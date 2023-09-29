@@ -1,0 +1,20 @@
+version: '3'
+services:
+  postgres:
+    container_name: DatabaseTechChallengeGrupo01 
+    build:
+      context: ./Database  # O Dockerfile está no mesmo diretório
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"  # Mapeamento de porta
+
+  #minha_aplicacao:
+    #build:
+      #context: ./caminho/para/seu/Dockerfile_da_aplicacao  # Caminho para o Dockerfile da sua aplicação
+    #ports:
+      #- "8080:8080"  
+    #depends_on:
+      #- postgres  
