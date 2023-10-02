@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <None Remove="Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Base\" />
-    <Folder Include="Entities\" />
     <Folder Include="ValueObjects\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
