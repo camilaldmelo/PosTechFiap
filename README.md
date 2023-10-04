@@ -45,3 +45,45 @@ Para solucionar o problema, a lanchonete quer investir em um sistema de autoaten
 
 ### Event Storming
 O Event Storming foi realizado na ferramenta Miro e está disponível no [aqui](https://miro.com/app/board/uXjVMqYSzbg=/?share_link_id=48933981551)
+
+---
+
+## Como Clonar e Subir a Aplicação com Docker Compose
+
+Este guia fornecerá instruções passo a passo sobre como clonar e executar a aplicação .NET 7.0 com um banco de dados PostgreSQL usando Docker Compose. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema antes de prosseguir.
+
+### Passo 1: Clone o Repositório
+
+Para começar, você precisa clonar o repositório do GitHub para sua máquina local. Abra o terminal e execute o seguinte comando:
+
+```bash
+git clone https://github.com/camilaldmelo/PosTechFiap.git
+```
+
+### Passo 2: Navegue até o Diretório do Projeto
+Após clonar o repositório, navegue até o diretório do projeto usando o seguinte comando:
+```bash
+cd PosTechFiap
+```
+### Passo 3: Inicialize os Contêineres Docker
+A aplicação depende de dois contêineres Docker: um para o PostgreSQL e outro para a API .NET. Você pode iniciar ambos usando o Docker Compose. Certifique-se de estar no diretório raiz do projeto (onde está o arquivo docker-compose.yml) e execute o seguinte comando:
+```bash
+docker-compose up -d
+```
+Isso iniciará os contêineres em segundo plano (-d). O Docker Compose lerá as configurações do docker-compose.yml e criará os contêineres necessários.
+
+### Passo 4: Aguarde a Inicialização
+Aguarde alguns momentos enquanto o Docker Compose cria e inicializa os contêineres. Isso pode levar algum tempo na primeira execução, pois ele precisará baixar as imagens Docker necessárias.
+
+### Passo 5: Acesse a Aplicação
+Após a inicialização bem-sucedida, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
+- Acesse a API em http://localhost:8080/swagger/index.html
+- O PostgreSQL estará disponível em localhost na porta padrão 5432.
+
+### Passo 6: Parar e Remover Contêineres (Opcional)
+Para parar e remover os contêineres, você pode executar o seguinte comando no diretório do projeto:
+```bash
+docker-compose down
+```
+Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
+
