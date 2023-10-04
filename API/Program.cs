@@ -41,9 +41,9 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
-    //var xmlFile = "API.xml";
-    //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    //c.IncludeXmlComments(xmlPath);
+    var xmlFile = "API.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 });
 
 var app = builder.Build();
