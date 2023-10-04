@@ -30,12 +30,11 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "API.API",
+        Title = "NuGET Burger",
         Version = "v1",
         Contact = new OpenApiContact
         {
-            Name = "Test",
-            Email = "Test@dominio.com.br",
+            Name = "Miro",
             Url = new Uri("https://miro.com/app/board/uXjVMqYSzbg=/?share_link_id=124875092732")
 
         }
