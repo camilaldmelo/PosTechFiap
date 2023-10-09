@@ -13,6 +13,10 @@ namespace Infra.Repositories
             _config = config;
         }
 
+        /// <summary>
+        /// Faz a conexão com o DB
+        /// </summary>
+        /// <returns></returns>
         public NpgsqlConnection ObterConexaoExclusiva()
         {
             //var senha = _config.GetValue<string>("ParamRepository:senhaCripto") ?? "";
@@ -32,6 +36,11 @@ namespace Infra.Repositories
             return ObterConexao(new Conexao(senha, chave, instance, usuario, role, senhaRoleCripto, "", "", ""));
         }
 
+        /// <summary>
+        /// Obtêm a conexão com o DB
+        /// </summary>
+        /// <param name="conexao"></param>
+        /// <returns></returns>
         private NpgsqlConnection ObterConexao(Conexao conexao)
         {
             var senhaDecripto = ""; // DESCRIPTOGRAFIA DE SENHA

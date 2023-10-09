@@ -9,6 +9,11 @@ namespace Infra.Repositories
     {
         public ProdutosPedidoRepository(IConfiguration config) : base(config) { }
 
+        /// <summary>
+        /// Deleta produto e pedido por ID do pedido
+        /// </summary>
+        /// <param name="idPedido"></param>
+        /// <returns></returns>
         public bool DeletarProdutoPedidoPorIdPedido(int idPedido)
         {
             return true;
@@ -20,6 +25,11 @@ namespace Infra.Repositories
             //return cmd.ExecuteNonQuery() > 0;
         }
 
+        /// <summary>
+        /// Insere produto e pedido
+        /// </summary>
+        /// <param name="produtosPedido"></param>
+        /// <returns></returns>
         public int InserirProdutoPedido(ProdutosPedido produtosPedido)
         {
             return 99;
