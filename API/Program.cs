@@ -1,3 +1,4 @@
+using API.HealthCheck;
 using Application.AutoMapper;
 using Application.Interface;
 using Application.UseCases;
@@ -5,7 +6,11 @@ using Domain.Interface.Repositories;
 using Domain.Interface.Services;
 using Domain.Services;
 using Infra.Repositories;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+
+EscreveHealthCheck healthCheck = new EscreveHealthCheck();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +27,9 @@ builder.Services.AddScoped<IPedidoService, PedidoService>();
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IProdutosPedidoRepository, ProdutosPedidoRepository>();
 
+//HealthCheck
+builder.Services.AddHealthChecks()
+    .AddCheck<MemoriaHealthCheck>("memoria_check", HealthStatus.Unhealthy);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -67,4 +75,18 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks("/health", new HealthCheckOptions()
+{
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Degraded] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
+    },
+    ResponseWriter = healthCheck.EscreveResposta
+});
+
 app.Run();
+
+
+

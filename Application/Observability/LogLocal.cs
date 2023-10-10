@@ -1,8 +1,8 @@
 ﻿namespace Application.Observability
 {
-    public class Log
+    public class LogLocal
     {
-        public void CriaLog(string mensagem, bool status)
+        public void CriaLogLocal(string mensagem, bool status)
         {
             string arquivoLog = "log.txt";
 
