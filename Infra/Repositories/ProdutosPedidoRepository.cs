@@ -1,28 +1,30 @@
-﻿using Domain.Entities;
+﻿using Dapper;
+using Domain.Entities;
 using Domain.Interface.Repositories;
-using Microsoft.Extensions.Configuration;
-using Npgsql;
 
 namespace Infra.Repositories
 {
-    public class ProdutosPedidoRepository : RepositoryBase, IProdutosPedidoRepository
+    public class ProdutosPedidoRepository : IProdutosPedidoRepository
     {
-        public ProdutosPedidoRepository(IConfiguration config) : base(config) { }
+        private RepositoryBase _session;
+
+        public ProdutosPedidoRepository(RepositoryBase session)
+        {
+            _session = session;
+        }
 
         /// <summary>
         /// Deleta produto e pedido por ID do pedido
         /// </summary>
         /// <param name="idPedido"></param>
         /// <returns></returns>
-        public bool DeletarProdutoPedidoPorIdPedido(int idPedido)
+        public async Task<bool> DeletarProdutoPedidoPorIdPedido(int idPedido)
         {
-            return true;
-            //using var cmd = new NpgsqlCommand("DELETE FROM TBL_PRODUTOS_PEDIDO WHERE ID = ($1)", ObterConexaoExclusiva())
-            //{
-            //    Parameters = { new() { Value = idPedido } }
-            //};
+            string sql = "DELETE FROM public.tbl_produtos_pedido WHERE id_pedido = (@idPedido)";
+            var parametros = new { idPedido };
 
-            //return cmd.ExecuteNonQuery() > 0;
+            await _session.Connection.ExecuteAsync(sql, parametros, _session.Transaction);
+            return true;
         }
 
         /// <summary>
@@ -30,26 +32,27 @@ namespace Infra.Repositories
         /// </summary>
         /// <param name="produtosPedido"></param>
         /// <returns></returns>
-        public int InserirProdutoPedido(ProdutosPedido produtosPedido)
+        public async Task<bool> InserirProdutoPedido(ProdutosPedido produtosPedido)
         {
-            return 99;
-            //using var cmd = new NpgsqlCommand(" INSERT INTO TBL_PRODUTOS_PEDIDO (ID_PEDIDO, ID_PRODUTO, QUANTIDADE) VALUES ($1), ($2), ($3);" +
-            //                                  " SELECT currval(pg_get_serial_sequence('TBL_PRODUTOS_PEDIDO','ID_PEDIDO'));", ObterConexaoExclusiva())
-            //{
-            //    Parameters =
-            //    {
-            //        new() { Value = produtosPedido.IdPedido },
-            //        new() { Value = produtosPedido.IdProduto },
-            //        new() { Value = produtosPedido.Quantidade }
-            //    }
-            //};
+            string sql = "INSERT INTO public.tbl_produtos_pedido (id_pedido, id_produto, quantidade) VALUES (@IdPedido, @IdProduto, @Quantidade);";
 
-            //return cmd.ExecuteNonQuery();
+            var parametros = new
+            {
+                produtosPedido.IdPedido,
+                produtosPedido.IdProduto,
+                produtosPedido.Quantidade
+            };
+
+            await _session.Connection.ExecuteAsync(sql, parametros, _session.Transaction);
+            return true;
         }
 
-        public IEnumerable<ProdutosPedido> ObterProdutoPedidoPorPedido(int idPedido)
+        public async Task<IEnumerable<ProdutosPedido>> ObterProdutoPedidoPorPedido(int idPedido)
         {
-            return new List<ProdutosPedido>();
+            string commandText = "SELECT id as Id, id_pedido as IdPedido, id_produto as IdProduto, quantidade as Quantidade FROM public.tbl_produtos_pedido WHERE id_pedido = (@idPedido)";
+            var parametros = new { idPedido };
+
+            return await _session.Connection.QueryAsync<ProdutosPedido>(commandText, parametros);
         }
     }
 }

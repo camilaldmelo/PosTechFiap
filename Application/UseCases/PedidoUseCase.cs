@@ -17,27 +17,27 @@ namespace Application.UseCases
             _mapper = mapper;
         }
 
-        public IEnumerable<PedidoViewModel> GetPedido(int idAcompanhamento)
+        public async Task<IEnumerable<PedidoViewModel>> GetPedido(int idPedido)
         {
-            var pedido = _pedidoService.GetPedido(idAcompanhamento);
+            var pedido = await _pedidoService.GetPedido(idPedido);
 
             return _mapper.Map<List<PedidoViewModel>>(pedido);
         }
 
-        public int PostPedido(PedidoViewModel pedidoViewModel)
-        {            
+        public async Task<int> PostPedido(PedidoViewModel pedidoViewModel)
+        {
             var cliente = _mapper.Map<Cliente>(pedidoViewModel);
             var produtosPedido = _mapper.Map<List<ProdutosPedido>>(pedidoViewModel.ProdutosPedido);
 
-            return _pedidoService.PostPedido(cliente, produtosPedido);
+            return await _pedidoService.PostPedido(cliente, produtosPedido);
         }
 
-        public bool PutPedido(PedidoViewModel pedidoViewModel)
+        public async Task<bool> PutPedido(PedidoViewModel pedidoViewModel)
         {
             var pedido = _mapper.Map<Pedido>(pedidoViewModel);
             pedido.ProdutosPedido = _mapper.Map<List<ProdutosPedido>>(pedidoViewModel.ProdutosPedido);
 
-            return _pedidoService.PutPedido(pedido);
+            return await _pedidoService.PutPedido(pedido);
         }
     }
 }

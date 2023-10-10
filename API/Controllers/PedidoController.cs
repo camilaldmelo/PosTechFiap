@@ -16,21 +16,21 @@ namespace API.Controllers
         }
 
         [HttpGet(Name = "Pedido")]
-        public IEnumerable<PedidoViewModel> Get(int idAcompanhamento)
+        public async Task<IEnumerable<PedidoViewModel>> Get(int idPedido)
         {
-            return _pedidoUseCase.GetPedido(idAcompanhamento);
+            return await _pedidoUseCase.GetPedido(idPedido);
         }
 
         [HttpPost(Name = "Pedido")]
-        public int Post(PedidoViewModel pedido)
+        public async Task<int> Post(PedidoViewModel pedido)
         {
-            return _pedidoUseCase.PostPedido(pedido);
+            return await _pedidoUseCase.PostPedido(pedido);
         }
 
         [HttpPut(Name = "Pedido")]
-        public bool Put(PedidoViewModel pedido)
+        public async Task<bool> Put(PedidoViewModel pedido)
         {
-            return _pedidoUseCase.PutPedido(pedido);
+            return await _pedidoUseCase.PutPedido(pedido);
         }
     }
 }

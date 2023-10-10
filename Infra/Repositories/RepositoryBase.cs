@@ -1,39 +1,38 @@
 ﻿using Domain.DTO;
-using Microsoft.Extensions.Configuration;
+using MyProject.Data.Encryption;
 using Npgsql;
+using System.Data;
 
 namespace Infra.Repositories
 {
-    public class RepositoryBase
+    public sealed class RepositoryBase : IDisposable
     {
-        private readonly IConfiguration _config;
+        private Guid _id;
+        public IDbConnection Connection { get; }
+        public IDbTransaction Transaction { get; set; }
 
-        public RepositoryBase(IConfiguration config)
+        public RepositoryBase()
         {
-            _config = config;
+            _id = Guid.NewGuid();
+            Connection = ObterConexaoExclusiva();
         }
 
+        public void Dispose() => Connection?.Dispose();
+		
         /// <summary>
         /// Faz a conexão com o DB
         /// </summary>
         /// <returns></returns>
-        public NpgsqlConnection ObterConexaoExclusiva()
+        private NpgsqlConnection ObterConexaoExclusiva()
         {
-            //var senha = _config.GetValue<string>("ParamRepository:senhaCripto") ?? "";
-            //var chave = _config.GetValue<string>("ParamRepository:chave") ?? "";
-            //var instance = _config.GetValue<string>("ParamRepository:instance") ?? "";
-            //var usuario = _config.GetValue<string>("ParamRepository:usuario") ?? "";
-            //var role = _config.GetValue<string>("ParamRepository:role") ?? "";
-            //var senhaRoleCripto = _config.GetValue<string>("ParamRepository:senhaRoleCripto") ?? "";
+            CriarVariaveisDeAmbiente();
 
-            var senha = "";
-            var chave = "";
-            var instance = "";
-            var usuario = "";
-            var role = "";
-            var senhaRoleCripto = "";
+            var senhaCriptografadaBase = Environment.GetEnvironmentVariable("SenhaCriptografadaBase") ?? "";
+            var usuarioBase = Environment.GetEnvironmentVariable("UsuarioBase") ?? "";
+            var hostBase = Environment.GetEnvironmentVariable("HostBase") ?? "";
+            var chaveCriptografiaBase = Environment.GetEnvironmentVariable("ChaveCriptografiaBase") ?? "";
 
-            return ObterConexao(new Conexao(senha, chave, instance, usuario, role, senhaRoleCripto, "", "", ""));
+            return ObterConexao(new Conexao(senhaCriptografadaBase, hostBase, usuarioBase, chaveCriptografiaBase, ""));
         }
 
         /// <summary>
@@ -41,17 +40,29 @@ namespace Infra.Repositories
         /// </summary>
         /// <param name="conexao"></param>
         /// <returns></returns>
-        private NpgsqlConnection ObterConexao(Conexao conexao)
+        private static NpgsqlConnection ObterConexao(Conexao conexao)
         {
-            var senhaDecripto = ""; // DESCRIPTOGRAFIA DE SENHA
+            var senhaDecripto = AES.Decrypt(conexao.Senha, conexao.ChaveCriptografia);
             conexao.StringConexao = "Host=" + conexao.Instance + ";Username=" + conexao.Usuario + ";Password=" + senhaDecripto + ";";
 
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(conexao.StringConexao);
-            var dsb = dataSourceBuilder.Build();
-            return dsb.OpenConnection();
+            var connection = new NpgsqlConnection(conexao.StringConexao);
+            connection.Open();
+            return connection;
+        }
 
+        private static void CriarVariaveisDeAmbiente()
+        {
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SenhaCriptografadaBase")))
+                Environment.SetEnvironmentVariable("SenhaCriptografadaBase", "mhoAnVA/tWmZFyrjfl5Qiw==");
 
-            // https://www.npgsql.org/doc/basic-usage.html
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("UsuarioBase")))
+                Environment.SetEnvironmentVariable("UsuarioBase", "postgres");
+
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("HostBase")))
+                Environment.SetEnvironmentVariable("HostBase", "localhost:5432");
+
+            if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ChaveCriptografiaBase")))
+                Environment.SetEnvironmentVariable("ChaveCriptografiaBase", "ntmFa1ec294");
         }
     }
 }

@@ -4,10 +4,10 @@ namespace Domain.Interface.Repositories
 {
     public interface IProdutosPedidoRepository
     {
-        public IEnumerable<ProdutosPedido> ObterProdutoPedidoPorPedido(int idPedido);
+        public Task<IEnumerable<ProdutosPedido>> ObterProdutoPedidoPorPedido(int idPedido);
 
-        public int InserirProdutoPedido(ProdutosPedido produtosPedido);
+        public Task<bool> InserirProdutoPedido(ProdutosPedido produtosPedido);
 
-        public bool DeletarProdutoPedidoPorIdPedido(int idPedido);
+        public Task<bool> DeletarProdutoPedidoPorIdPedido(int idPedido);
     }
 }

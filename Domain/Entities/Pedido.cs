@@ -3,8 +3,8 @@
     public class Pedido
     {
         public Pedido () { }
-        public Pedido (int idCliente, DateTime data, int idAcompanhamento, IEnumerable<ProdutosPedido>? produtosPedido) =>
-                      (IdCliente, Data, IdAcompanhamento, ProdutosPedido) = (idCliente, data, idAcompanhamento, produtosPedido);
+        public Pedido (int id, int idCliente, DateTime data, int idAcompanhamento, IEnumerable<ProdutosPedido>? produtosPedido) =>
+                      (Id, IdCliente, Data, IdAcompanhamento, ProdutosPedido) = (id, idCliente, data, idAcompanhamento, produtosPedido);
 
         public int Id { get; set; }
         public int IdCliente { get; set; }

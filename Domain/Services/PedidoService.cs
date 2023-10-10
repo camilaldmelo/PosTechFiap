@@ -9,53 +9,74 @@ namespace Domain.Services
     {
         public IPedidoRepository _pedidoRepository;
         public IProdutosPedidoRepository _produtosPedidoRepository;
+        public IUnitOfWork _unitOfWork;
 
-        public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository)
+        public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository, IUnitOfWork unitOfWork)
         {
             _pedidoRepository = pedidoRepository;
             _produtosPedidoRepository = produtosPedidoRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Pedido> GetPedido(int idAcompanhamento)
+        public async Task<IEnumerable<Pedido>> GetPedido(int idPedido)
         {
-            var pedidos = _pedidoRepository.ObterPedidosPorStatusAcompanhamento(idAcompanhamento);
+            var pedidos = await _pedidoRepository.ObterPedidosPorId(idPedido);
 
             foreach(var pedido in pedidos)
             {
-                pedido.ProdutosPedido = _produtosPedidoRepository.ObterProdutoPedidoPorPedido(pedido.Id);
+                pedido.ProdutosPedido = await _produtosPedidoRepository.ObterProdutoPedidoPorPedido(pedido.Id);
             }
 
             return pedidos;
         }
 
-        public int PostPedido(Cliente cliente, IEnumerable<ProdutosPedido> produtosPedido)
+        public async Task<int> PostPedido(Cliente cliente, IEnumerable<ProdutosPedido> produtosPedido)
         {
-            var pedido = new Pedido(idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Recebido, null);
-            var idPedido = _pedidoRepository.InserirPedido(pedido);
+            var idPedido = await _pedidoRepository.ObterIdUltimoRegistroInserido() + 1;
+            var pedido = new Pedido(id:idPedido, idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Recebido, null);
 
-            foreach(var pp in produtosPedido)
+            try
             {
-                pp.IdPedido = idPedido;
-                _produtosPedidoRepository.InserirProdutoPedido(pp);
+                _unitOfWork.BeginTransaction();
+
+                await _pedidoRepository.InserirPedido(pedido);
+                foreach (var pp in produtosPedido)
+                {
+                    pp.IdPedido = idPedido;
+                    await _produtosPedidoRepository.InserirProdutoPedido(pp);
+                }
+
+                _unitOfWork.Commit();                
             }
-            
+            catch
+            {
+                _unitOfWork.Rollback();
+            }
             return idPedido;
         }
 
-        public bool PutPedido(Pedido pedido)
+        public async Task<bool> PutPedido(Pedido pedido)
         {
-            _pedidoRepository.AtualizarPedido(pedido);
-            _produtosPedidoRepository.DeletarProdutoPedidoPorIdPedido(pedido.Id);
-
-            if (pedido.ProdutosPedido != null)
+            try
             {
-                foreach (var pp in pedido.ProdutosPedido)
-                {
-                    pp.IdPedido = pedido.Id;
-                    _produtosPedidoRepository.InserirProdutoPedido(pp);
-                }
-            }
+                _unitOfWork.BeginTransaction();                
+                await _pedidoRepository.AtualizarPedido(pedido);
+                await _produtosPedidoRepository.DeletarProdutoPedidoPorIdPedido(pedido.Id);
 
+                if (pedido.ProdutosPedido != null)
+                {
+                    foreach (var pp in pedido.ProdutosPedido)
+                    {
+                        pp.IdPedido = pedido.Id;
+                        await _produtosPedidoRepository.InserirProdutoPedido(pp);
+                    }
+                }
+                _unitOfWork.Commit();
+            }
+            catch
+            {
+                _unitOfWork.Rollback();
+            }
             return true;
         }
     }

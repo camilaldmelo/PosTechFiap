@@ -26,6 +26,8 @@ builder.Services.AddScoped<IPedidoService, PedidoService>();
 //Repositórios
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IProdutosPedidoRepository, ProdutosPedidoRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<RepositoryBase>();
 
 //HealthCheck
 builder.Services.AddHealthChecks()
@@ -55,21 +57,15 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseReDoc(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
-    app.UseReDoc(c =>
-    {
-        c.DocumentTitle = "REDOC API Documentation";
-        c.SpecUrl = "/swagger/v1/swagger.json";
-    });
-}
-
-//app.UseHttpsRedirection();
+    c.DocumentTitle = "REDOC API Documentation";
+    c.SpecUrl = "/swagger/v1/swagger.json";
+});
 
 app.UseAuthorization();
 
