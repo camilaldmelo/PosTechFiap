@@ -19,15 +19,20 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 //UseCases
 builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
+builder.Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
 
 //Domínio
 builder.Services.AddScoped<IPedidoService, PedidoService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
 //Repositórios
+builder.Services.AddScoped<RepositoryBase>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<IProdutosPedidoRepository, ProdutosPedidoRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<RepositoryBase>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
 
 //HealthCheck
 builder.Services.AddHealthChecks()

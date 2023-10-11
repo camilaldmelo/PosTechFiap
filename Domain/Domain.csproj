@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Base\" />
-    <Folder Include="ValueObjects\" />
+    <Folder Include="Entities\Enums\" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,9 @@ namespace Application.AutoMapper
 
             CreateMap<ProdutosPedido, ProdutosPedidoViewModel>();
 
+            CreateMap<Produto, ProdutoViewModel>()
+                .ForMember(dest => dest.Categoria, opt => opt.MapFrom(src => src.Categoria.Nome));
+
 
 
             CreateMap<PedidoViewModel, Cliente>()
@@ -25,6 +28,7 @@ namespace Application.AutoMapper
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdPedido));
 
             CreateMap<ProdutosPedidoViewModel, ProdutosPedido>();
+
         }
     }
 }

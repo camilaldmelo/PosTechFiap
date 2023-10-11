@@ -77,7 +77,7 @@ Aguarde alguns momentos enquanto o Docker Compose cria e inicializa os contêine
 
 ### Passo 5: Acesse a Aplicação
 Após a inicialização bem-sucedida, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
-- Acesse a API em http://localhost:8080/swagger/index.html
+- Acesse a API em http://localhost:8080/swagger ou http://localhost:8080/api-docs
 - O PostgreSQL estará disponível em localhost na porta padrão 5432.
 
 ### Passo 6: Parar e Remover Contêineres (Opcional)
