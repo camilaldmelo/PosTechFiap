@@ -3,7 +3,7 @@
     public class PedidoViewModel
     {
         public int IdPedido { get; set; }
-        public int IdCliente { get; set; }
+        public ClienteViewModel Cliente { get; set; }
         public required List<ProdutosPedidoViewModel> ProdutosPedido { get; set; }
     }
 }

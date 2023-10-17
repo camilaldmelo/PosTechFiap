@@ -9,7 +9,7 @@ namespace Application.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<Cliente, PedidoViewModel>()
-                .ForMember(dest => dest.IdCliente, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.Cliente.IdCliente, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<Pedido, PedidoViewModel>()
                 .ForMember(dest => dest.IdPedido, opt => opt.MapFrom(src => src.Id));
@@ -22,12 +22,15 @@ namespace Application.AutoMapper
 
 
             CreateMap<PedidoViewModel, Cliente>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCliente));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Cliente.IdCliente));
 
             CreateMap<PedidoViewModel, Pedido>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdPedido));
 
             CreateMap<ProdutosPedidoViewModel, ProdutosPedido>();
+
+            CreateMap<ClienteViewModel, Cliente>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCliente));
 
         }
     }
