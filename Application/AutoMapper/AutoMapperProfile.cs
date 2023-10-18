@@ -21,6 +21,9 @@ namespace Application.AutoMapper
                 .ForPath(dest => dest.IdCategoria, opt => opt.MapFrom(src => src.Categoria.Id))
                 .ForPath(dest => dest.Categoria, opt => opt.MapFrom(src => src.Categoria.Nome));
 
+            CreateMap<Categoria, CategoriaViewModel>()
+                .ForMember(dest => dest.IdCategoria, opt => opt.MapFrom(src => src.Id));
+
 
 
             CreateMap<PedidoViewModel, Cliente>()
@@ -35,6 +38,9 @@ namespace Application.AutoMapper
                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdProduto))
                       .ForPath(dest => dest.Categoria.Id, opt => opt.MapFrom(src => src.IdCategoria))
                       .ForPath(dest => dest.Categoria.Nome, opt => opt.MapFrom(src => src.Categoria));
+
+            CreateMap<CategoriaViewModel, Categoria>()
+                            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCategoria));
 
         }
     }

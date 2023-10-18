@@ -3,7 +3,6 @@ using Application.ViewModel;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interface.Services;
-using Domain.Services;
 
 namespace Application.UseCases
 {
@@ -35,8 +34,53 @@ namespace Application.UseCases
         public async Task<int> Post(ProdutoViewModel produto)
         {
             var p = _mapper.Map<Produto>(produto);
+            try
+            {
+                return await _produtoService.Post(p);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-            return await _produtoService.Post(p);
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                return await _produtoService.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<ProdutoViewModel> GetById(int id)
+        {
+            var produto = await _produtoService.GetById(id);
+
+            return _mapper.Map<ProdutoViewModel>(produto);
+        }
+
+        public async Task<bool> Update(int id, ProdutoViewModel produto)
+        {
+            var existingProduct = await _produtoService.GetById(id);
+
+            if (existingProduct == null)
+            {
+                return false; // Produto não encontrado, portanto, não foi atualizado.
+            }
+
+            // Realize as validações necessárias no objeto 'produto' e manipule exceções, se necessário.
+
+            // Atualize as propriedades do produto existente com base nos dados de 'produto'.
+            existingProduct.Nome = produto.Nome;
+            existingProduct.Preco = produto.Preco;
+            existingProduct.Descricao = produto.Descricao;
+            existingProduct.UrlImagem = produto.UrlImagem;
+            existingProduct.Categoria = new Categoria(produto.IdCategoria, produto.Categoria);
+            return await _produtoService.Update(existingProduct); // Atualiza o produto no serviço.
         }
     }
 }

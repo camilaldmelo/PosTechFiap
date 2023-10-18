@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.ValueObjects;
 
 namespace Infra.Repositories
 {
@@ -21,7 +20,7 @@ namespace Infra.Repositories
             FROM 
                 public.tbl_produto pro
             INNER JOIN 
-                tbl_categoria cat ON cat.id = pro.id_categoria";
+                public.tbl_categoria cat ON cat.id = pro.id_categoria";
 
         public ProdutoRepository(RepositoryBase session)
         {
@@ -83,10 +82,77 @@ namespace Infra.Repositories
                 await _session.Connection.ExecuteAsync(sql, parametros);
                 return true;
             }
-            catch (Exception e )
+            catch (Exception ex)
             {
-                throw new Exception(e.Message);
+                throw new Exception(ex.Message);
             }
         }
+
+        public async Task<bool> Delete(int id)
+        {
+            string sql = "DELETE FROM public.tbl_produto WHERE id = @id";
+
+            try
+            {
+                int rowsAffected = await _session.Connection.ExecuteAsync(sql, new { id });
+                return rowsAffected > 0; // Retorna true se uma linha foi afetada (produto excluído).
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Produto> GetById(int id)
+        {
+            string sql = commandTextGet + " WHERE pro.id = @id";
+
+            var produto = await _session.Connection.QueryAsync<Produto, Categoria, Produto>(
+                sql: sql,
+                map: (p, categoria) =>
+                {
+                    p.Categoria = categoria;
+                    return p;
+                },
+                splitOn: "Id",
+                param: new { id }
+            );
+
+            return produto.FirstOrDefault(); // Retorna o primeiro produto correspondente ao ID.
+        }
+
+        public async Task<bool> Update(Produto produto)
+        {
+            string sql = @"
+                UPDATE public.tbl_produto
+                SET nome = @nome,
+                    preco = @preco,
+                    descricao = @descricao,
+                    url_imagem = @url_imagem,
+                    id_categoria = @id_categoria
+                WHERE id = @id;";
+
+            var parametros = new
+            {
+                id = produto.Id,
+                nome = produto.Nome,
+                preco = produto.Preco,
+                descricao = produto.Descricao,
+                url_imagem = produto.UrlImagem,
+                id_categoria = produto.Categoria.Id
+            };
+
+            try
+            {
+                int rowsAffected = await _session.Connection.ExecuteAsync(sql, parametros);
+
+                return rowsAffected > 0; // Retorna true se alguma linha foi afetada (atualização bem-sucedida).
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

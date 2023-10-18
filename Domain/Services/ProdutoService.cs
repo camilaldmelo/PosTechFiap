@@ -2,7 +2,6 @@
 using Domain.Entities;
 using Domain.Interface.Repositories;
 using Domain.Interface.Services;
-using Domain.ValueObjects;
 
 namespace Domain.Services
 {
@@ -37,12 +36,73 @@ namespace Domain.Services
                 _unitOfWork.Commit();
                 return produto.Id;
             }
-            catch (Exception e) 
+            catch (Exception ex)
             {
                 _unitOfWork.Rollback();
-                throw new Exception(e.Message);
+                throw new Exception(ex.Message);
             }
-            
         }
+
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                var result = await _produtoRepository.Delete(id);
+                if (result)
+                {
+                    _unitOfWork.Commit();
+                    return true; 
+                }
+                else
+                {
+                    _unitOfWork.Rollback();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Produto> GetById(int id)
+        {
+            try
+            {
+                return await _produtoRepository.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<bool> Update(Produto produto)
+        {
+            try
+            {
+                _unitOfWork.BeginTransaction();
+                bool updated = await _produtoRepository.Update(produto);
+
+                if (updated)
+                {
+                    _unitOfWork.Commit();
+                    return true;
+                }
+                else
+                {
+                    _unitOfWork.Rollback();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

@@ -7,5 +7,8 @@ namespace Application.Interface
         public Task<IEnumerable<ProdutoViewModel>> GetAll();
         public Task<IEnumerable<ProdutoViewModel>> GetByIdCategoria(int idCategoria);
         public Task<int> Post(ProdutoViewModel produto);
+        public Task<bool> Delete(int id);
+        public Task<ProdutoViewModel> GetById(int id);
+        public Task<bool> Update(int id, ProdutoViewModel produto);
     }
 }
