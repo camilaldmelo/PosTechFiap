@@ -1,7 +1,5 @@
 ﻿using Application.Interface;
-using Application.UseCases;
 using Application.ViewModel;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -22,16 +20,35 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Listagem de produtos
+        /// Obtém uma lista de todos os produtos.
         /// </summary>
-        /// <returns>Uma lista de produtos</returns>
+        /// <returns>Uma lista de produtos.</returns>
         [HttpGet(Name = "Produtos")]
-        [SwaggerOperation(Summary = "Listagem de produtos", Description = "Retorna uma lista de produtos.")]
-        [SwaggerResponse(StatusCodes.Status200OK, "A lista de produtos foi recuperada com sucesso.")]
-        [Produces(typeof(IEnumerable<ProdutoViewModel>))]
-        public IActionResult GetAll()
+        [SwaggerOperation(Summary = "Listagem de todos os produtos", Description = "Recupera uma lista de todos os produtos.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "A lista de produtos foi recuperada com sucesso.", typeof(IEnumerable<ProdutoViewModel>))]
+        public async Task<IEnumerable<ProdutoViewModel>> GetAll()
         {
-            return Ok(_produtoUseCase.GetAll());
+            return await _produtoUseCase.GetAll();
+        }
+
+
+        /// <summary>
+        /// Obtém uma lista de produtos com base no identificador da categoria.
+        /// </summary>
+        /// <param name="idCategoria">O identificador da categoria dos produtos desejada.</param>
+        /// <returns>Uma lista de produtos filtrados pela categoria especificada.</returns>
+        [HttpGet("{idCategoria}", Name = "ProdutosPorCategoria")]
+        [SwaggerOperation(Summary = "Listagem de produtos por categoria", Description = "Recupera uma lista de produtos filtrados pela categoria especificada.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "A lista de produtos foi recuperada com sucesso.", typeof(IEnumerable<ProdutoViewModel>))]
+        public async Task<IEnumerable<ProdutoViewModel>> GetByIdCategoria(int idCategoria)
+        {
+            return await _produtoUseCase.GetByIdCategoria(idCategoria);
+        }
+
+        [HttpPost(Name = "Produtos")]
+        public async Task<int> Post(ProdutoViewModel produto)
+        {
+            return await _produtoUseCase.Post(produto);
         }
     }
 }

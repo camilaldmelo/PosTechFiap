@@ -10,5 +10,8 @@ namespace Domain.Interface.Repositories
     public interface IProdutoRepository
     {
         public Task<IEnumerable<Produto>> GetAll();
+        public Task<IEnumerable<Produto>> GetByIdCategoria(int idCategoria);
+        public Task<int> GetLastID();
+        public Task<bool> Post(Produto produto);
     }
 }

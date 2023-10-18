@@ -8,8 +8,8 @@ namespace Domain.Entities
         public required int Id { get; set; }
         public required string Nome { get; set; }
         public required decimal Preco { get; set; }
-        public string? Descricao { get; set; }
-        public string? UrlImagem { get; set; }
+        public string Descricao { get; set; }
+        public string UrlImagem { get; set; }
         public Categoria Categoria { get; set; }
 
         public Produto(int id, string nome, decimal preco, string descricao, string urlImagem)
@@ -21,6 +21,13 @@ namespace Domain.Entities
             UrlImagem = urlImagem;
 
             ValidateEntity();
+        }
+
+        //Construtor usado apenas pelo mapper
+        private Produto()
+        {
+            // Inicialize propriedades padrão (o que for necessário)
+            Categoria = new Categoria(0, "");
         }
 
         public void ValidateEntity()
