@@ -56,20 +56,13 @@ namespace Infra.Repositories
             return produtos;
         }
 
-        public async Task<int> GetLastID()
+        public async Task<int> Create(Produto produto)
         {
-            string commandText = "SELECT id FROM public.tbl_produto ORDER BY id DESC LIMIT 1";
-            return await _session.Connection.QueryFirstOrDefaultAsync<int>(commandText);
-        }
-
-        public async Task<bool> Post(Produto produto)
-        {
-            string sql = "INSERT INTO public.tbl_produto (id, nome, preco, descricao, url_imagem, id_categoria) VALUES (@id, @nome, @preco, @descricao, @url_imagem, @id_categoria);";
+            string sql = "INSERT INTO public.tbl_produto (nome, preco, descricao, url_imagem, id_categoria) VALUES (@nome, @preco, @descricao, @url_imagem, @id_categoria) RETURNING id";
 
             var idCategoria = produto.Categoria.Id;
             var parametros = new
             {
-                id = produto.Id,
                 nome = produto.Nome,
                 preco = produto.Preco,
                 descricao = produto.Descricao,
@@ -79,8 +72,8 @@ namespace Infra.Repositories
 
             try
             {
-                await _session.Connection.ExecuteAsync(sql, parametros);
-                return true;
+                int produtoId = await _session.Connection.ExecuteScalarAsync<int>(sql, parametros);
+                return produtoId;
             }
             catch (Exception ex)
             {

@@ -106,7 +106,7 @@ namespace API.Controllers
         {
             try
             {
-                int produtoId = await _produtoUseCase.Post(produto);
+                int produtoId = await _produtoUseCase.Create(produto);
                 return CreatedAtRoute("ProdutoPorId", new { id = produtoId }, null);
             }
             catch (Exception ex)

@@ -26,15 +26,23 @@ namespace Domain.Services
             return await _produtoRepository.GetByIdCategoria(idCategoria);
         }
 
-        public async Task<int> Post(Produto produto)
+        public async Task<int> Create(Produto produto)
         {
-            produto.Id = await _produtoRepository.GetLastID() + 1;
             try
             {
                 _unitOfWork.BeginTransaction();
-                await _produtoRepository.Post(produto);
-                _unitOfWork.Commit();
-                return produto.Id;
+                int produtoId = await _produtoRepository.Create(produto);
+
+                if (produtoId > 0)
+                {
+                    _unitOfWork.Commit();
+                    return produtoId;
+                }
+                else
+                {
+                    _unitOfWork.Rollback();
+                    return 0;
+                }
             }
             catch (Exception ex)
             {

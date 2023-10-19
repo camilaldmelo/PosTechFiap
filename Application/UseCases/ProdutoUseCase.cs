@@ -31,12 +31,12 @@ namespace Application.UseCases
             return _mapper.Map<List<ProdutoViewModel>>(produtos);
         }
 
-        public async Task<int> Post(ProdutoViewModel produto)
+        public async Task<int> Create(ProdutoViewModel produto)
         {
             var p = _mapper.Map<Produto>(produto);
             try
             {
-                return await _produtoService.Post(p);
+                return await _produtoService.Create(p);
             }
             catch (Exception ex)
             {
