@@ -8,7 +8,7 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        private Categoria() { } // Construtor privado para uso pelo Entity Framework
+        private Categoria() { } // Construtor privado para uso pelo Dapper
 
         public Categoria(int id, string nome)
         {
