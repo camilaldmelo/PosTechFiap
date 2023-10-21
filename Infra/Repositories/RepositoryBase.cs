@@ -14,7 +14,7 @@ namespace Infra.Repositories
         public RepositoryBase()
         {
             _id = Guid.NewGuid();
-            Connection = ObterConexaoExclusiva();
+            Connection = GetExclusiveConnection();
         }
 
         public void Dispose() => Connection?.Dispose();
@@ -23,34 +23,34 @@ namespace Infra.Repositories
         /// Faz a conexão com o DB
         /// </summary>
         /// <returns></returns>
-        private NpgsqlConnection ObterConexaoExclusiva()
+        private NpgsqlConnection GetExclusiveConnection()
         {
-            CriarVariaveisDeAmbiente();
+            CreateEnvironmentVariables();
 
-            var senhaCriptografadaBase = Environment.GetEnvironmentVariable("SenhaCriptografadaBase") ?? "";
-            var usuarioBase = Environment.GetEnvironmentVariable("UsuarioBase") ?? "";
+            var passwordEncryptedBase = Environment.GetEnvironmentVariable("SenhaCriptografadaBase") ?? "";
+            var userBase = Environment.GetEnvironmentVariable("UsuarioBase") ?? "";
             var hostBase = Environment.GetEnvironmentVariable("HostBase") ?? "";
-            var chaveCriptografiaBase = Environment.GetEnvironmentVariable("ChaveCriptografiaBase") ?? "";
+            var keyEncryptionBase = Environment.GetEnvironmentVariable("ChaveCriptografiaBase") ?? "";
 
-            return ObterConexao(new Conexao(senhaCriptografadaBase, hostBase, usuarioBase, chaveCriptografiaBase, ""));
+            return GetConnection(new Conexao(passwordEncryptedBase, hostBase, userBase, keyEncryptionBase, ""));
         }
 
         /// <summary>
         /// Obtêm a conexão com o DB
         /// </summary>
-        /// <param name="conexao"></param>
+        /// <param name="connection"></param>
         /// <returns></returns>
-        private static NpgsqlConnection ObterConexao(Conexao conexao)
+        private static NpgsqlConnection GetConnection(Conexao connection)
         {
-            var senhaDecripto = AES.Decrypt(conexao.Senha, conexao.ChaveCriptografia);
-            conexao.StringConexao = "Host=" + conexao.Instance + ";Username=" + conexao.Usuario + ";Password=" + senhaDecripto + ";";
+            var passwordDecrypt = AES.Decrypt(connection.Senha, connection.ChaveCriptografia);
+            connection.StringConexao = "Host=" + connection.Instance + ";Username=" + connection.Usuario + ";Password=" + passwordDecrypt + ";";
 
-            var connection = new NpgsqlConnection(conexao.StringConexao);
-            connection.Open();
-            return connection;
+            var npgConnection = new NpgsqlConnection(connection.StringConexao);
+            npgConnection.Open();
+            return npgConnection;
         }
 
-        private static void CriarVariaveisDeAmbiente()
+        private static void CreateEnvironmentVariables()
         {
             if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SenhaCriptografadaBase")))
                 Environment.SetEnvironmentVariable("SenhaCriptografadaBase", "mhoAnVA/tWmZFyrjfl5Qiw==");
