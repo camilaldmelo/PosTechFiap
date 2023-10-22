@@ -4,7 +4,11 @@ namespace Domain.Interface.Services
 {
     public interface IPedidoService
     {
-        public Task<IEnumerable<Pedido>> GetById(int idPedido); 
+        public Task<Pedido> GetById(int idPedido);
+
+        public Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento);
+
+        public Task<bool> UpdateStatus(int idPedido, int idStatus);
 
         public Task<bool> Update(Pedido pedido);
 

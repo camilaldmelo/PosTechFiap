@@ -18,41 +18,66 @@ namespace Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Pedido>> GetById(int idPedido)
+        public async Task<Pedido> GetById(int idPedido)
         {
-            var requests = await _pedidoRepository.GetById(idPedido);
+            var pedido = await _pedidoRepository.GetById(idPedido);
+            pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+            return pedido;
+        }
 
-            foreach(var request in requests)
+        public async Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento)
+        {
+            var pedidos = await _pedidoRepository.GetByIdStatus(idAcompanhamento);
+
+            foreach (var pedido in pedidos)
             {
-                request.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(request.Id);
+                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
             }
 
-            return requests;
+            return pedidos;
         }
 
         public async Task<int> Create(Cliente cliente, IEnumerable<ProdutosPedido> produtosPedido)
         {
-            var idPedido = await _pedidoRepository.GetIdLastRecordInserted() + 1;
-            var pedido = new Pedido(id:idPedido, idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Recebido, null);
-
+            var pedido = new Pedido(idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Recebido);
             try
             {
                 _unitOfWork.BeginTransaction();
 
-                await _pedidoRepository.Create(pedido);
+                pedido.Id = await _pedidoRepository.Create(pedido);
                 foreach (var pp in produtosPedido)
                 {
-                    pp.IdPedido = idPedido;
+                    pp.IdPedido = pedido.Id;
                     await _produtosPedidoRepository.Create(pp);
                 }
 
                 _unitOfWork.Commit();                
             }
-            catch
+            catch (Exception ex)
             {
                 _unitOfWork.Rollback();
+                throw new Exception(ex.Message);
             }
-            return idPedido;
+            return pedido.Id;
+        }
+
+        public async Task<bool> UpdateStatus(int idPedido, int idStatus)
+        {
+            try
+            {
+                var pedido = await _pedidoRepository.GetById(idPedido) ?? throw new Exception("O pedido fornecido não existe.");
+                pedido.IdAcompanhamento = idStatus;
+
+                _unitOfWork.BeginTransaction();
+                await _pedidoRepository.Update(pedido);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                _unitOfWork.Rollback();
+                throw new Exception(ex.Message);
+            }
+            return true;
         }
 
         public async Task<bool> Update(Pedido pedido)
@@ -73,9 +98,10 @@ namespace Domain.Services
                 }
                 _unitOfWork.Commit();
             }
-            catch
+            catch (Exception ex)
             {
                 _unitOfWork.Rollback();
+                throw new Exception(ex.Message);
             }
             return true;
         }

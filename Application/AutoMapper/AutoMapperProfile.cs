@@ -8,13 +8,23 @@ namespace Application.AutoMapper
     {
         public AutoMapperProfile()
         {
+            CreateMap<Cliente, PedidoIncViewModel>()
+                .ForMember(dest => dest.IdCliente, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<Pedido, PedidoIncViewModel>()
+                .ForMember(dest => dest.IdPedido, opt => opt.MapFrom(src => src.Id));
+
             CreateMap<Cliente, PedidoViewModel>()
                 .ForMember(dest => dest.IdCliente, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<Pedido, PedidoViewModel>()
                 .ForMember(dest => dest.IdPedido, opt => opt.MapFrom(src => src.Id));
 
+            CreateMap<ProdutosPedido, ProdutosPedidoIncViewModel>();
+
             CreateMap<ProdutosPedido, ProdutosPedidoViewModel>();
+
+            CreateMap<ProdutosPedido, ProdutoViewModel>();
 
             CreateMap<Produto, ProdutoViewModel>()
                 .ForMember(dest => dest.IdProduto, opt => opt.MapFrom(src => src.Id))
@@ -29,13 +39,23 @@ namespace Application.AutoMapper
 
 
 
+            CreateMap<PedidoIncViewModel, Cliente>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCliente));
+
+            CreateMap<PedidoIncViewModel, Pedido>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdPedido));
+
             CreateMap<PedidoViewModel, Cliente>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCliente));
 
             CreateMap<PedidoViewModel, Pedido>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdPedido));
 
+            CreateMap<ProdutosPedidoIncViewModel, ProdutosPedido>();
+
             CreateMap<ProdutosPedidoViewModel, ProdutosPedido>();
+
+            CreateMap<ProdutoViewModel, ProdutosPedido>();
 
             CreateMap<ProdutoViewModel, Produto>()
                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdProduto))

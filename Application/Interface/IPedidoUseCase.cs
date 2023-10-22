@@ -4,10 +4,14 @@ namespace Application.Interface
 {
     public interface IPedidoUseCase
     {
-        public Task<IEnumerable<PedidoViewModel>> GetById(int idPedido);
+        public Task<PedidoViewModel> GetById(int idPedido);
 
-        public Task<bool> Update(PedidoViewModel pedido);
+        public Task<IEnumerable<PedidoViewModel>> GetByIdStatus(int idAcompanhamento);
 
-        public Task<int> Create(PedidoViewModel pedido);
+        public Task<bool> Update(PedidoIncViewModel pedido);
+
+        public Task<bool> UpdateStatus(int idPedido, int idStatus);
+
+        public Task<int> Create(PedidoIncViewModel pedido);
     }
 }
