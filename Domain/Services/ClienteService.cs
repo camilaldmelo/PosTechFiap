@@ -16,7 +16,7 @@ namespace Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Pedido>> GetCliente(string cpf)
+        public async Task<IEnumerable<Cliente>> GetCliente(string cpf)
         {
             var result = await _clienteRepository.ObterClientePorCpf(cpf);
 
