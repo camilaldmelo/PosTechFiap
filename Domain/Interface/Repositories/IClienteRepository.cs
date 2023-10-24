@@ -6,8 +6,6 @@ namespace Domain.Interface.Repositories
     {
         public Task<IEnumerable<Pedido>> ObterClientePorCpf(string cpf);
 
-        public Task<bool> Inserircliente(Cliente cliente);
-
-        public Task<int> ObterIdUltimoRegistroInserido();
+        public Task<int> InserirCliente(Cliente cliente);
     }
 }

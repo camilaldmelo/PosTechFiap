@@ -25,15 +25,13 @@ namespace Domain.Services
 
         public async Task<int> PostCliente(Cliente cliente)
         {
-            var idCliente = await _clienteRepository.ObterIdUltimoRegistroInserido() + 1;
-            cliente.Id = idCliente;
             cliente.Data = DateTime.Now;
 
             try
             {
                 _unitOfWork.BeginTransaction();
 
-                await _clienteRepository.Inserircliente(cliente);
+                cliente.Id = await _clienteRepository.InserirCliente(cliente);
 
                 _unitOfWork.Commit();
             }
@@ -41,7 +39,7 @@ namespace Domain.Services
             {
                 _unitOfWork.Rollback();
             }
-            return idCliente;
+            return cliente.Id;
         }
 
     }
