@@ -43,6 +43,7 @@ CREATE TABLE TBL_ACOMPANHAMENTO (
 );
 
 INSERT INTO TBL_CLIENTE (NOME, CPF, EMAIL, DATA) VALUES
+	('Anônimo', '00000000001', 'anonimo@email.com', '2023-01-15'),
     ('João Silva', '12345678901', 'joao@email.com', '2023-01-15'),
     ('Maria Santos', '98765432101', 'maria@email.com', '2023-05-20'),
     ('Pedro Souza', '45678912301', 'pedro@email.com', '2023-11-10'),
