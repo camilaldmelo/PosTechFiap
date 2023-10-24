@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.ValueObjects;
 
 namespace Infra.Repositories
 {
@@ -36,12 +35,12 @@ namespace Infra.Repositories
             return clienteId;
         }
 
-        public async Task<IEnumerable<Pedido>> ObterClientePorCpf(string cpfCliente)
+        public async Task<IEnumerable<Cliente>> ObterClientePorCpf(string cpfCliente)
         {
             string commandText = "SELECT id as Id, nome as Nome, cpf as CPF, email as Email, \"data\" as Data  FROM public.tbl_cliente WHERE cpf = (@cpfCliente)";
             var parametros = new { cpfCliente };
 
-            return await _session.Connection.QueryAsync<Pedido>(commandText, parametros);
+            return await _session.Connection.QueryAsync<Cliente>(commandText, parametros);
         }
     }
 }
