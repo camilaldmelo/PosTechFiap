@@ -1,7 +1,11 @@
-﻿namespace Domain.Entities
+﻿using Domain.Base;
+
+namespace Domain.Entities
 {
-    public class Cliente
+    public class Cliente : IAggregateRoot
     {
+        public Cliente() { }
+
         public required int Id { get; set; }
         public required string Nome { get; set; }
         public required string CPF { get; set; }

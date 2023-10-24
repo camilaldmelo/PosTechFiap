@@ -4,12 +4,14 @@ namespace Domain.Interface.Repositories
 {
     public interface IPedidoRepository
     {
-        public Task<IEnumerable<Pedido>> ObterPedidosPorId(int idPedido);
+        public Task<Pedido> GetById(int idPedido);
 
-        public Task<bool> InserirPedido(Pedido pedido);
+        public Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento);
 
-        public Task<int> ObterIdUltimoRegistroInserido();
+        public Task<int> Create(Pedido pedido);
 
-        public Task<bool> AtualizarPedido(Pedido pedido);
+        public Task<int> GetIdLastRecordInserted();
+
+        public Task<bool> Update(Pedido pedido);
     }
 }
