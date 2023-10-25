@@ -56,6 +56,12 @@ namespace Domain.Services
             try
             {
                 _unitOfWork.BeginTransaction();
+                var clienteCPF = await _clienteRepository.GetByCPF(cliente.CPF);
+                if (clienteCPF != null)
+                {
+                    throw new Exception("Já existe um usuário cadastrado com esse CPF.");
+                }
+                
                 int clienteId = await _clienteRepository.Create(cliente);
 
                 if (clienteId > 0)
