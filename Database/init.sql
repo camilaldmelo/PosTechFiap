@@ -43,6 +43,9 @@ CREATE TABLE TBL_PRODUTOS_PEDIDO (
 );
 
 
+INSERT INTO TBL_CLIENTE (ID, NOME, CPF, EMAIL, DATA) VALUES
+    (0, 'Default', '00000000000', 'sem_cadastro@email.com', '2023-01-15');
+	
 
 INSERT INTO TBL_CLIENTE (NOME, CPF, EMAIL, DATA) VALUES
     ('João Silva', '12345678901', 'joao@email.com', '2023-01-15'),

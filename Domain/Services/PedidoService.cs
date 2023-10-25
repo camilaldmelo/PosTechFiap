@@ -84,6 +84,9 @@ namespace Domain.Services
         {
             try
             {
+                var pedidoUpdate = await _pedidoRepository.GetById(pedido.Id) ?? throw new Exception("O pedido fornecido não existe.");
+                pedido.IdAcompanhamento = pedidoUpdate.IdAcompanhamento;
+
                 _unitOfWork.BeginTransaction();                
                 await _pedidoRepository.Update(pedido);
                 await _produtosPedidoRepository.DeleteByIdPedido(pedido.Id);
