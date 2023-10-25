@@ -1,5 +1,7 @@
 ﻿using Application.Interface;
+using Application.UseCases;
 using Application.ViewModel;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -22,12 +24,28 @@ namespace API.Controllers
         /// <returns>Um pedido</returns>
         [HttpGet("{idPedido}", Name = "Pedidos")]
         [SwaggerOperation(Summary = "Obtém um pedido por id", Description = "Obtém um pedido por id do pedido.")]
-        [SwaggerResponse(StatusCodes.Status200OK, "O pedido foi recuperado com sucesso.", typeof(CategoriaViewModel))]
+        [SwaggerResponse(StatusCodes.Status200OK, "O pedido foi recuperado com sucesso.", typeof(PedidoViewModel))]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Nenhum pedido foi encontrado.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno do servidor.")]
-        public async Task<PedidoViewModel> GetById(int idPedido)
+        public async Task<IActionResult> GetById(int idPedido)
         {
-            return await _pedidoUseCase.GetById(idPedido);
+            try
+            {
+                var pedido = await _pedidoUseCase.GetById(idPedido);
+
+                if (pedido != null)
+                {
+                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                }
+                else
+                {
+                    return NotFound(); // Retorna 404 Not Found se o cliente não for encontrado.
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message); // Retorna 500 Internal Server Error em caso de erro interno do servidor.
+            }
         }
 
         /// <summary>
@@ -36,12 +54,28 @@ namespace API.Controllers
         /// <returns>Uma lista de pedidos</returns>
         [HttpGet("Status/{idAcompanhamento}", Name = "PedidosPorStatus")]
         [SwaggerOperation(Summary = "Obtém uma lista de pedidos", Description = "Obtém uma lista de pedidos pelo id do status.")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Os pedidos foram recuperados com sucesso.", typeof(IEnumerable<CategoriaViewModel>))]
+        [SwaggerResponse(StatusCodes.Status200OK, "Os pedidos foram recuperados com sucesso.", typeof(IEnumerable<PedidoViewModel>))]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Nenhum pedido foi encontrado.")]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno do servidor.")]
-        public async Task<IEnumerable<PedidoViewModel>> GetByIdStatus(int idAcompanhamento)
+        public async Task<IActionResult> GetByIdStatus(int idAcompanhamento)
         {
-            return await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
+            try
+            {
+                var pedido = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
+
+                if (pedido != null)
+                {
+                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                }
+                else
+                {
+                    return NotFound(); // Retorna 404 Not Found se o cliente não for encontrado.
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message); // Retorna 500 Internal Server Error em caso de erro interno do servidor.
+            }
         }
 
         /// <summary>
@@ -63,19 +97,11 @@ namespace API.Controllers
             try
             {
                 int idPedido = await _pedidoUseCase.Create(pedido);
-
-                if (idPedido > 0)
-                {
-                    return Ok(); // Retorna 200 OK
-                }
-                else
-                {
-                    return NotFound(); // Retorna 404 Not Found
-                }
+                return CreatedAtRoute("Pedidos", new { idPedido }, null);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message); // Retorna 500 Internal Server Error em caso de erro interno do servidor.
+                return StatusCode(500, ex.Message);
             }
         }
 
