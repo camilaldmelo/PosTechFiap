@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.ValueObjects;
 
 namespace Infra.Repositories
 {
