@@ -8,11 +8,13 @@ namespace Domain.Services
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPedidoService _pedidoService;
 
-        public ClienteService(IClienteRepository clienteRepository, IUnitOfWork unitOfWork)
+        public ClienteService(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
         {
             _clienteRepository = clienteRepository;
             _unitOfWork = unitOfWork;
+            _pedidoService = pedidoService;
         }
 
         public async Task<IEnumerable<Cliente>> GetAll()
@@ -56,7 +58,7 @@ namespace Domain.Services
             try
             {
                 _unitOfWork.BeginTransaction();
-                var clienteCPF = await _clienteRepository.GetByCPF(cliente.CPF);
+                var clienteCPF = await GetByCPF(cliente.CPF);
                 if (clienteCPF != null)
                 {
                     throw new Exception("Já existe um usuário cadastrado com esse CPF.");
@@ -109,9 +111,15 @@ namespace Domain.Services
 
         public async Task<bool> CanDeleteCliente(int clienteId)
         {
-            // Adicione lógica aqui para verificar se há alguma restrição que impeça a exclusão do acompanhamento, se necessário.
+            // Verifique se há pedidos associados a este cliente
+            var pedidos = await _pedidoService.GetByIdCliente(clienteId);
 
-            // Se não houver restrições, o acompanhamento pode ser excluído.
+            if (pedidos != null && pedidos.Any())
+            {
+                // Se houver pedidos associados, não permita a exclusão do cliente
+                return false;
+            }
+            // Se não houver pedidos associados, o cliente pode ser excluído
             return true;
         }
 
