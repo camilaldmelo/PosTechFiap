@@ -68,7 +68,7 @@ cd PosTechFiap
 ### Passo 3: Inicialize os Contêineres Docker
 A aplicação depende de dois contêineres Docker: um para o PostgreSQL e outro para a API .NET. Você pode iniciar ambos usando o Docker Compose. Certifique-se de estar no diretório raiz do projeto (onde está o arquivo docker-compose.yml) e execute o seguinte comando:
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 Isso iniciará os contêineres em segundo plano (-d). O Docker Compose lerá as configurações do docker-compose.yml e criará os contêineres necessários.
 
@@ -87,3 +87,72 @@ docker-compose down
 ```
 Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
 
+## Endpoints disponíveis
+
+Foram disponibilizados os metodos de Cadastro, Remoção, Busca e Atualização dos seguintes recursos:
+ - Acompanhamento
+ - Categoria
+ - Cliente
+ - Pedido
+ - Produto
+
+É possível acessar a documentação da API via Swagger ou ReDoc.
+
+[Baixe o Postman Collection](Grupo01.postman_collection.json)
+
+## APIs
+Abaixo serão listados apenas os metodos solicitados no entregável 02 do TechChallenge Fase 1. Os demais metodos poderão ser consultados na documentação da API via Swagger/ReDoc ou utilizando o Postman Collection.
+### I. Cadastro do Cliente
+```bash
+POST http://localhost:8080/Cliente
+
+{
+  "cpf": "98765432110",
+  "nome": "Cristiano Ronaldo",
+  "email": "cr7@email.com"
+}
+```
+### II. Identificação do Cliente via CPF
+```bash
+GET http://localhost:8080/Cliente/cpf/12345678901
+```
+### III. Criar, editar e remover produto
+```bash
+POST http://localhost:8080/Produto
+{
+  "nome": "Água com Gás",
+  "descricao": "Água mineral natural",
+  "preco": 3.99,
+  "urlImagem": "https://example.com/aguagas.jpg",
+  "idCategoria": 3
+}
+```
+```bash
+PUT http://localhost:8080/Produto/1
+{
+    "nome": "Hambúrguer",
+    "descricao": "Hambúrguer delicioso",
+    "preco": 15.99,
+    "urlImagem": "https://example.com/imagem1.jpg",
+    "idCategoria": 1,
+    "categoria": "Lanche"
+}
+```
+```bash
+DELETE http://localhost:8080/Produto/30
+```
+
+### IV. Buscar produtos por categoria
+```bash
+GET http://localhost:8080/Produto/Categoria/2
+```
+
+### V. Fake checkout, apenas enviar os produtos escolhidos para a fila
+```bash
+POST http://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2
+```
+
+### VI. Listar os pedidos
+```bash
+GET http://localhost:8080/Pedido/Status/1
+```
