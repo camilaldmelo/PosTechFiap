@@ -12,7 +12,7 @@ Este é o projeto desenvolvido durante a fase I do curso de pós-graduação em 
 - [Josué Batista Cruz Júnior - RM 352045](https://www.linkedin.com/in/josuejuniorjf/)
 
 
-## Documentação
+## Documentação - Entregável 01
 
 ### Problema atual - AS IS
 Uma lanchonete de bairro, está expandindo devido ao seu grande sucesso. Porém encontra grande dificuldade para gerenciar os pedidos manualmente. Em alguns momentos o atendimento aos clientes é caótico e confuso. O atendente anota o pedido em um papel e entrega à cozinha, mas não se tem nenhuma garantina que o pedido será preparado corretamente.
@@ -48,46 +48,7 @@ O Event Storming foi realizado na ferramenta Miro e está disponível no [aqui](
 
 ---
 
-## Como Clonar e Subir a Aplicação com Docker Compose
-
-Este guia fornecerá instruções passo a passo sobre como clonar e executar a aplicação .NET 7.0 com um banco de dados PostgreSQL usando Docker Compose. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema antes de prosseguir.
-
-### Passo 1: Clone o Repositório
-
-Para começar, você precisa clonar o repositório do GitHub para sua máquina local. Abra o terminal e execute o seguinte comando:
-
-```bash
-git clone https://github.com/camilaldmelo/PosTechFiap.git
-```
-
-### Passo 2: Navegue até o Diretório do Projeto
-Após clonar o repositório, navegue até o diretório do projeto usando o seguinte comando:
-```bash
-cd PosTechFiap
-```
-### Passo 3: Inicialize os Contêineres Docker
-A aplicação depende de dois contêineres Docker: um para o PostgreSQL e outro para a API .NET. Você pode iniciar ambos usando o Docker Compose. Certifique-se de estar no diretório raiz do projeto (onde está o arquivo docker-compose.yml) e execute o seguinte comando:
-```bash
-docker-compose up -d --build
-```
-Isso iniciará os contêineres em segundo plano (-d). O Docker Compose lerá as configurações do docker-compose.yml e criará os contêineres necessários.
-
-### Passo 4: Aguarde a Inicialização
-Aguarde alguns momentos enquanto o Docker Compose cria e inicializa os contêineres. Isso pode levar algum tempo na primeira execução, pois ele precisará baixar as imagens Docker necessárias.
-
-### Passo 5: Acesse a Aplicação
-Após a inicialização bem-sucedida, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
-- Acesse a API em http://localhost:8080/swagger ou http://localhost:8080/api-docs
-- O PostgreSQL estará disponível em localhost na porta padrão 5432.
-
-### Passo 6: Parar e Remover Contêineres (Opcional)
-Para parar e remover os contêineres, você pode executar o seguinte comando no diretório do projeto:
-```bash
-docker-compose down
-```
-Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
-
-## Endpoints disponíveis
+## Endpoints disponíveis - Entregável 02
 
 Foram disponibilizados os metodos de Cadastro, Remoção, Busca e Atualização dos seguintes recursos:
  - Acompanhamento
@@ -156,3 +117,43 @@ POST http://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2
 ```bash
 GET http://localhost:8080/Pedido/Status/1
 ```
+---
+
+## Como Clonar e Subir a Aplicação com Docker Compose - Entregável 03
+
+Este guia fornecerá instruções passo a passo sobre como clonar e executar a aplicação .NET 7.0 com um banco de dados PostgreSQL usando Docker Compose. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema antes de prosseguir.
+
+### Passo 1: Clone o Repositório
+
+Para começar, você precisa clonar o repositório do GitHub para sua máquina local. Abra o terminal e execute o seguinte comando:
+
+```bash
+git clone https://github.com/camilaldmelo/PosTechFiap.git
+```
+
+### Passo 2: Navegue até o Diretório do Projeto
+Após clonar o repositório, navegue até o diretório do projeto usando o seguinte comando:
+```bash
+cd PosTechFiap
+```
+### Passo 3: Inicialize os Contêineres Docker
+A aplicação depende de dois contêineres Docker: um para o PostgreSQL e outro para a API .NET. Você pode iniciar ambos usando o Docker Compose. Certifique-se de estar no diretório raiz do projeto (onde está o arquivo docker-compose.yml) e execute o seguinte comando:
+```bash
+docker-compose up -d --build
+```
+Isso iniciará os contêineres em segundo plano (-d). O Docker Compose lerá as configurações do docker-compose.yml e criará os contêineres necessários.
+
+### Passo 4: Aguarde a Inicialização
+Aguarde alguns momentos enquanto o Docker Compose cria e inicializa os contêineres. Isso pode levar algum tempo na primeira execução, pois ele precisará baixar as imagens Docker necessárias.
+
+### Passo 5: Acesse a Aplicação
+Após a inicialização bem-sucedida, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
+- Acesse a API em http://localhost:8080/swagger ou http://localhost:8080/api-docs
+- O PostgreSQL estará disponível em localhost na porta padrão 5432.
+
+### Passo 6: Parar e Remover Contêineres (Opcional)
+Para parar e remover os contêineres, você pode executar o seguinte comando no diretório do projeto:
+```bash
+docker-compose down
+```
+Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
