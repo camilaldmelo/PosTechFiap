@@ -37,8 +37,6 @@ namespace Application.AutoMapper
             CreateMap<Acompanhamento, AcompanhamentoViewModel>()
                 .ForMember(dest => dest.IdAcompanhamento, opt => opt.MapFrom(src => src.Id));
 
-
-
             CreateMap<PedidoIncViewModel, Cliente>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.IdCliente));
 

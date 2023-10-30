@@ -4,6 +4,10 @@ namespace Domain.Interface.Services
 {
     public interface IClienteService
     {
+        public Task<IEnumerable<Cliente>> GetCliente(string cpf);
+
+        public Task<int> PostCliente(Cliente cliente);
+
         public Task<IEnumerable<Cliente>> GetAll();
         public Task<Cliente> GetById(int id);
         public Task<Cliente> GetByCPF(string cpf);

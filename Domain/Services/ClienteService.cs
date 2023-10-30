@@ -17,7 +17,9 @@ namespace Domain.Services
             _pedidoService = pedidoService;
         }
 
+        public async Task<IEnumerable<Cliente>> GetCliente(string cpf)
         public async Task<IEnumerable<Cliente>> GetAll()
+
         {
             try
             {

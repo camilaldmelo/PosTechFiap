@@ -66,10 +66,13 @@ namespace Infra.Repositories
             }
         }
 
+        public async Task<IEnumerable<Cliente>> ObterClientePorCpf(string cpfCliente)
+
         public async Task<bool> Delete(int id)
         {
             string sql = "DELETE FROM public.tbl_cliente WHERE id = @id";
 
+            return await _session.Connection.QueryAsync<Cliente>(commandText, parametros);
             try
             {
                 int rowsAffected = await _session.Connection.ExecuteAsync(sql, new { id });
