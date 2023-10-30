@@ -136,6 +136,10 @@ Após clonar o repositório, navegue até o diretório do projeto usando o segui
 ```bash
 cd PosTechFiap
 ```
+Posicione para a branch da entrega da fase 1.
+```bash
+git checkout origin/fase-1
+```
 ### Passo 3: Inicialize os Contêineres Docker
 A aplicação depende de dois contêineres Docker: um para o PostgreSQL e outro para a API .NET. Você pode iniciar ambos usando o Docker Compose. Certifique-se de estar no diretório raiz do projeto (onde está o arquivo docker-compose.yml) e execute o seguinte comando:
 ```bash
