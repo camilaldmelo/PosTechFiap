@@ -702,7 +702,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Água com Gás\",\r\n  \"descricao\": \"Água mineral natural\",\r\n  \"preco\": 3.99,\r\n  \"urlImagem\": \"https://example.com/aguagas.jpg\",\r\n  \"idCategoria\": 3\r\n}",
+							"raw": "{\r\n  \"nome\": \"Água com Gás\",\r\n  \"descricao\": \"Água mineral natural\",\r\n  \"preco\": 3.99,\r\n  \"urlImagem\": \"https://example.com/aguagas.jpg\",\r\n  \"idCategoria\": 3,\r\n  \"Categoria\":\"Bebida\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -796,7 +796,7 @@
 				{
 					"name": "V. Fake checkout",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2",
@@ -829,7 +829,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/Pedido/Status/1",
+							"raw": "http://localhost:8080/Pedido/Status/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -838,7 +838,7 @@
 							"path": [
 								"Pedido",
 								"Status",
-								"1"
+								"2"
 							]
 						}
 					},
