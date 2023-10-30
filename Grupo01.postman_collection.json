@@ -15,8 +15,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:8080/Pedido/1",
-							"protocol": "https",
+							"raw": "http://localhost:8080/Pedido/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -35,8 +35,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:8080/Pedido/Status/1",
-							"protocol": "https",
+							"raw": "http://localhost:8080/Pedido/Status/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -65,8 +65,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8080/Pedido",
-							"protocol": "https",
+							"raw": "http://localhost:8080/Pedido",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -93,8 +93,8 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8080/Pedido",
-							"protocol": "https",
+							"raw": "http://localhost:8080/Pedido",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -112,8 +112,8 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2",
-							"protocol": "https",
+							"raw": "http://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -288,7 +288,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idProduto\": 0,\r\n  \"nome\": \"Sundae de Morango\",\r\n  \"descricao\": \"Sobremesa de Morango\",\r\n  \"preco\": 3.99,\r\n  \"urlImagem\": \"https://example.com/imagem78.jpg\",\r\n  \"idCategoria\": 4,\r\n  \"categoria\": \"Sobremesa\"\r\n}",
+							"raw": "{\r\n  \"nome\": \"Sundae de Morango\",\r\n  \"descricao\": \"Sobremesa de Morango\",\r\n  \"preco\": 3.99,\r\n  \"urlImagem\": \"https://example.com/imagem78.jpg\",\r\n  \"idCategoria\": 4,\r\n  \"categoria\": \"Sobremesa\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -384,7 +384,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/Produto/Categoria/1",
+							"raw": "http://localhost:8080/Produto/Categoria/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -515,6 +515,330 @@
 							"path": [
 								"Acompanhamento",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "GetALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"12345678910\",\r\n  \"nome\": \"Pedro Cabral\",\r\n  \"email\": \"pedrocabral@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Cliente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"12345678901\",\r\n    \"nome\": \"João Costa e Silva \",\r\n    \"email\": \"joao@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Cliente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Cliente/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APIs Entregavel",
+			"item": [
+				{
+					"name": "I. Cadastro do Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"98765432110\",\r\n  \"nome\": \"Cristiano Ronaldo\",\r\n  \"email\": \"cr7@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "II. Identificação do Cliente via CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Cliente/cpf/12345678901",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Cliente",
+								"cpf",
+								"12345678901"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "III. Criar produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Água com Gás\",\r\n  \"descricao\": \"Água mineral natural\",\r\n  \"preco\": 3.99,\r\n  \"urlImagem\": \"https://example.com/aguagas.jpg\",\r\n  \"idCategoria\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Produto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "III. Editar produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Hambúrguer\",\r\n    \"descricao\": \"Hambúrguer delicioso\",\r\n    \"preco\": 15.99,\r\n    \"urlImagem\": \"https://example.com/imagem1.jpg\",\r\n    \"idCategoria\": 1,\r\n    \"categoria\": \"Lanche\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Produto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Produto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "III. Remover produto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Produto/30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Produto",
+								"30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IV. Buscar produtos por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Produto/Categoria/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Produto",
+								"Categoria",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V. Fake checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Pedido/PedidoStatus?idPedido=1&idStatus=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Pedido",
+								"PedidoStatus"
+							],
+							"query": [
+								{
+									"key": "idPedido",
+									"value": "1"
+								},
+								{
+									"key": "idStatus",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VI. Listar os pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Pedido/Status/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Pedido",
+								"Status",
+								"1"
 							]
 						}
 					},

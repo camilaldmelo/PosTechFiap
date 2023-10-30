@@ -8,11 +8,15 @@ namespace Domain.Services
     {
         private readonly IAcompanhamentoRepository _acompanhamentoRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPedidoService _pedidoService;
 
-        public AcompanhamentoService(IAcompanhamentoRepository acompanhamentoRepository, IUnitOfWork unitOfWork)
+        public AcompanhamentoService(IAcompanhamentoRepository acompanhamentoRepository, 
+                                     IUnitOfWork unitOfWork,
+                                     IPedidoService pedidoService)
         {
             _acompanhamentoRepository = acompanhamentoRepository;
             _unitOfWork = unitOfWork;
+            _pedidoService = pedidoService;
         }
 
         public async Task<IEnumerable<Acompanhamento>> GetAll()
@@ -91,9 +95,15 @@ namespace Domain.Services
 
         public async Task<bool> CanDeleteAcompanhamento(int acompanhamentoId)
         {
-            // Adicione lógica aqui para verificar se há alguma restrição que impeça a exclusão do acompanhamento, se necessário.
+            // Verifique se há pedidos associados a esta acompanhamento/status
+            var pedidos = await _pedidoService.GetByIdStatus(acompanhamentoId);
 
-            // Se não houver restrições, o acompanhamento pode ser excluído.
+            if (pedidos != null && pedidos.Any())
+            {
+                // Se houver pedidos associados, não permita a exclusão da acompanhamento/status
+                return false;
+            }
+            // Se não houver pedidos associados, o acompanhamento/status pode ser excluído
             return true;
         }
 

@@ -7,9 +7,9 @@ namespace Domain.Services
 {
     public class PedidoService : IPedidoService
     {
-        public IPedidoRepository _pedidoRepository;
-        public IProdutosPedidoRepository _produtosPedidoRepository;
-        public IUnitOfWork _unitOfWork;
+        private readonly IPedidoRepository _pedidoRepository;
+        private readonly IProdutosPedidoRepository _produtosPedidoRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository, IUnitOfWork unitOfWork)
         {
@@ -28,6 +28,30 @@ namespace Domain.Services
         public async Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento)
         {
             var pedidos = await _pedidoRepository.GetByIdStatus(idAcompanhamento);
+
+            foreach (var pedido in pedidos)
+            {
+                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+            }
+
+            return pedidos;
+        }
+
+        public async Task<IEnumerable<Pedido>> GetByIdCliente(int idCliente)
+        {
+            var pedidos = await _pedidoRepository.GetByIdCliente(idCliente);
+
+            foreach (var pedido in pedidos)
+            {
+                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+            }
+
+            return pedidos;
+        }
+
+        public async Task<IEnumerable<Pedido>> GetByIdProduto(int idProduto)
+        {
+            var pedidos = await _pedidoRepository.GetByIdProduto(idProduto);
 
             foreach (var pedido in pedidos)
             {
@@ -84,6 +108,9 @@ namespace Domain.Services
         {
             try
             {
+                var pedidoUpdate = await _pedidoRepository.GetById(pedido.Id) ?? throw new Exception("O pedido fornecido não existe.");
+                pedido.IdAcompanhamento = pedidoUpdate.IdAcompanhamento;
+
                 _unitOfWork.BeginTransaction();                
                 await _pedidoRepository.Update(pedido);
                 await _produtosPedidoRepository.DeleteByIdPedido(pedido.Id);

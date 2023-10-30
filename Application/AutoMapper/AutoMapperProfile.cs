@@ -14,11 +14,11 @@ namespace Application.AutoMapper
             CreateMap<Pedido, PedidoIncViewModel>()
                 .ForMember(dest => dest.IdPedido, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<Cliente, PedidoViewModel>()
-                .ForMember(dest => dest.IdCliente, opt => opt.MapFrom(src => src.Id));
-
             CreateMap<Pedido, PedidoViewModel>()
                 .ForMember(dest => dest.IdPedido, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<Cliente, ClienteViewModel>()
+                .ForMember(dest => dest.IdCliente, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<ProdutosPedido, ProdutosPedidoIncViewModel>();
 

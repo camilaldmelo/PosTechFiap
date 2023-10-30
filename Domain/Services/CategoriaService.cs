@@ -6,9 +6,9 @@ namespace Domain.Services
 {
     public class CategoriaService : ICategoriaService
     {
-        public ICategoriaRepository _categoriaRepository;
-        public IProdutoService _produtoService;
-        public IUnitOfWork _unitOfWork;
+        private readonly ICategoriaRepository _categoriaRepository;
+        private readonly IProdutoService _produtoService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CategoriaService(ICategoriaRepository categoriaRepository, IProdutoService produtoService, IUnitOfWork unitOfWork)
         {

@@ -7,13 +7,15 @@ namespace Domain.Services
 {
     public class ProdutoService : IProdutoService
     {
-        public IProdutoRepository _produtoRepository;
-        public IUnitOfWork _unitOfWork;
+        private readonly IProdutoRepository _produtoRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPedidoService _pedidoService;
 
-        public ProdutoService(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork)
+        public ProdutoService(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
         {
             _produtoRepository = produtoRepository;
             _unitOfWork = unitOfWork;
+            _pedidoService = pedidoService;
         }
 
         public async Task<IEnumerable<Produto>> GetAll()
@@ -50,9 +52,28 @@ namespace Domain.Services
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<bool> CanDeleteProduto(int produtoId)
+        {
+            // Verifique se há pedidos associados a este produto
+            var pedidos = await _pedidoService.GetByIdProduto(produtoId);
+
+            if (pedidos != null && pedidos.Any())
+            {
+                // Se houver pedidos associados, não permita a exclusão do produto
+                return false;
+            }
+            // Se não houver pedidos associados, o produto pode ser excluído
+            return true;
+        }
 
         public async Task<bool> Delete(int id)
         {
+            if (!await CanDeleteProduto(id))
+            {
+                throw new Exception("Não é possível excluir o produto devido a restrições ou vínculos com outras entidades.");
+            }
+
+
             try
             {
                 _unitOfWork.BeginTransaction();

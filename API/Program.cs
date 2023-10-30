@@ -22,12 +22,14 @@ builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
 builder.Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
 builder.Services.AddScoped<ICategoriaUseCase, CategoriaUseCase>();
 builder.Services.AddScoped<IAcompanhamentoUseCase, AcompanhamentoUseCase>();
+builder.Services.AddScoped<IClienteUseCase, ClienteUseCase>();
 
 //Domínio
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IAcompanhamentoService, AcompanhamentoService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
 
 //Repositórios
 builder.Services.AddScoped<RepositoryBase>();
@@ -38,6 +40,7 @@ builder.Services.AddScoped<IProdutosPedidoRepository, ProdutosPedidoRepository>(
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IAcompanhamentoRepository, AcompanhamentoRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 
 //HealthCheck

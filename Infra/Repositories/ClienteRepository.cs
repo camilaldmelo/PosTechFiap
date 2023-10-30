@@ -13,34 +13,75 @@ namespace Infra.Repositories
             _session = session;
         }
 
-        /// <summary>
-        /// Atualiza pedido
-        /// </summary>
-        /// <param name="pedido"></param>
-        /// <returns></returns>
-        public async Task<int> InserirCliente(Cliente cliente)
+        public async Task<IEnumerable<Cliente>> GetAll()
         {
-            var sql = $@"INSERT INTO public.tbl_cliente (id, nome, cpf, email, ""data"") VALUES(@Id, @Nome, @Cpf, @Email, @Data) RETURNING id;";
+            string sql = "SELECT id, nome, cpf, email, data FROM public.tbl_cliente";
 
-            var parametros = new
+            var clientes = await _session.Connection.QueryAsync<Cliente>(sql);
+            return clientes;
+        }
+
+        public async Task<Cliente> GetById(int id)
+        {
+            string sql = "SELECT id, nome, cpf, email, data FROM public.tbl_cliente WHERE id = @id";
+
+            var cliente = await _session.Connection.QueryFirstOrDefaultAsync<Cliente>(sql, new { id });
+            return cliente;
+        }
+        public async Task<Cliente> GetByCPF(string cpf)
+        {
+            string sql = "SELECT id, nome, cpf, email, data FROM public.tbl_cliente WHERE cpf = @cpf";
+
+            var cliente = await _session.Connection.QueryFirstOrDefaultAsync<Cliente>(sql, new { cpf });
+            return cliente;
+        }
+
+        public async Task<int> Create(Cliente cliente)
+        {
+            string sql = "INSERT INTO public.tbl_cliente (nome, cpf, email, data) VALUES (@nome, @cpf, @email, @data) RETURNING id";
+
+            try
             {
-                cliente.Id,
-                cliente.Nome,
-                cliente.CPF,
-                cliente.Email,
-                cliente.Data,
-            };
+                int clienteId = await _session.Connection.ExecuteScalarAsync<int>(sql, cliente);
+                return clienteId;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-            int clienteId = await _session.Connection.ExecuteScalarAsync<int>(sql, cliente);
-            return clienteId;
+        public async Task<bool> Update(Cliente cliente)
+        {
+            string sql = "UPDATE public.tbl_cliente SET nome = @nome, cpf = @cpf, email = @email, data = @data WHERE id = @id";
+
+            try
+            {
+                int rowsAffected = await _session.Connection.ExecuteAsync(sql, cliente);
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Cliente>> ObterClientePorCpf(string cpfCliente)
+
+        public async Task<bool> Delete(int id)
         {
-            string commandText = "SELECT id as Id, nome as Nome, cpf as CPF, email as Email, \"data\" as Data  FROM public.tbl_cliente WHERE cpf = (@cpfCliente)";
-            var parametros = new { cpfCliente };
+            string sql = "DELETE FROM public.tbl_cliente WHERE id = @id";
 
             return await _session.Connection.QueryAsync<Cliente>(commandText, parametros);
+            try
+            {
+                int rowsAffected = await _session.Connection.ExecuteAsync(sql, new { id });
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
