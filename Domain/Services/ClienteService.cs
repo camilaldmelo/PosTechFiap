@@ -16,10 +16,8 @@ namespace Domain.Services
             _unitOfWork = unitOfWork;
             _pedidoService = pedidoService;
         }
-
-        public async Task<IEnumerable<Cliente>> GetCliente(string cpf)
+        
         public async Task<IEnumerable<Cliente>> GetAll()
-
         {
             try
             {
