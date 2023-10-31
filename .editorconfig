@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# ASP0014: Suggest using top level route registrations
+dotnet_diagnostic.ASP0014.severity = none
