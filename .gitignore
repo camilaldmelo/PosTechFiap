@@ -1,0 +1,12 @@
+Infra/obj/
+Infra/bin/
+Domain.Tests/obj/
+Domain.Tests/bin/
+Domain/obj/
+Domain/bin/
+Application/obj/
+Application/bin/
+API/obj/
+API/bin/
+API/API.csproj.user
+.vs/

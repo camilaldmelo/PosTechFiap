@@ -1,0 +1,26 @@
+version: '3'
+services:
+  postgres:
+    container_name: DatabaseTechChallengeGrupo01 
+    build:
+      context: ./Database  # O Dockerfile está no mesmo diretório
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"  # Mapeamento de porta
+
+  api:
+    container_name: APITechChallengeGrupo01 
+    build:
+      context: .  # Caminho para o Dockerfile da aplicação
+    environment:
+      SenhaCriptografadaBase: mhoAnVA/tWmZFyrjfl5Qiw==
+      UsuarioBase: postgres
+      HostBase: postgres:5432  
+      ChaveCriptografiaBase: ntmFa1ec294
+    ports:
+      - "8080:80"  
+    depends_on:
+      - postgres  
