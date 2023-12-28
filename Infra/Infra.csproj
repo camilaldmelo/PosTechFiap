@@ -14,10 +14,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Domain\Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="k8s\db\" />
 	</ItemGroup>	
 
 </Project>
