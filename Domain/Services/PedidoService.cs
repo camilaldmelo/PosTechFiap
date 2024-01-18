@@ -37,6 +37,19 @@ namespace Domain.Services
             return pedidos;
         }
 
+        public async Task<IEnumerable<Pedido>> GetInProgress()
+        {
+            var pedidos = await _pedidoRepository.GetInProgress();
+
+            foreach (var pedido in pedidos)
+            {
+                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+            }
+
+            return pedidos.OrderByDescending(pedido => pedido.IdAcompanhamento)
+                          .ThenBy(pedido => pedido.Data);
+        }
+
         public async Task<IEnumerable<Pedido>> GetByIdCliente(int idCliente)
         {
             var pedidos = await _pedidoRepository.GetByIdCliente(idCliente);
@@ -63,7 +76,7 @@ namespace Domain.Services
 
         public async Task<int> Create(Cliente cliente, IEnumerable<ProdutosPedido> produtosPedido)
         {
-            var pedido = new Pedido(idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Recebido);
+            var pedido = new Pedido(idCliente:cliente.Id, data:DateTime.Now, idAcompanhamento:AcompanhamentoConst.Criado);
             try
             {
                 _unitOfWork.BeginTransaction();

@@ -1,4 +1,5 @@
 ﻿using Application.ViewModel;
+using Domain.Entities;
 
 namespace Application.Interface
 {
@@ -7,6 +8,8 @@ namespace Application.Interface
         public Task<PedidoViewModel> GetById(int idPedido);
 
         public Task<IEnumerable<PedidoViewModel>> GetByIdStatus(int idAcompanhamento);
+
+        public Task<IEnumerable<PedidoViewModel>> GetInProgress();
 
         public Task<bool> Update(PedidoIncViewModel pedido);
 

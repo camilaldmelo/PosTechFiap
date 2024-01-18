@@ -79,6 +79,36 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Obtém uma lista de pedidos em andamento
+        /// </summary>
+        /// <returns>Uma lista de pedidos</returns>
+        [HttpGet("InProgress", Name = "PedidosEmAndamento")]
+        [SwaggerOperation(Summary = "Obtém uma lista de pedidos", Description = "Obtém uma lista de pedidos em andamento, ordenados do mais antigo para o mais atual.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Os pedidos foram recuperados com sucesso.", typeof(IEnumerable<PedidoViewModel>))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Nenhum pedido foi encontrado.")]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno do servidor.")]
+        public async Task<IActionResult> GetInProgress()
+        {
+            try
+            {
+                var pedido = await _pedidoUseCase.GetInProgress();
+
+                if (pedido != null)
+                {
+                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                }
+                else
+                {
+                    return NotFound(); // Retorna 404 Not Found se o cliente não for encontrado.
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message); // Retorna 500 Internal Server Error em caso de erro interno do servidor.
+            }
+        }
+
+        /// <summary>
         /// Cria um novo pedido
         /// </summary>
         /// <param name="pedido">Os dados do pedido a serem criados.</param>

@@ -109,6 +109,35 @@ namespace Infra.Repositories
             return pedidos;
         }
 
+        public async Task<IEnumerable<Pedido>> GetInProgress()
+        {
+            string commandText = @" SELECT p.id, 
+                                           p.id_cliente as IdCliente, 
+                                           p.data, 
+                                           p.id_acompanhamento as IdAcompanhamento,
+                                           c.id,
+                                           c.nome,
+                                           c.cpf,
+                                           c.email,
+                                           a.id,
+                                           a.nome
+                                      FROM public.tbl_pedido p LEFT JOIN
+                                           public.tbl_cliente c ON c.id = p.id_cliente LEFT join
+                                           public.tbl_acompanhamento a ON a.id = p.id_acompanhamento
+                                     WHERE p.id_acompanhamento in (2,3,4)";
+
+            var pedidos = await _session.Connection.QueryAsync<Pedido, Cliente, Acompanhamento, Pedido>(
+                sql: commandText,
+                map: (pedido, cliente, acompanhamento) =>
+                {
+                    pedido.Cliente = cliente;
+                    pedido.Acompanhamento = acompanhamento;
+                    return pedido;
+                },
+                splitOn: "Id");
+            return pedidos;
+        }
+
         public async Task<IEnumerable<Pedido>> GetByIdCliente(int idCliente)
         {
             string commandText = @" SELECT p.id, 

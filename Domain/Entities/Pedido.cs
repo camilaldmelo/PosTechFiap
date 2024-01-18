@@ -1,4 +1,5 @@
 ﻿using Domain.Base;
+using Domain.DTO;
 
 namespace Domain.Entities
 {
@@ -28,11 +29,30 @@ namespace Domain.Entities
         public Cliente? Cliente { get; set; }
         public IEnumerable<ProdutosPedido>? ProdutosPedido { get; set; }
 
+        public Pagamento? Pagamento { get; set; }
+        public int? IdPagamento { get; set; }
+
 
         public void ValidateEntity()
         {
             if (IdCliente < 0)
                 throw new DomainException("O IdCliente precisa ser maior ou igual a zero.");
+        }
+
+        public Pagamento GerarPagamento(int idMetodoPagamento)
+        {
+            Acompanhamento = new Acompanhamento { Id = AcompanhamentoConst.Recebido, Nome = "Recebido" };
+
+            Pagamento = new Pagamento
+            {
+                Pedido = this,
+                IdPedido = Id,
+                Valor = (double)ProdutosPedido.Sum(p => p.Quantidade * p.Produto.Preco),
+                IdMetodoPagamento = idMetodoPagamento,
+                
+            };
+
+            return Pagamento;
         }
     }
 }

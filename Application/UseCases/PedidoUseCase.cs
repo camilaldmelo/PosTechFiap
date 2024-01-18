@@ -31,6 +31,13 @@ namespace Application.UseCases
             return _mapper.Map<List<PedidoViewModel>>(pedido);
         }
 
+        public async Task<IEnumerable<PedidoViewModel>> GetInProgress()
+        {
+            var pedidos = await _pedidoService.GetInProgress();
+
+            return _mapper.Map<List<PedidoViewModel>>(pedidos);
+        }
+
         public async Task<int> Create(PedidoIncViewModel pedidoViewModel)
         {
             var cliente = _mapper.Map<Cliente>(pedidoViewModel);
