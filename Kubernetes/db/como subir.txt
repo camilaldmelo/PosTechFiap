@@ -1,0 +1,14 @@
+kubectl apply -f "1 - postgres-secret.yml"
+kubectl apply -f "2 - init-sql-script-configmap.yml"
+kubectl apply -f "3 - postgres-pvc.yml"
+kubectl apply -f "4 - postgres-statefulset.yml"
+kubectl apply -f "5 - postgres-service.yml"
+kubectl apply -f "6 - postgres-init-job.yml"
+
+
+kubectl delete -f "6 - postgres-init-job.yml"
+kubectl delete -f "5 - postgres-service.yml"
+kubectl delete -f "4 - postgres-statefulset.yml"
+kubectl delete pvc -l app=postgres  
+kubectl delete -f "2 - init-sql-script-configmap.yml"
+kubectl delete -f "1 - postgres-secret.yml"

@@ -1,0 +1,78 @@
+apiVersion: v1
+data:
+  init.sql: "-- Usar o banco de dados criado\r\n\\c postgres;\r\n\r\nCREATE TABLE
+    TBL_CLIENTE (\r\n    ID serial PRIMARY KEY,\r\n    NOME VARCHAR(255),\r\n    CPF
+    VARCHAR(11),\r\n    EMAIL VARCHAR(255),\r\n    DATA DATE\r\n);\r\n\r\nCREATE TABLE
+    TBL_CATEGORIA (\r\n    ID serial PRIMARY KEY,\r\n    NOME VARCHAR(255)\r\n);\r\n\r\nCREATE
+    TABLE TBL_ACOMPANHAMENTO (\r\n    ID serial PRIMARY KEY,\r\n    NOME VARCHAR(255)\r\n);\r\n\r\nCREATE
+    TABLE TBL_PRODUTO (\r\n    ID serial PRIMARY KEY,\r\n    NOME VARCHAR(255),\r\n
+    \   PRECO NUMERIC(10, 2),\r\n    DESCRICAO TEXT,\r\n    URL_IMAGEM VARCHAR(255),\r\n
+    \   ID_CATEGORIA INT REFERENCES TBL_CATEGORIA(ID)\r\n);\r\n\r\nCREATE TABLE TBL_METODO_PAGAMENTO
+    (\r\n  ID serial PRIMARY KEY,\r\n  NOME VARCHAR(255)\r\n);\r\n\r\nCREATE TABLE
+    TBL_PAGAMENTO (\r\n  ID serial PRIMARY KEY,\r\n  ID_PEDIDO INT,\r\n  ID_METODO
+    INT REFERENCES TBL_METODO_PAGAMENTO(ID), \r\n  VALOR NUMERIC(10, 2),  \r\n  DATA_CRIACAO
+    DATE,\r\n  DATA_ATUALIZACAO DATE\r\n);\r\n\r\nCREATE TABLE TBL_PEDIDO (\r\n    ID
+    serial PRIMARY KEY,\r\n    ID_CLIENTE INT REFERENCES TBL_CLIENTE(ID),\r\n    DATA
+    DATE,\r\n    ID_ACOMPANHAMENTO INT REFERENCES TBL_ACOMPANHAMENTO(ID),\r\n\tID_PAGAMENTO
+    INT REFERENCES TBL_PAGAMENTO(ID)\r\n);\r\n\r\nCREATE TABLE TBL_PRODUTOS_PEDIDO
+    (\r\n    ID serial PRIMARY KEY,\r\n    ID_PEDIDO INT REFERENCES TBL_PEDIDO(ID),\r\n
+    \   ID_PRODUTO INT REFERENCES TBL_PRODUTO(ID),\r\n    QUANTIDADE INT\r\n);\r\n\r\n\r\nINSERT
+    INTO TBL_METODO_PAGAMENTO (ID, NOME) VALUES\r\n    (1, 'MercadoPagoQRCode');\r\n\r\nINSERT
+    INTO TBL_CLIENTE (ID, NOME, CPF, EMAIL, DATA) VALUES\r\n    (0, 'Default', '00000000000',
+    'sem_cadastro@email.com', '2023-01-15');\t\r\n\r\nINSERT INTO TBL_CLIENTE (NOME,
+    CPF, EMAIL, DATA) VALUES\r\n    ('João Silva', '12345678901', 'joao@email.com',
+    '2023-01-15'),\r\n    ('Maria Santos', '98765432101', 'maria@email.com', '2023-05-20'),\r\n
+    \   ('Pedro Souza', '45678912301', 'pedro@email.com', '2023-11-10'),\r\n    ('Ana
+    Oliveira', '78912345601', 'ana@email.com', '2023-07-02'),\r\n    ('Carlos Pereira',
+    '32165498701', 'carlos@email.com', '2023-09-25');\r\n\r\n\r\nINSERT INTO TBL_CATEGORIA
+    (NOME) VALUES\r\n    ('Lanche'),\r\n    ('Acompanhamento'),\r\n    ('Bebida'),\r\n
+    \   ('Sobremesa');\r\n\t\r\nINSERT INTO TBL_ACOMPANHAMENTO (NOME) VALUES\r\n    ('Criado'),\r\n\t('Recebido'),\r\n
+    \   ('Em preparação'),\r\n    ('Pronto'),\r\n    ('Finalizado');\t\r\n\t\r\n--
+    Inserir 30 registros fictícios na tabela TBL_PRODUTO com URLs fictícias de imagens\r\nINSERT
+    INTO TBL_PRODUTO (NOME, PRECO, DESCRICAO, URL_IMAGEM, ID_CATEGORIA) VALUES\r\n
+    \   ('Hambúrguer', 9.99, 'Hambúrguer delicioso', 'https://example.com/imagem1.jpg',
+    1),\r\n    ('Batata Frita', 4.99, 'Batata frita crocante', 'https://example.com/imagem2.jpg',
+    2),\r\n    ('Coca-Cola', 2.99, 'Refrigerante refrescante', 'https://example.com/imagem3.jpg',
+    3),\r\n    ('Sundae de Chocolate', 3.99, 'Sobremesa de chocolate', 'https://example.com/imagem4.jpg',
+    4),\r\n    ('Salada Caesar', 7.99, 'Salada de frango caesar', 'https://example.com/imagem5.jpg',
+    2),\r\n    ('Pizza de Pepperoni', 12.99, 'Pizza com pepperoni', 'https://example.com/imagem6.jpg',
+    1),\r\n    ('Onion Rings', 5.99, 'Anéis de cebola fritos', 'https://example.com/imagem7.jpg',
+    2),\r\n    ('Sprite', 2.99, 'Refrigerante de limão-limão', 'https://example.com/imagem8.jpg',
+    3),\r\n    ('Cheesecake de Morango', 4.99, 'Cheesecake com morangos', 'https://example.com/imagem9.jpg',
+    4),\r\n    ('Taco de Frango', 8.99, 'Taco de frango picante', 'https://example.com/imagem10.jpg',
+    1),\r\n    ('Milkshake de Baunilha', 3.99, 'Milkshake de baunilha cremoso', 'https://example.com/imagem11.jpg',
+    3),\r\n    ('Creme Brulee', 6.99, 'Sobremesa de creme queimado', 'https://example.com/imagem12.jpg',
+    4),\r\n    ('Wrap de Alface', 7.99, 'Wrap de frango em folha de alface', 'https://example.com/imagem13.jpg',
+    2),\r\n    ('Água Mineral', 1.99, 'Água mineral pura', 'https://example.com/imagem14.jpg',
+    3),\r\n    ('Torta de Maçã', 5.99, 'Torta de maçã caseira', 'https://example.com/imagem15.jpg',
+    4),\r\n    ('Muffin de Blueberry', 3.49, 'Muffin com blueberries', 'https://example.com/imagem16.jpg',
+    4),\r\n    ('Cachorro-Quente', 6.99, 'Cachorro-quente clássico', 'https://example.com/imagem17.jpg',
+    1),\r\n    ('Fritas de Queijo', 5.49, 'Fritas de queijo derretido', 'https://example.com/imagem18.jpg',
+    2),\r\n    ('Pepsi', 2.99, 'Refrigerante de cola', 'https://example.com/imagem19.jpg',
+    3),\r\n    ('Bolo de Chocolate', 4.99, 'Bolo de chocolate decadente', 'https://example.com/imagem20.jpg',
+    4),\r\n    ('Sushi de Salmão', 11.99, 'Sushi de salmão fresco', 'https://example.com/imagem21.jpg',
+    1),\r\n    ('Sorvete de Baunilha', 4.49, 'Sorvete de baunilha cremoso', 'https://example.com/imagem22.jpg',
+    4),\r\n    ('Sanduíche de Frango', 7.49, 'Sanduíche de frango grelhado', 'https://example.com/imagem23.jpg',
+    1),\r\n    ('Tiramisu', 6.99, 'Sobremesa de café italiana', 'https://example.com/imagem24.jpg',
+    4),\r\n    ('Nuggets de Frango', 4.99, 'Nuggets de frango crocantes', 'https://example.com/imagem25.jpg',
+    2),\r\n    ('Fanta', 2.99, 'Refrigerante de laranja', 'https://example.com/imagem26.jpg',
+    3),\r\n    ('Bolo de Morango', 4.99, 'Bolo de morango fresco', 'https://example.com/imagem27.jpg',
+    4),\r\n    ('Tacos de Peixe', 9.99, 'Tacos de peixe com molho de pimenta', 'https://example.com/imagem28.jpg',
+    1),\r\n    ('Sorvete de Chocolate', 4.49, 'Sorvete de chocolate indulgente', 'https://example.com/imagem29.jpg',
+    4),\r\n    ('Sanduíche Vegetariano', 7.49, 'Sanduíche vegetariano saudável', 'https://example.com/imagem30.jpg',
+    1);\r\n\r\n\r\nINSERT INTO TBL_PEDIDO (ID_CLIENTE, DATA, ID_ACOMPANHAMENTO) VALUES\r\n
+    \   (1, '2023-09-30', 2),\r\n    (2, '2023-09-30', 3),\r\n    (3, '2023-09-29',
+    4),\r\n    (4, '2023-09-29', 3),\r\n    (5, '2023-09-28', 5);\r\n\t\r\nINSERT
+    INTO TBL_PRODUTOS_PEDIDO (ID_PEDIDO, ID_PRODUTO, QUANTIDADE) VALUES\r\n    (1,
+    1, 1),  -- Pedido 1: Hambúrguer (Acompanhamento: Recebido)\r\n    (2, 2, 2),  --
+    Pedido 2: Batata Frita (Acompanhamento: Em preparação)\r\n    (3, 3, 1),  -- Pedido
+    3: Coca-Cola (Acompanhamento: Pronto)\r\n    (4, 4, 3),  -- Pedido 4: Sundae de
+    Chocolate (Acompanhamento: Em preparação)\r\n    (5, 5, 2);  -- Pedido 5: Salada
+    Caesar (Acompanhamento: Finalizado)\t"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-01-18T19:11:57Z"
+  name: init-sql-script
+  namespace: default
+  resourceVersion: "57939"
+  uid: a04c2a16-f155-4e2e-9f53-5987b4c894a3

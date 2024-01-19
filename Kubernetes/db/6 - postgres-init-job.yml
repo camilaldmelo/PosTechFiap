@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-init-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: init-db
+        image: postgres:latest
+        command: ["/bin/sh", "-c", "sleep 30; psql -h postgres.default.svc.cluster.local -U postgres -d postgres -f /scripts/init.sql"]
+        volumeMounts:
+        - name: init-script
+          mountPath: /scripts
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+      volumes:
+      - name: init-script
+        configMap:
+          name: init-sql-script
+      restartPolicy: Never
