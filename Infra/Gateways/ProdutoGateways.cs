@@ -5,9 +5,9 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class ProdutoGateways : IProdutoRepository
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
         private const string commandTextGet  = @"
             SELECT 
@@ -23,7 +23,7 @@ namespace Infra.Gateways
             INNER JOIN 
                 public.tbl_categoria cat ON cat.id = pro.id_categoria";
 
-        public ProdutoRepository(RepositoryBase session)
+        public ProdutoGateways(RepositoryDB session)
         {
             _session = session;
         }

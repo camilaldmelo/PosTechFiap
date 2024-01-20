@@ -7,9 +7,9 @@ namespace Infra.Gateways
 {
     public class PagamentoGateways : IPagamentoRepository
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public PagamentoGateways(RepositoryBase session)
+        public PagamentoGateways(RepositoryDB session)
         {
             _session = session;
         }

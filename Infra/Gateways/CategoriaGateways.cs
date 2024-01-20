@@ -5,11 +5,11 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class CategoriaRepository : ICategoriaGateways
+    public class CategoriaGateways : ICategoriaGateways
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public CategoriaRepository(RepositoryBase session)
+        public CategoriaGateways(RepositoryDB session)
         {
             _session = session;
         }

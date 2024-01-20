@@ -4,13 +4,13 @@ using System.Data;
 
 namespace Infra.DB
 {
-    public sealed class RepositoryBase : IDisposable
+    public sealed class RepositoryDB : IDisposable
     {
         private Guid _id;
         public IDbConnection Connection { get; }
         public IDbTransaction Transaction { get; set; }
 
-        public RepositoryBase()
+        public RepositoryDB()
         {
             _id = Guid.NewGuid();
             Connection = GetExclusiveConnection();

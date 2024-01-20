@@ -7,9 +7,9 @@ namespace Infra.Gateways
 {
     public class ClienteRepository : IClienteGateways
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public ClienteRepository(RepositoryBase session)
+        public ClienteRepository(RepositoryDB session)
         {
             _session = session;
         }

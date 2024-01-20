@@ -33,7 +33,7 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IPagamentoService, PagamentoService>();
 
 //Repositórios
-builder.Services.AddScoped<RepositoryBase>();
+builder.Services.AddScoped<RepositoryDB>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IPedidoRepository, PedidoGateways>();

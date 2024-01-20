@@ -8,10 +8,10 @@ namespace Application.UseCases
     public class PedidoService : IPedidoUseCases
     {
         private readonly IPedidoRepository _pedidoRepository;
-        private readonly IProdutosPedidoRepository _produtosPedidoRepository;
+        private readonly IProdutosPedidoGateways _produtosPedidoRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository, IUnitOfWork unitOfWork)
+        public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoGateways produtosPedidoRepository, IUnitOfWork unitOfWork)
         {
             _pedidoRepository = pedidoRepository;
             _produtosPedidoRepository = produtosPedidoRepository;

@@ -6,11 +6,11 @@ namespace Application.UseCases
 {
     public class ClienteUseCases : IClienteUseCases
     {
-        private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteGateways _clienteRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoUseCases _pedidoService;
 
-        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
+        public ClienteUseCases(IClienteGateways clienteRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
         {
             _clienteRepository = clienteRepository;
             _unitOfWork = unitOfWork;

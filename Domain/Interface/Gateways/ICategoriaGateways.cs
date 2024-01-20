@@ -2,7 +2,7 @@
 
 namespace Domain.Interface.Repositories
 {
-    public interface ICategoriaRepository
+    public interface ICategoriaGateways
     {
         public Task<IEnumerable<Categoria>> GetAll();
         public Task<Categoria> GetById(int id);

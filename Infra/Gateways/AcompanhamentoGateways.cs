@@ -7,9 +7,9 @@ namespace Infra.Gateways
 {
     public class AcompanhamentoGateways : IAcompanhamentoRepository
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public AcompanhamentoGateways(RepositoryBase session)
+        public AcompanhamentoGateways(RepositoryDB session)
         {
             _session = session;
         }
