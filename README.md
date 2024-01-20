@@ -12,7 +12,7 @@ Este é o projeto desenvolvido durante a fase I do curso de pós-graduação em 
 - [Josué Batista Cruz Júnior - RM 352045](https://www.linkedin.com/in/josuejuniorjf/)
 
 
-## Documentação - Entregável 01
+## Documentação - Entregável 01 - Fase 1
 
 ### Problema atual - AS IS
 Uma lanchonete de bairro, está expandindo devido ao seu grande sucesso. Porém encontra grande dificuldade para gerenciar os pedidos manualmente. Em alguns momentos o atendimento aos clientes é caótico e confuso. O atendente anota o pedido em um papel e entrega à cozinha, mas não se tem nenhuma garantina que o pedido será preparado corretamente.
@@ -48,7 +48,7 @@ O Event Storming foi realizado na ferramenta Miro e está disponível no [aqui](
 
 ---
 
-## Endpoints disponíveis - Entregável 02
+## Endpoints disponíveis - Entregável 02 - Fase 1
 
 Foram disponibilizados os metodos de Cadastro, Remoção, Busca e Atualização dos seguintes recursos:
  - Acompanhamento
@@ -119,7 +119,7 @@ GET http://localhost:8080/Pedido/Status/1
 ```
 ---
 
-## Como Clonar e Subir a Aplicação com Docker Compose - Entregável 03
+## Como Clonar e Subir a Aplicação com Docker Compose - Entregável 03 - Fase 1
 
 Este guia fornecerá instruções passo a passo sobre como clonar e executar a aplicação .NET 7.0 com um banco de dados PostgreSQL usando Docker Compose. Certifique-se de ter o Docker e o Docker Compose instalados em seu sistema antes de prosseguir.
 
@@ -158,7 +158,59 @@ docker-compose down
 ```
 Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
 
-# Fase 2
+## Como executar uma arquitetura em Kubernetes - Entregavel 2 - Fase 2
 
+### Passo 1: Clone o Repositório
+
+Para começar, você precisa clonar o repositório do GitHub para sua máquina local. Abra o terminal e execute o seguinte comando:
+
+```bash
+git clone https://github.com/camilaldmelo/PosTechFiap.git
+```
+
+### Passo 2: Navegue até o Diretório do Projeto
+Após clonar o repositório, navegue até o diretório do projeto usando o seguinte comando:
+```bash
+cd PosTechFiap/Kubernetes
+```
+### Passo 3: Navegue até o Diretório da api
+Navegue até o diretório da api usando o seguinte comando:
+```bash
+cd api
+```
+
+### Passo 4: Execute os comandos na ordem:
+Execute usando o seguinte comando:
+```bash
+kubectl apply -f "1 - api-deployment.yml"
+kubectl apply -f "2 - api-service.yml"
+kubectl apply -f "3 - api-hpa.yml"
+```
+
+### Passo 5: Navegue até o Diretório do db
+Navegue até o diretório da api usando o seguinte comando:
+```bash
+cd ..
+cd db
+```
+
+### Passo 6: Execute os comandos na ordem:
+Execute usando o seguinte comando:
+```bash
+kubectl apply -f "1 - postgres-secret.yml"
+kubectl apply -f "2 - init-sql-script-configmap.yml"
+kubectl apply -f "3 - postgres-pvc.yml"
+kubectl apply -f "4 - postgres-statefulset.yml"
+kubectl apply -f "5 - postgres-service.yml"
+kubectl apply -f "6 - postgres-init-job.yml"
+```
+
+### Deletar:
+Para deletar, execute o seguinte comando dentro do diretorio do projeto:
+```bash
+kubectl delete all --all
+```
+
+## Entregavel 3 - Fase 2
 ### Desenho da arquitetura
 ![Desenho da arquitetura](https://cdn.discordapp.com/attachments/1144408943993573376/1198276440500732084/image.png?ex=65be50e6&is=65abdbe6&hm=2744212da50d87b7e29d16daa5d53ab958a2449c3fb3ba51473a807c889a1cbe&)
