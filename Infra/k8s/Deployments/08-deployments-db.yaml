@@ -1,0 +1,31 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-nugetburger-db-deployment
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: tech-challenge-nugetburger-db
+      labels:
+        app: tech-challenge-nugetburger-db
+    spec:
+      containers:
+        - name: tech-challenge-nugetburger-db-container
+          image: postgres:latest
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: tech-challenge-nugetburger-db-configmap
+          volumeMounts:
+            - name: tech-challenge-nugetburger-db-volume
+              mountPath: /var/lib/postgres
+      volumes:
+        - name: tech-challenge-nugetburger-db-volume
+          persistentVolumeClaim:
+            claimName: tech-challenge-nugetburger-db-pvc
+  selector:
+    matchLabels:
+      app: tech-challenge-nugetburger-db

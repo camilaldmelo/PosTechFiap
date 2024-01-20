@@ -1,0 +1,8 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tech-challenge-nugetburger-configmap
+data:
+  DB_HOST: tech-challenge-nugetburger-db-svc
+  DB_USER: root
+  DB_PASSWORD: root
