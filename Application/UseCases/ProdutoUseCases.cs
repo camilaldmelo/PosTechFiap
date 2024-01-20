@@ -2,8 +2,9 @@
 using Domain.DTO;
 using Domain.Entities;
 using Domain.Interface.Repositories;
+using Application.Interface.UseCases;
 
-namespace Domain.UseCases
+namespace Application.UseCases
 {
     public class ProdutoUseCases : IProdutoService
     {

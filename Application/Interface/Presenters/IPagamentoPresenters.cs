@@ -1,5 +1,4 @@
-﻿using Application.ViewModel;
-using Domain.Entities;
+﻿using Domain.Entities;
 
 namespace Application.Interface.Presenters
 {

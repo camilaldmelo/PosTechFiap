@@ -1,9 +1,9 @@
 ﻿using Domain.DTO;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
+using Application.Interface.UseCases;
 
-namespace Domain.UseCases
+namespace Application.UseCases
 {
     public class PedidoService : IPedidoService
     {
