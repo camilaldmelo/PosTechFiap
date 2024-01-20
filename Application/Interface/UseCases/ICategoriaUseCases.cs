@@ -1,8 +1,8 @@
 ﻿using Domain.Entities;
 
-namespace Application.Interface.UserCases
+namespace Application.Interface.UseCases
 {
-    public interface ICategoriaUserCases
+    public interface ICategoriaUseCases
     {
         public Task<IEnumerable<Categoria>> GetAll();
         public Task<Categoria> GetById(int id);
