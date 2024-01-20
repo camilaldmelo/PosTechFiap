@@ -5,11 +5,11 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class AcompanhamentoRepository : IAcompanhamentoRepository
+    public class AcompanhamentoGateways : IAcompanhamentoRepository
     {
         private RepositoryBase _session;
 
-        public AcompanhamentoRepository(RepositoryBase session)
+        public AcompanhamentoGateways(RepositoryBase session)
         {
             _session = session;
         }

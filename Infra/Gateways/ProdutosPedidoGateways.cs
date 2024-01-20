@@ -5,7 +5,7 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class ProdutosPedidoRepository : IProdutosPedidoRepository
+    public class ProdutosPedidoRepository : IProdutosPedidoGateways
     {
         private RepositoryBase _session;
 

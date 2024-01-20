@@ -36,13 +36,13 @@ builder.Services.AddScoped<IPagamentoService, PagamentoService>();
 builder.Services.AddScoped<RepositoryBase>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
-builder.Services.AddScoped<IProdutosPedidoRepository, ProdutosPedidoRepository>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-builder.Services.AddScoped<IAcompanhamentoRepository, AcompanhamentoRepository>();
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+builder.Services.AddScoped<IPedidoRepository, PedidoGateways>();
+builder.Services.AddScoped<IProdutosPedidoGateways, ProdutosPedidoGateways>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoGateways>();
+builder.Services.AddScoped<ICategoriaGateways, CategoriaGateways>();
+builder.Services.AddScoped<IAcompanhamentoRepository, AcompanhamentoGateways>();
+builder.Services.AddScoped<IClienteGateways, ClienteRepository>();
+builder.Services.AddScoped<IPagamentoRepository, PagamentoGateways>();
 
 
 //HealthCheck
