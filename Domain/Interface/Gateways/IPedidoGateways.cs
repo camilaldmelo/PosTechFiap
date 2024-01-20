@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Interface.Gateways;
+namespace Domain.Interface.Gateways
 {
     public interface IPedidoRepository
     {
@@ -14,3 +14,4 @@ namespace Domain.Interface.Gateways;
         public Task<bool> Update(Pedido pedido);
     }
 }
+    
