@@ -1,17 +1,17 @@
-﻿using Domain.DTO;
+﻿using Application.Interface.UseCases;
+using Domain.DTO;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class PagamentoService : IPagamentoService
+    public class PagamentoService : IPagamentoUseCases
     {
 
-        private readonly IPedidoService _pedidoService;
+        private readonly IPedidoUseCases _pedidoService;
         private readonly IPagamentoRepository _pagamentoRepository;
 
-        public PagamentoService(IPedidoService pedidoService, IPagamentoRepository pagamentoRepository)
+        public PagamentoService(IPedidoUseCases pedidoService, IPagamentoRepository pagamentoRepository)
         {
             _pedidoService = pedidoService;
             _pagamentoRepository = pagamentoRepository;

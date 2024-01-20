@@ -1,8 +1,8 @@
 ﻿using Domain.Entities;
 
-namespace Application.Interface.UserCases
+namespace Application.Interface.UseCases
 {
-    public interface IPedidoUserCases
+    public interface IPedidoUseCases
     {
         public Task<Pedido> GetById(int idPedido);
         public Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento);

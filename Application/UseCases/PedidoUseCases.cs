@@ -1,11 +1,11 @@
-﻿using Domain.DTO;
+﻿using Application.Interface.UseCases;
+using Domain.DTO;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class PedidoService : IPedidoService
+    public class PedidoService : IPedidoUseCases
     {
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutosPedidoRepository _produtosPedidoRepository;

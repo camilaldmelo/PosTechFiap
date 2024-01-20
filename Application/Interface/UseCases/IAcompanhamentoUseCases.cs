@@ -1,8 +1,8 @@
 ﻿using Domain.Entities;
 
-namespace Application.Interface.UserCases
+namespace Application.Interface.UseCases
 {
-    public interface IAcompanhamentoUserCases
+    public interface IAcompanhamentoUseCases
     {
         public Task<IEnumerable<Acompanhamento>> GetAll();
         public Task<Acompanhamento> GetById(int id);

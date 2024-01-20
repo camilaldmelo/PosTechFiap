@@ -1,5 +1,5 @@
 ﻿using Application.Interface.Presenters;
-using Application.Interface.UserCases;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
@@ -8,10 +8,10 @@ namespace Application.Presenters
 {
     public class ProdutoUseCase : IProdutoPresenters
     {
-        public IProdutoUserCases _produtoService;
+        public IProdutoUseCases _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutoUseCase(IMapper mapper, IProdutoUserCases produtoService)
+        public ProdutoUseCase(IMapper mapper, IProdutoUseCases produtoService)
         {
             _produtoService = produtoService;
             _mapper = mapper;

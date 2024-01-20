@@ -1,9 +1,9 @@
 ﻿using Domain.Entities;
 
 
-namespace Application.Interface.UserCases
+namespace Application.Interface.UseCases
 {
-    public interface IPagamentoUserCases
+    public interface IPagamentoUseCases
     {
         public Task<bool> PagarViaQRCodeMercadoPago(int idPedido);
         public Task<Pagamento> GetPagamentoByIdPedido(int idPedido);

@@ -1,16 +1,16 @@
-﻿using Domain.Entities;
+﻿using Application.Interface.UseCases;
+using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class CategoriaService : ICategoriaService
+    public class CategoriaService : ICategoriaUseCases
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        private readonly IProdutoService _produtoService;
+        private readonly IProdutoUseCases _produtoService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriaService(ICategoriaRepository categoriaRepository, IProdutoService produtoService, IUnitOfWork unitOfWork)
+        public CategoriaService(ICategoriaRepository categoriaRepository, IProdutoUseCases produtoService, IUnitOfWork unitOfWork)
         {
             _categoriaRepository = categoriaRepository;
             _produtoService = produtoService;

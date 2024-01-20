@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interface.UserCases
+namespace Application.Interface.UseCases
 {
-    public interface IProdutoUserCases
+    public interface IProdutoUseCases
     {
         public Task<IEnumerable<Produto>> GetAll();
         public Task<IEnumerable<Produto>> GetByIdCategoria(int idCategoria);

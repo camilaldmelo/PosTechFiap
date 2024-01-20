@@ -1,16 +1,16 @@
-﻿using Domain.Entities;
+﻿using Application.Interface.UseCases;
+using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class ClienteUseCases : IClienteService
+    public class ClienteUseCases : IClienteUseCases
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPedidoService _pedidoService;
+        private readonly IPedidoUseCases _pedidoService;
 
-        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
+        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
         {
             _clienteRepository = clienteRepository;
             _unitOfWork = unitOfWork;
