@@ -180,7 +180,7 @@ cd api
 ```
 
 ### Passo 4: Execute os comandos na ordem:
-Execute usando o seguinte comando:
+Execute usando os seguintes comandos:
 ```bash
 kubectl apply -f "1 - api-deployment.yml"
 kubectl apply -f "2 - api-service.yml"
@@ -188,14 +188,14 @@ kubectl apply -f "3 - api-hpa.yml"
 ```
 
 ### Passo 5: Navegue até o Diretório do db
-Navegue até o diretório da api usando o seguinte comando:
+Navegue até o diretório da api usando os seguintes comandos:
 ```bash
 cd ..
 cd db
 ```
 
 ### Passo 6: Execute os comandos na ordem:
-Execute usando o seguinte comando:
+Execute usando os seguintes comandos:
 ```bash
 kubectl apply -f "1 - postgres-secret.yml"
 kubectl apply -f "2 - init-sql-script-configmap.yml"
