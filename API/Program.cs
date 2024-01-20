@@ -19,8 +19,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 //UseCases
 builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
 builder.Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
-builder.Services.AddScoped<ICategoriaUseCase, CategoriaUseCase>();
-builder.Services.AddScoped<IAcompanhamentoUseCase, AcompanhamentoUseCase>();
+builder.Services.AddScoped<ICategoriaPresenters, CategoriaUseCase>();
+builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoUseCase>();
 builder.Services.AddScoped<IClienteUseCase, ClienteUseCase>();
 builder.Services.AddScoped<IPagamentoUseCase, PagamentoUseCase>();
 

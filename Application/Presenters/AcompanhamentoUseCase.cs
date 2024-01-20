@@ -6,7 +6,7 @@ using Domain.Interface.Services;
 
 namespace Application.Presenters
 {
-    public class AcompanhamentoUseCase : IAcompanhamentoUseCase
+    public class AcompanhamentoUseCase : IAcompanhamentoPresenters
     {
         private readonly IAcompanhamentoService _acompanhamentoService;
         private readonly IMapper _mapper;

@@ -6,7 +6,7 @@ using Domain.Interface.Services;
 
 namespace Application.Presenters
 {
-    public class CategoriaUseCase : ICategoriaUseCase
+    public class CategoriaUseCase : ICategoriaPresenters
     {
         public ICategoriaService _categoriaService;
         private readonly IMapper _mapper;

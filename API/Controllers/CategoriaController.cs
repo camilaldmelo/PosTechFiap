@@ -10,9 +10,9 @@ namespace API.Controllers
     public class CategoriaController : Controller
     {
         private readonly ILogger<CategoriaController> _logger;
-        private readonly ICategoriaUseCase _categoriaUseCase;
+        private readonly ICategoriaPresenters _categoriaUseCase;
 
-        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaUseCase categoriaUseCase)
+        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaPresenters categoriaUseCase)
         {
             _logger = logger;
             _categoriaUseCase = categoriaUseCase;

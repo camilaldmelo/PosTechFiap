@@ -6,7 +6,7 @@ using Domain.UseCases;
 
 namespace Application.Presenters
 {
-    public class PagamentoUseCase : IPagamentoUseCase
+    public class PagamentoUseCase : IPagamentoPresenters
     {
         private readonly IPagamentoService _pagamentoService;
         public PagamentoUseCase(IPagamentoService pagamentoService)

@@ -6,7 +6,7 @@ using Domain.Interface.Services;
 
 namespace Application.Presenters
 {
-    public class ProdutoUseCase : IProdutoUseCase
+    public class ProdutoUseCase : IProdutoPresenters
     {
         public IProdutoService _produtoService;
         private readonly IMapper _mapper;

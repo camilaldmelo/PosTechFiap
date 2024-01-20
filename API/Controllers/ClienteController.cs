@@ -10,9 +10,9 @@ namespace API.Controllers
     public class ClienteController : Controller
     {
         private readonly ILogger<ClienteController> _logger;
-        private readonly IClienteUseCase _clienteUseCase;
+        private readonly IClientePresenters _clienteUseCase;
 
-        public ClienteController(ILogger<ClienteController> logger, IClienteUseCase clienteUseCase)
+        public ClienteController(ILogger<ClienteController> logger, IClientePresenters clienteUseCase)
         {
             _logger = logger;
             _clienteUseCase = clienteUseCase;

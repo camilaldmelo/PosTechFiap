@@ -2,7 +2,7 @@
 
 namespace Application.Interface.Presenters
 {
-    public interface ICategoriaUseCase
+    public interface ICategoriaPresenters
     {
         public Task<IEnumerable<CategoriaViewModel>> GetAll();
         public Task<CategoriaViewModel> GetById(int id);

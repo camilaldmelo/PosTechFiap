@@ -11,9 +11,9 @@ namespace API.Controllers
     {
 
         private readonly ILogger<ProdutoController> _logger;
-        private readonly IProdutoUseCase _produtoUseCase;
+        private readonly IProdutoPresenters _produtoUseCase;
 
-        public ProdutoController(ILogger<ProdutoController> logger, IProdutoUseCase produtoUseCase)
+        public ProdutoController(ILogger<ProdutoController> logger, IProdutoPresenters produtoUseCase)
         {
             _logger = logger;
             _produtoUseCase = produtoUseCase;

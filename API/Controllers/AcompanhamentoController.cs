@@ -10,9 +10,9 @@ namespace API.Controllers
     public class AcompanhamentoController : Controller
     {
         private readonly ILogger<AcompanhamentoController> _logger;
-        private readonly IAcompanhamentoUseCase _acompanhamentoUseCase;
+        private readonly IAcompanhamentoPresenters _acompanhamentoUseCase;
 
-        public AcompanhamentoController(ILogger<AcompanhamentoController> logger, IAcompanhamentoUseCase acompanhamentoUseCase)
+        public AcompanhamentoController(ILogger<AcompanhamentoController> logger, IAcompanhamentoPresenters acompanhamentoUseCase)
         {
             _logger = logger;
             _acompanhamentoUseCase = acompanhamentoUseCase;

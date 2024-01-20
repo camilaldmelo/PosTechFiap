@@ -6,7 +6,7 @@ using Domain.Interface.Services;
 
 namespace Application.Presenters
 {
-    public class PedidoUseCase : IPedidoUseCase
+    public class PedidoUseCase : IPedidoPresenters
     {
         public IPedidoService _pedidoService;
         private readonly IMapper _mapper;

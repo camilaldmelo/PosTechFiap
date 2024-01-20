@@ -11,9 +11,9 @@ namespace API.Controllers
     [Route("[controller]")]
     public class PedidoController : Controller
     {
-        private readonly IPedidoUseCase _pedidoUseCase;
+        private readonly IPedidoPresenters _pedidoUseCase;
 
-        public PedidoController(IPedidoUseCase pedidoUseCase)
+        public PedidoController(IPedidoPresenters pedidoUseCase)
         {
             _pedidoUseCase = pedidoUseCase;
         }

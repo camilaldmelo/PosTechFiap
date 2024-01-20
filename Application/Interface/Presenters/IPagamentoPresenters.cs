@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Application.Interface.Presenters
 {
-    public interface IPagamentoUseCase
+    public interface IPagamentoPresenters
     {
         public Task<bool> PagarViaQRCodeMercadoPago(int idPedido);
         public Task<Pagamento> GetPagamentoByIdPedido(int idPedido);

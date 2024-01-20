@@ -4,13 +4,13 @@ using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class ClienteService : IClienteService
+    public class ClienteUseCases : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoService _pedidoService;
 
-        public ClienteService(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
+        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
         {
             _clienteRepository = clienteRepository;
             _unitOfWork = unitOfWork;

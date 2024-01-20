@@ -13,9 +13,9 @@ namespace API.Controllers
     public class PagamentoController : Controller
     {
         private readonly ILogger<PagamentoController> _logger;
-        private readonly IPagamentoUseCase _pagamentoUseCase;
+        private readonly IPagamentoPresenters _pagamentoUseCase;
 
-        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoUseCase pagamentoUseCase)
+        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoPresenters pagamentoUseCase)
         {
             _logger = logger;
             _pagamentoUseCase = pagamentoUseCase;

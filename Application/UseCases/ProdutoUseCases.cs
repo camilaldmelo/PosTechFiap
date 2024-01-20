@@ -1,17 +1,17 @@
-﻿using Domain.DTO;
+﻿using Application.Interface.UserCases;
+using Domain.DTO;
 using Domain.Entities;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
 
 namespace Domain.UseCases
 {
-    public class ProdutoService : IProdutoService
+    public class ProdutoUseCases : IProdutoService
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoService _pedidoService;
 
-        public ProdutoService(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
+        public ProdutoUseCases(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
         {
             _produtoRepository = produtoRepository;
             _unitOfWork = unitOfWork;

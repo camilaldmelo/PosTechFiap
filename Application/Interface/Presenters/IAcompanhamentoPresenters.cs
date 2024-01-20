@@ -2,7 +2,7 @@
 
 namespace Application.Interface.Presenters
 {
-    public interface IAcompanhamentoUseCase
+    public interface IAcompanhamentoPresenters
     {
         public Task<IEnumerable<AcompanhamentoViewModel>> GetAll();
         public Task<AcompanhamentoViewModel> GetById(int id);
