@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "90836daa-b738-4745-9b0e-e8d6332f04d4",
+		"_postman_id": "fe55b86d-12b3-43fc-a221-9b374b08e024",
 		"name": "Grupo01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21597864"
@@ -551,7 +551,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"cpf\": \"12345678910\",\r\n  \"nome\": \"Pedro Cabral\",\r\n  \"email\": \"pedrocabral@email.com\"\r\n}",
+							"raw": "{\r\n  \"cpf\": \"22345678910\",\r\n  \"nome\": \"Pedro Cabral\",\r\n  \"email\": \"pedrocabral@email.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,7 +627,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/Cliente/",
+							"raw": "http://localhost:8080/Cliente/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -635,7 +635,7 @@
 							"port": "8080",
 							"path": [
 								"Cliente",
-								""
+								"6"
 							]
 						}
 					},
