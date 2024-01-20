@@ -1,0 +1,46 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-nugetburger-deployment
+spec:
+  template:
+    metadata:
+      name: tech-challenge-nugetburger
+      labels:
+        app: tech-challenge-nugetburger
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: tech-challenge-nugetburger-container
+          image: ubuntu/dotnet-deps:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: tech-challenge-nugetburger-configmap
+          resources:
+            requests:
+              cpu: 10m
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+              httpGet:
+                path: /api/health
+                port: 8080
+              failureThreshold: 3
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              successThreshold: 1
+              timeoutSeconds: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tech-challenge-nugetburger
