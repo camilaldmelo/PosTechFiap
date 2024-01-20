@@ -1,8 +1,0 @@
-﻿apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: tech-challenge-nuGETBurger-configmap
-data:
-  DB_HOST: tech-challenge-nuGETBurger-db-svc
-  DB_USER: root
-  DB_PASSWORD: root

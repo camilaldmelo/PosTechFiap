@@ -1,8 +1,0 @@
-﻿apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: tech-challenge-nuGETBurger-db-configmap
-data:
-  POSTGRES_ROOT_PASSWORD: root
-  POSTGRES_DATABASE: tech_challenge
-  POSTGRES_PASSWORD: root

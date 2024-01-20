@@ -157,3 +157,8 @@ Para parar e remover os contêineres, você pode executar o seguinte comando no 
 docker-compose down
 ```
 Isso encerrará os contêineres e os removerá. Você pode executar docker-compose up -d novamente para iniciar os contêineres quando desejar.
+
+# Fase 2
+
+### Desenho da arquitetura
+![Desenho da arquitetura](https://cdn.discordapp.com/attachments/1144408943993573376/1198276440500732084/image.png?ex=65be50e6&is=65abdbe6&hm=2744212da50d87b7e29d16daa5d53ab958a2449c3fb3ba51473a807c889a1cbe&)
