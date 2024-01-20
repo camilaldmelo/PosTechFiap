@@ -9,9 +9,9 @@ namespace Application.UseCases
     {
 
         private readonly IPedidoUseCases _pedidoService;
-        private readonly IPagamentoRepository _pagamentoRepository;
+        private readonly IPagamentoGateways _pagamentoRepository;
 
-        public PagamentoUseCases(IPedidoUseCases pedidoService, IPagamentoRepository pagamentoRepository)
+        public PagamentoUseCases(IPedidoUseCases pedidoService, IPagamentoGateways pagamentoRepository)
         {
             _pedidoService = pedidoService;
             _pagamentoRepository = pagamentoRepository;

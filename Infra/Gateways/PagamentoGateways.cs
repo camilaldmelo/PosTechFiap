@@ -5,11 +5,11 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class PagamentoGateways : IPagamentoRepository
+    public class PagamentoGateways : IPagamentoGateways
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public PagamentoGateways(RepositoryBase session)
+        public PagamentoGateways(RepositoryDB session)
         {
             _session = session;
         }

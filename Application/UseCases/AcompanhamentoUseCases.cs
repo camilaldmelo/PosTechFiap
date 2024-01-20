@@ -1,16 +1,17 @@
 ﻿using Domain.Entities;
 using Domain.Interface.Gateways;
 using Application.Interface.UseCases;
+using Domain.Interface.Repositories;
 
 namespace Application.UseCases
 {
     public class AcompanhamentoUseCases : IAcompanhamentoUseCases
     {
-        private readonly IAcompanhamentoRepository _acompanhamentoRepository;
+        private readonly IAcompanhamentoGateways _acompanhamentoRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoUseCases _pedidoService;
 
-        public AcompanhamentoUseCases(IAcompanhamentoRepository acompanhamentoRepository, 
+        public AcompanhamentoUseCases(IAcompanhamentoGateways acompanhamentoRepository, 
                                      IUnitOfWork unitOfWork,
                                      IPedidoUseCases pedidoService)
         {

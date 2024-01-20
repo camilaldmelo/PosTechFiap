@@ -2,7 +2,7 @@
 
 namespace Domain.Interface.Gateways
 {
-    public interface IClienteRepository
+    public interface IClienteGateways
     {
         public Task<IEnumerable<Cliente>> GetAll();
         public Task<Cliente> GetById(int id);

@@ -4,9 +4,9 @@ namespace Infra.DB
 {
     public sealed class UnitOfWork : IUnitOfWork
     {
-        private readonly RepositoryBase _session;
+        private readonly RepositoryDB _session;
 
-        public UnitOfWork(RepositoryBase session)
+        public UnitOfWork(RepositoryDB session)
         {
             _session = session;
         }

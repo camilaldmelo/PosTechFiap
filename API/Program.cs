@@ -33,16 +33,16 @@ builder.Services.AddScoped<IClienteUseCases, ClienteUseCases>();
 builder.Services.AddScoped<IPagamentoUseCases, PagamentoUseCases>();
 
 //Repositórios
-builder.Services.AddScoped<RepositoryBase>();
+builder.Services.AddScoped<RepositoryDB>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IPedidoRepository, PedidoGateways>();
+builder.Services.AddScoped<IPedidoGateways, PedidoGateways>();
 builder.Services.AddScoped<IProdutosPedidoGateways, ProdutosPedidoGateways>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoGateways>();
+builder.Services.AddScoped<IProdutoGateways, ProdutoGateways>();
 builder.Services.AddScoped<ICategoriaGateways, CategoriaGateways>();
-builder.Services.AddScoped<IAcompanhamentoRepository, AcompanhamentoGateways>();
-builder.Services.AddScoped<IClienteGateways, ClienteRepository>();
-builder.Services.AddScoped<IPagamentoRepository, PagamentoGateways>();
+builder.Services.AddScoped<IAcompanhamentoGateways, AcompanhamentoGateways>();
+builder.Services.AddScoped<IClienteGateways, ClienteGateways>();
+builder.Services.AddScoped<IPagamentoGateways, PagamentoGateways>();
 
 
 //HealthCheck

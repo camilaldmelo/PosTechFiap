@@ -6,11 +6,11 @@ namespace Application.UseCases
 {
     public class CategoriaUseCases : ICategoriaUseCases
     {
-        private readonly ICategoriaRepository _categoriaRepository;
+        private readonly ICategoriaGateways _categoriaRepository;
         private readonly IProdutoUseCases _produtoService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriaUseCases(ICategoriaRepository categoriaRepository, IProdutoUseCases produtoService, IUnitOfWork unitOfWork)
+        public CategoriaUseCases(ICategoriaGateways categoriaRepository, IProdutoUseCases produtoService, IUnitOfWork unitOfWork)
         {
             _categoriaRepository = categoriaRepository;
             _produtoService = produtoService;

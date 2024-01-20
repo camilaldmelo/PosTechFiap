@@ -5,11 +5,11 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class PedidoRepository : IPedidoRepository
+    public class PedidoGateways : IPedidoGateways
     {
-        private RepositoryBase _session;
+        private RepositoryDB _session;
 
-        public PedidoRepository(RepositoryBase session)
+        public PedidoGateways(RepositoryDB session)
         {
             _session = session;
         }
