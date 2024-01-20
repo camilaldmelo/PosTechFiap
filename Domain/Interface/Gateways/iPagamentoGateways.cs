@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Interface.Repositories
+namespace Domain.Interface.Gateways;
 {
     public interface IPagamentoRepository
     {

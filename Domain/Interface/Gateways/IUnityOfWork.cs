@@ -1,4 +1,4 @@
-﻿namespace Domain.Interface.Repositories
+﻿namespace Domain.Interface.Gateways;
 {
     public interface IUnitOfWork : IDisposable
     {
