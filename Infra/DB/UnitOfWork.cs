@@ -1,4 +1,4 @@
-﻿using Domain.Interface.Repositories;
+﻿using Domain.Interface.Gateways;
 
 namespace Infra.DB
 {

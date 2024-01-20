@@ -3,7 +3,7 @@ using Application.Interface.Presenters;
 using Application.Interface.UseCases;
 using Application.Presenters;
 using Application.UseCases;
-using Domain.Interface.Repositories;
+using Domain.Interface.Gateways;
 using Infra.DB;
 using Infra.Gateways;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;

@@ -1,6 +1,6 @@
 ﻿using Domain.DTO;
 using Domain.Entities;
-using Domain.Interface.Repositories;
+using Domain.Interface.Gateways;
 using Application.Interface.UseCases;
 
 namespace Application.UseCases
