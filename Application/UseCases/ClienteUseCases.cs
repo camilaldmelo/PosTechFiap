@@ -4,11 +4,11 @@ using Application.Interface.UseCases;
 
 namespace Application.UseCases
 {
-    public class ClienteUseCases : IClienteService
+    public class ClienteUseCases : IClienteUseCases
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPedidoService _pedidoService;
+        private readonly IPedidoUseCases _pedidoService;
 
         public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
         {

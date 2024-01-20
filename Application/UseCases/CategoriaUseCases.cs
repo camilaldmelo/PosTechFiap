@@ -1,4 +1,4 @@
-﻿using Application.Interface.UserCases;
+﻿using Application.Interface.UseCases;
 using Domain.Entities;
 using Domain.Interface.Repositories;
 
@@ -7,7 +7,7 @@ namespace Application.UseCases
     public class CategoriaUseCases : ICategoriaUseCases
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        private readonly IProdutoService _produtoService;
+        private readonly IProdutoUseCases _produtoService;
         private readonly IUnitOfWork _unitOfWork;
 
         public CategoriaUseCases(ICategoriaRepository categoriaRepository, IProdutoService produtoService, IUnitOfWork unitOfWork)

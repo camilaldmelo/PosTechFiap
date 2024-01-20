@@ -5,7 +5,7 @@ using Application.Interface.UseCases;
 
 namespace Application.UseCases
 {
-    public class PedidoService : IPedidoService
+    public class PedidoService : IPedidoUseCases
     {
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutosPedidoRepository _produtosPedidoRepository;

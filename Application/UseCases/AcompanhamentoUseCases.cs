@@ -4,15 +4,15 @@ using Application.Interface.UseCases;
 
 namespace Application.UseCases
 {
-    public class AcompanhamentoService : IAcompanhamentoService
+    public class AcompanhamentoService : IAcompanhamentoUseCases
     {
         private readonly IAcompanhamentoRepository _acompanhamentoRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPedidoService _pedidoService;
+        private readonly IPedidoUseCases _pedidoService;
 
         public AcompanhamentoService(IAcompanhamentoRepository acompanhamentoRepository, 
                                      IUnitOfWork unitOfWork,
-                                     IPedidoService pedidoService)
+                                     IPedidoUseCases pedidoService)
         {
             _acompanhamentoRepository = acompanhamentoRepository;
             _unitOfWork = unitOfWork;
