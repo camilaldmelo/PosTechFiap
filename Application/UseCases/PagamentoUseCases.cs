@@ -5,13 +5,13 @@ using Application.Interface.UseCases;
 
 namespace Application.UseCases
 {
-    public class PagamentoService : IPagamentoUseCases
+    public class PagamentoUseCases : IPagamentoUseCases
     {
 
         private readonly IPedidoUseCases _pedidoService;
         private readonly IPagamentoRepository _pagamentoRepository;
 
-        public PagamentoService(IPedidoUseCases pedidoService, IPagamentoRepository pagamentoRepository)
+        public PagamentoUseCases(IPedidoUseCases pedidoService, IPagamentoRepository pagamentoRepository)
         {
             _pedidoService = pedidoService;
             _pagamentoRepository = pagamentoRepository;

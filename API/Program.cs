@@ -1,9 +1,9 @@
 using Application.AutoMapper;
 using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters;
+using Application.UseCases;
 using Domain.Interface.Repositories;
-using Domain.Interface.Services;
-using Domain.UseCases;
 using Infra.DB;
 using Infra.Gateways;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -16,21 +16,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Add services to the container.
 
-//UseCases
+//Presenters
 builder.Services.AddScoped<IPedidoPresenters, PedidoPresenters>();
 builder.Services.AddScoped<IProdutoPresenters, ProdutoPresenters>();
 builder.Services.AddScoped<ICategoriaPresenters, CategoriaPresenters>();
 builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoPresenters>();
-builder.Services.AddScoped<IClienteUseCase, ClientePresenters>();
-builder.Services.AddScoped<IPagamentoUseCase, PagamentoPresenters>();
+builder.Services.AddScoped<IClientePresenters, ClientePresenters>();
+builder.Services.AddScoped<IPagamentoPresenters, PagamentoPresenters>();
 
-//Domínio
-builder.Services.AddScoped<IPedidoService, PedidoService>();
-builder.Services.AddScoped<IProdutoService, ProdutoService>();
-builder.Services.AddScoped<ICategoriaService, CategoriaService>();
-builder.Services.AddScoped<IAcompanhamentoService, AcompanhamentoService>();
-builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+//UseCases
+builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
+builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
+builder.Services.AddScoped<ICategoriaUseCases, CategoriaUseCases>();
+builder.Services.AddScoped<IAcompanhamentoUseCases, AcompanhamentoUseCases>();
+builder.Services.AddScoped<IClienteUseCases, ClienteUseCases>();
+builder.Services.AddScoped<IPagamentoUseCases, PagamentoUseCases>();
 
 //Repositórios
 builder.Services.AddScoped<RepositoryDB>();
