@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Domain.Entities;
-using Domain.Interface.Repositories;
+using Domain.Interface.Gateways;
 using Infra.DB;
 
 namespace Infra.Gateways
