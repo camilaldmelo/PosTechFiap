@@ -2,7 +2,7 @@
 
 namespace Domain.Interface.Gateways
 {
-    public interface IAcompanhamentoRepository
+    public interface IAcompanhamentoGateways
     {
         public Task<IEnumerable<Acompanhamento>> GetAll();
         public Task<Acompanhamento> GetById(int id);

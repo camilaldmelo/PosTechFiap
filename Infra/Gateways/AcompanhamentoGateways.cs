@@ -5,7 +5,7 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class AcompanhamentoGateways : IAcompanhamentoRepository
+    public class AcompanhamentoGateways : IAcompanhamentoGateways
     {
         private RepositoryDB _session;
 

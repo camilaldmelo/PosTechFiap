@@ -1,16 +1,17 @@
 ﻿using Application.Interface.UseCases;
 using Domain.Entities;
 using Domain.Interface.Gateways;
+using Domain.Interface.Repositories;
 
 namespace Application.UseCases
 {
     public class ProdutoUseCases : IProdutoUseCases
     {
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IProdutoGateways _produtoRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoUseCases _pedidoService;
 
-        public ProdutoUseCases(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
+        public ProdutoUseCases(IProdutoGateways produtoRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
         {
             _produtoRepository = produtoRepository;
             _unitOfWork = unitOfWork;

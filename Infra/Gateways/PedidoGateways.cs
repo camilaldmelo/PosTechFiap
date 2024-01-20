@@ -5,7 +5,7 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class PedidoGateways : IPedidoRepository
+    public class PedidoGateways : IPedidoGateways
     {
         private RepositoryDB _session;
 

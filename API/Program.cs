@@ -3,6 +3,7 @@ using Application.Interface.Presenters;
 using Application.Interface.UseCases;
 using Application.Presenters;
 using Application.UseCases;
+using Domain.Interface.Gateways;
 using Domain.Interface.Repositories;
 using Infra.DB;
 using Infra.Gateways;
@@ -36,13 +37,13 @@ builder.Services.AddScoped<IPagamentoUseCases, PagamentoUseCases>();
 builder.Services.AddScoped<RepositoryDB>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IPedidoRepository, PedidoGateways>();
+builder.Services.AddScoped<IPedidoGateways, PedidoGateways>();
 builder.Services.AddScoped<IProdutosPedidoGateways, ProdutosPedidoGateways>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoGateways>();
+builder.Services.AddScoped<IProdutoGateways, ProdutoGateways>();
 builder.Services.AddScoped<ICategoriaGateways, CategoriaGateways>();
-builder.Services.AddScoped<IAcompanhamentoRepository, AcompanhamentoGateways>();
-builder.Services.AddScoped<IClienteGateways, ClienteRepository>();
-builder.Services.AddScoped<IPagamentoRepository, PagamentoGateways>();
+builder.Services.AddScoped<IAcompanhamentoGateways, AcompanhamentoGateways>();
+builder.Services.AddScoped<IClienteGateways, ClienteGateways>();
+builder.Services.AddScoped<IPagamentoGateways, PagamentoGateways>();
 
 
 //HealthCheck

@@ -2,7 +2,7 @@
 
 namespace Domain.Interface.Gateways
 {
-    public interface IPedidoRepository
+    public interface IPedidoGateways
     {
         public Task<Pedido> GetById(int idPedido);
         public Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento);
