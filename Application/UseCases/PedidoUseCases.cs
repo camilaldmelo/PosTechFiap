@@ -5,31 +5,31 @@ namespace Application.UseCases
 {
     public class PedidoUseCases : IPedidoUseCases
     {
-        private readonly IPedidoGateways _pedidoRepository;
-        private readonly IProdutosPedidoGateways _produtosPedidoRepository;
+        private readonly IPedidoGateways _pedidoGateways;
+        private readonly IProdutosPedidoGateways _produtosPedidoGateways;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PedidoUseCases(IPedidoGateways pedidoRepository, IProdutosPedidoGateways produtosPedidoRepository, IUnitOfWork unitOfWork)
+        public PedidoUseCases(IPedidoGateways pedidoRepository, IProdutosPedidoGateways produtosPedidoGateways, IUnitOfWork unitOfWork)
         {
-            _pedidoRepository = pedidoRepository;
-            _produtosPedidoRepository = produtosPedidoRepository;
+            _pedidoGateways = pedidoGateways;
+            _produtosPedidoGateways = produtosPedidoGateways;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<Pedido> GetById(int idPedido)
         {
-            var pedido = await _pedidoRepository.GetById(idPedido);
-            pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+            var pedido = await _pedidoGateways.GetById(idPedido);
+            pedido.ProdutosPedido = await _produtosPedidoGateways.GetByIdPedido(pedido.Id);
             return pedido;
         }
 
         public async Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento)
         {
-            var pedidos = await _pedidoRepository.GetByIdStatus(idAcompanhamento);
+            var pedidos = await _pedidoGateways.GetByIdStatus(idAcompanhamento);
 
             foreach (var pedido in pedidos)
             {
-                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+                pedido.ProdutosPedido = await _produtosPedidoGateways.GetByIdPedido(pedido.Id);
             }
 
             return pedidos;
@@ -37,11 +37,11 @@ namespace Application.UseCases
 
         public async Task<IEnumerable<Pedido>> GetInProgress()
         {
-            var pedidos = await _pedidoRepository.GetInProgress();
+            var pedidos = await _pedidoGateways.GetInProgress();
 
             foreach (var pedido in pedidos)
             {
-                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+                pedido.ProdutosPedido = await _produtosPedidoGateways.GetByIdPedido(pedido.Id);
             }
 
             return pedidos.OrderByDescending(pedido => pedido.IdAcompanhamento)
@@ -50,11 +50,11 @@ namespace Application.UseCases
 
         public async Task<IEnumerable<Pedido>> GetByIdCliente(int idCliente)
         {
-            var pedidos = await _pedidoRepository.GetByIdCliente(idCliente);
+            var pedidos = await _pedidoGateways.GetByIdCliente(idCliente);
 
             foreach (var pedido in pedidos)
             {
-                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+                pedido.ProdutosPedido = await _produtosPedidoGateways.GetByIdPedido(pedido.Id);
             }
 
             return pedidos;
@@ -62,11 +62,11 @@ namespace Application.UseCases
 
         public async Task<IEnumerable<Pedido>> GetByIdProduto(int idProduto)
         {
-            var pedidos = await _pedidoRepository.GetByIdProduto(idProduto);
+            var pedidos = await _pedidoGateways.GetByIdProduto(idProduto);
 
             foreach (var pedido in pedidos)
             {
-                pedido.ProdutosPedido = await _produtosPedidoRepository.GetByIdPedido(pedido.Id);
+                pedido.ProdutosPedido = await _produtosPedidoGateways.GetByIdPedido(pedido.Id);
             }
 
             return pedidos;
@@ -79,11 +79,11 @@ namespace Application.UseCases
             {
                 _unitOfWork.BeginTransaction();
 
-                pedido.Id = await _pedidoRepository.Create(pedido);
+                pedido.Id = await _pedidoGateways.Create(pedido);
                 foreach (var pp in produtosPedido)
                 {
                     pp.IdPedido = pedido.Id;
-                    await _produtosPedidoRepository.Create(pp);
+                    await _produtosPedidoGateways.Create(pp);
                 }
 
                 _unitOfWork.Commit();                
@@ -100,11 +100,11 @@ namespace Application.UseCases
         {
             try
             {
-                var pedido = await _pedidoRepository.GetById(idPedido) ?? throw new Exception("O pedido fornecido não existe.");
+                var pedido = await _pedidoGateways.GetById(idPedido) ?? throw new Exception("O pedido fornecido não existe.");
                 pedido.IdAcompanhamento = idStatus;
 
                 _unitOfWork.BeginTransaction();
-                await _pedidoRepository.Update(pedido);
+                await _pedidoGateways.Update(pedido);
                 _unitOfWork.Commit();
             }
             catch (Exception ex)
@@ -119,19 +119,19 @@ namespace Application.UseCases
         {
             try
             {
-                var pedidoUpdate = await _pedidoRepository.GetById(pedido.Id) ?? throw new Exception("O pedido fornecido não existe.");
+                var pedidoUpdate = await _pedidoGateways.GetById(pedido.Id) ?? throw new Exception("O pedido fornecido não existe.");
                 pedido.IdAcompanhamento = pedidoUpdate.IdAcompanhamento;
 
                 _unitOfWork.BeginTransaction();                
-                await _pedidoRepository.Update(pedido);
-                await _produtosPedidoRepository.DeleteByIdPedido(pedido.Id);
+                await _pedidoGateways.Update(pedido);
+                await _produtosPedidoGateways.DeleteByIdPedido(pedido.Id);
 
                 if (pedido.ProdutosPedido != null)
                 {
                     foreach (var pp in pedido.ProdutosPedido)
                     {
                         pp.IdPedido = pedido.Id;
-                        await _produtosPedidoRepository.Create(pp);
+                        await _produtosPedidoGateways.Create(pp);
                     }
                 }
                 _unitOfWork.Commit();

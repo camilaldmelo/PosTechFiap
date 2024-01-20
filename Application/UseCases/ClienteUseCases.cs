@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interface.Gateways;
 using Application.Interface.UseCases;
-using Domain.Interface.Repositories;
+using Domain.Interface.Gateways;
 
 namespace Application.UseCases
 {
