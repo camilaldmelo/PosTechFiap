@@ -5,13 +5,13 @@ using Application.Interface.UseCases;
 
 namespace Application.UseCases
 {
-    public class PedidoService : IPedidoUseCases
+    public class PedidoUseCases : IPedidoUseCases
     {
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IProdutosPedidoRepository _produtosPedidoRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PedidoService(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository, IUnitOfWork unitOfWork)
+        public PedidoUseCases(IPedidoRepository pedidoRepository, IProdutosPedidoRepository produtosPedidoRepository, IUnitOfWork unitOfWork)
         {
             _pedidoRepository = pedidoRepository;
             _produtosPedidoRepository = produtosPedidoRepository;
