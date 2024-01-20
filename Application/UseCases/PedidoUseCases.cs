@@ -1,5 +1,7 @@
-﻿using Domain.DTO;
+﻿using Application.Interface.UseCases;
+using Domain.DTO;
 using Domain.Entities;
+using Domain.Interface.Gateways;
 
 namespace Application.UseCases
 {
