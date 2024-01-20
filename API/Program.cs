@@ -1,10 +1,11 @@
 using Application.AutoMapper;
-using Application.Interface;
-using Application.UseCases;
+using Application.Interface.Presenters;
+using Application.Presenters;
 using Domain.Interface.Repositories;
 using Domain.Interface.Services;
-using Domain.Services;
-using Infra.Repositories;
+using Domain.UseCases;
+using Infra.DB;
+using Infra.Gateways;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;

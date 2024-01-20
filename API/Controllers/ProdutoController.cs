@@ -1,5 +1,5 @@
-﻿using Application.Interface;
-using Application.ViewModel;
+﻿using Application.Interface.Presenters;
+using Application.Presenters.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

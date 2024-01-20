@@ -8,14 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="Repositories\**" />
+    <Compile Remove="ValueObjects\**" />
     <EmbeddedResource Remove="Repositories\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
     <None Remove="Repositories\**" />
+    <None Remove="ValueObjects\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="Entities\Enums\" />
-    <Folder Include="ValueObjects\" />
   </ItemGroup>
 
 </Project>

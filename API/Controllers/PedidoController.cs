@@ -1,6 +1,6 @@
-﻿using Application.Interface;
-using Application.UseCases;
-using Application.ViewModel;
+﻿using Application.Interface.Presenters;
+using Application.Presenters;
+using Application.Presenters.ViewModel;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
