@@ -2,7 +2,7 @@
 
 namespace Domain.Interface.Repositories
 {
-    public interface IProdutosPedidoRepository
+    public interface IProdutosPedidoGateways
     {
         public Task<IEnumerable<ProdutosPedido>> GetByIdPedido(int idPedido);
 

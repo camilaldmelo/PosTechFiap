@@ -5,7 +5,7 @@ using Infra.DB;
 
 namespace Infra.Gateways
 {
-    public class CategoriaRepository : ICategoriaRepository
+    public class CategoriaRepository : ICategoriaGateways
     {
         private RepositoryBase _session;
 
