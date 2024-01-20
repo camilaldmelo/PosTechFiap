@@ -2,7 +2,7 @@
 
 namespace Application.Interface.UserCases
 {
-    public interface IAcompanhamentoService
+    public interface IAcompanhamentoUserCases
     {
         public Task<IEnumerable<Acompanhamento>> GetAll();
         public Task<Acompanhamento> GetById(int id);

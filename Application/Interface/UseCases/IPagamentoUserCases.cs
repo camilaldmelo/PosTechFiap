@@ -3,7 +3,7 @@
 
 namespace Application.Interface.UserCases
 {
-    public interface IPagamentoService
+    public interface IPagamentoUserCases
     {
         public Task<bool> PagarViaQRCodeMercadoPago(int idPedido);
         public Task<Pagamento> GetPagamentoByIdPedido(int idPedido);

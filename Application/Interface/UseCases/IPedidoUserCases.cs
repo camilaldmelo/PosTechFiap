@@ -2,7 +2,7 @@
 
 namespace Application.Interface.UserCases
 {
-    public interface IPedidoService
+    public interface IPedidoUserCases
     {
         public Task<Pedido> GetById(int idPedido);
         public Task<IEnumerable<Pedido>> GetByIdStatus(int idAcompanhamento);

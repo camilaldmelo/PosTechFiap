@@ -17,8 +17,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Add services to the container.
 
 //UseCases
-builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
-builder.Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
+builder.Services.AddScoped<IPedidoPresenters, PedidoUseCase>();
+builder.Services.AddScoped<IProdutoPresenters, ProdutoUseCase>();
 builder.Services.AddScoped<ICategoriaPresenters, CategoriaUseCase>();
 builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoUseCase>();
 builder.Services.AddScoped<IClienteUseCase, ClienteUseCase>();

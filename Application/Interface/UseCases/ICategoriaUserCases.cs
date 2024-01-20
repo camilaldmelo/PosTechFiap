@@ -2,7 +2,7 @@
 
 namespace Application.Interface.UserCases
 {
-    public interface ICategoriaService
+    public interface ICategoriaUserCases
     {
         public Task<IEnumerable<Categoria>> GetAll();
         public Task<Categoria> GetById(int id);

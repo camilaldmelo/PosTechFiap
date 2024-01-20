@@ -9,9 +9,9 @@ namespace Domain.UseCases
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPedidoService _pedidoService;
+        private readonly IPedidoUserCases _pedidoService;
 
-        public ProdutoUseCases(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
+        public ProdutoUseCases(IProdutoRepository produtoRepository, IUnitOfWork unitOfWork, IPedidoUserCases pedidoService)
         {
             _produtoRepository = produtoRepository;
             _unitOfWork = unitOfWork;

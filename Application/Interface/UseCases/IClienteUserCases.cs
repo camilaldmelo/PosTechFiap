@@ -2,7 +2,7 @@
 
 namespace Application.Interface.UserCases
 {
-    public interface IClienteService
+    public interface IClienteUserCases
     {
         public Task<IEnumerable<Cliente>> GetAll();
         public Task<Cliente> GetById(int id);

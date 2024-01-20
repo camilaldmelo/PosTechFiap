@@ -1,9 +1,8 @@
 ﻿using Application.Presenters.ViewModel;
-using Domain.Entities;
 
 namespace Application.Interface.Presenters
 {
-    public interface IPedidoUseCase
+    public interface IPedidoPresenters
     {
         public Task<PedidoViewModel> GetById(int idPedido);
 
