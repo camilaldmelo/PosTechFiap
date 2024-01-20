@@ -1,15 +1,13 @@
 ﻿using Application.Interface.Presenters;
-using AutoMapper;
+using Application.Interface.UseCases;
 using Domain.Entities;
-using Domain.Interface.Services;
-using Domain.UseCases;
 
 namespace Application.Presenters
 {
-    public class PagamentoUseCase : IPagamentoPresenters
+    public class PagamentoPresenters : IPagamentoPresenters
     {
-        private readonly IPagamentoService _pagamentoService;
-        public PagamentoUseCase(IPagamentoService pagamentoService)
+        private readonly IPagamentoUseCases _pagamentoService;
+        public PagamentoPresenters(IPagamentoUseCases pagamentoService)
         {
             _pagamentoService = pagamentoService;
         }

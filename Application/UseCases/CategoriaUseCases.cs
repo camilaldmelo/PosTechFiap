@@ -10,7 +10,7 @@ namespace Application.UseCases
         private readonly IProdutoUseCases _produtoService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriaUseCases(ICategoriaRepository categoriaRepository, IProdutoService produtoService, IUnitOfWork unitOfWork)
+        public CategoriaUseCases(ICategoriaRepository categoriaRepository, IProdutoUseCases produtoService, IUnitOfWork unitOfWork)
         {
             _categoriaRepository = categoriaRepository;
             _produtoService = produtoService;

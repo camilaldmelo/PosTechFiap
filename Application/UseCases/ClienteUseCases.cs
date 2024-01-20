@@ -10,7 +10,7 @@ namespace Application.UseCases
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoUseCases _pedidoService;
 
-        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoService pedidoService)
+        public ClienteUseCases(IClienteRepository clienteRepository, IUnitOfWork unitOfWork, IPedidoUseCases pedidoService)
         {
             _clienteRepository = clienteRepository;
             _unitOfWork = unitOfWork;

@@ -17,12 +17,12 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Add services to the container.
 
 //UseCases
-builder.Services.AddScoped<IPedidoPresenters, PedidoUseCase>();
-builder.Services.AddScoped<IProdutoPresenters, ProdutoUseCase>();
-builder.Services.AddScoped<ICategoriaPresenters, CategoriaUseCase>();
-builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoUseCase>();
-builder.Services.AddScoped<IClienteUseCase, ClienteUseCase>();
-builder.Services.AddScoped<IPagamentoUseCase, PagamentoUseCase>();
+builder.Services.AddScoped<IPedidoPresenters, PedidoPresenters>();
+builder.Services.AddScoped<IProdutoPresenters, ProdutoPresenters>();
+builder.Services.AddScoped<ICategoriaPresenters, CategoriaPresenters>();
+builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoPresenters>();
+builder.Services.AddScoped<IClienteUseCase, ClientePresenters>();
+builder.Services.AddScoped<IPagamentoUseCase, PagamentoPresenters>();
 
 //Domínio
 builder.Services.AddScoped<IPedidoService, PedidoService>();

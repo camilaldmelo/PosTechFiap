@@ -6,12 +6,12 @@ using Domain.Entities;
 
 namespace Application.Presenters
 {
-    public class ProdutoUseCase : IProdutoPresenters
+    public class ProdutoPresenters : IProdutoPresenters
     {
         public IProdutoUseCases _produtoService;
         private readonly IMapper _mapper;
 
-        public ProdutoUseCase(IMapper mapper, IProdutoUseCases produtoService)
+        public ProdutoPresenters(IMapper mapper, IProdutoUseCases produtoService)
         {
             _produtoService = produtoService;
             _mapper = mapper;

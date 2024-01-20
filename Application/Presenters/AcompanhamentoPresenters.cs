@@ -2,16 +2,16 @@
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Interface.Services;
+using Application.Interface.UseCases;
 
 namespace Application.Presenters
 {
-    public class AcompanhamentoUseCase : IAcompanhamentoPresenters
+    public class AcompanhamentoPresenters : IAcompanhamentoPresenters
     {
-        private readonly IAcompanhamentoService _acompanhamentoService;
+        private readonly IAcompanhamentoUseCases _acompanhamentoService;
         private readonly IMapper _mapper;
 
-        public AcompanhamentoUseCase(IMapper mapper, IAcompanhamentoService acompanhamentoService)
+        public AcompanhamentoPresenters(IMapper mapper, IAcompanhamentoUseCases acompanhamentoService)
         {
             _acompanhamentoService = acompanhamentoService;
             _mapper = mapper;

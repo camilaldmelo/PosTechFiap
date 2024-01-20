@@ -1,17 +1,17 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Interface.Services;
 
 namespace Application.Presenters
 {
-    public class CategoriaUseCase : ICategoriaPresenters
+    public class CategoriaPresenters : ICategoriaPresenters
     {
-        public ICategoriaService _categoriaService;
+        public ICategoriaUseCases _categoriaService;
         private readonly IMapper _mapper;
 
-        public CategoriaUseCase(IMapper mapper, ICategoriaService categoriaService)
+        public CategoriaPresenters(IMapper mapper, ICategoriaUseCases categoriaService)
         {
             _categoriaService = categoriaService;
             _mapper = mapper;

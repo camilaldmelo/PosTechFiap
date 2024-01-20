@@ -2,16 +2,16 @@
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Interface.Services;
+using Application.Interface.UseCases;
 
 namespace Application.Presenters
 {
-    public class ClienteUseCase : IClientePresenters
+    public class ClientePresenters : IClientePresenters
     {
-        private readonly IClienteService _clienteService;
+        private readonly IClienteUseCases _clienteService;
         private readonly IMapper _mapper;
 
-        public ClienteUseCase(IMapper mapper, IClienteService clienteService)
+        public ClientePresenters(IMapper mapper, IClienteUseCases clienteService)
         {
             _clienteService = clienteService;
             _mapper = mapper;

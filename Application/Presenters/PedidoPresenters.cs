@@ -2,16 +2,16 @@
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Interface.Services;
+using Application.Interface.UseCases;
 
 namespace Application.Presenters
 {
-    public class PedidoUseCase : IPedidoPresenters
+    public class PedidoPresenters : IPedidoPresenters
     {
-        public IPedidoService _pedidoService;
+        public IPedidoUseCases _pedidoService;
         private readonly IMapper _mapper;
 
-        public PedidoUseCase(IMapper mapper, IPedidoService pedidoService)
+        public PedidoPresenters(IMapper mapper, IPedidoUseCases pedidoService)
         {
             _pedidoService = pedidoService;
             _mapper = mapper;
