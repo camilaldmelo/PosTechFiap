@@ -9,7 +9,7 @@ namespace Application.UseCases
         private readonly IProdutosPedidoGateways _produtosPedidoGateways;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PedidoUseCases(IPedidoGateways pedidoRepository, IProdutosPedidoGateways produtosPedidoGateways, IUnitOfWork unitOfWork)
+        public PedidoUseCases(IPedidoGateways pedidoGateways, IProdutosPedidoGateways produtosPedidoGateways, IUnitOfWork unitOfWork)
         {
             _pedidoGateways = pedidoGateways;
             _produtosPedidoGateways = produtosPedidoGateways;
