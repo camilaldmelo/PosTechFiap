@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v2
+        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v4
         livenessProbe:
           httpGet:
             path: /health  
@@ -33,11 +33,12 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: SenhaCriptografadaBase
-          value: "mhoAnVA/tWmZFyrjfl5Qiw=="
-        - name: UsuarioBase
-          value: "postgres"
-        - name: HostBase
+        - name: DB_HOST
           value: "postgres.default.svc.cluster.local:5432"
-        - name: ChaveCriptografiaBase
-          value: "ntmFa1ec294"
+        - name: DB_USER
+          value: "postgres"          
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password          

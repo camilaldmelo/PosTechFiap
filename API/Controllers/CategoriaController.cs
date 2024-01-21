@@ -10,12 +10,12 @@ namespace API.Controllers
     public class CategoriaController : Controller
     {
         private readonly ILogger<CategoriaController> _logger;
-        private readonly ICategoriaPresenters _categoriaUseCase;
+        private readonly ICategoriaPresenter _categoriaPresenter;
 
-        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaPresenters categoriaUseCase)
+        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaPresenter categoriaPresenter)
         {
             _logger = logger;
-            _categoriaUseCase = categoriaUseCase;
+            _categoriaPresenter = categoriaPresenter;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace API.Controllers
         {
             try
             {
-                var categorias = await _categoriaUseCase.GetAll();
+                var categorias = await _categoriaPresenter.GetAll();
 
                 if (categorias != null && categorias.Any())
                 {
@@ -70,7 +70,7 @@ namespace API.Controllers
         {
             try
             {
-                var categoria = await _categoriaUseCase.GetById(id);
+                var categoria = await _categoriaPresenter.GetById(id);
 
                 if (categoria != null)
                 {
@@ -103,7 +103,7 @@ namespace API.Controllers
         {
             try
             {
-                int categoriaId = await _categoriaUseCase.Create(categoria);
+                int categoriaId = await _categoriaPresenter.Create(categoria);
                 return CreatedAtRoute("CategoriaPorId", new { id = categoriaId }, null);
             }
             catch (Exception ex)
@@ -132,7 +132,7 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _categoriaUseCase.Update(id, categoria);
+                bool updated = await _categoriaPresenter.Update(id, categoria);
 
                 if (updated)
                 {
@@ -167,7 +167,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _categoriaUseCase.Delete(id);
+                bool result = await _categoriaPresenter.Delete(id);
 
                 if (result)
                 {

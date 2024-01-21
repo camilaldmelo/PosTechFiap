@@ -26,11 +26,11 @@ namespace Infra.DB
         {
             CreateEnvironmentVariables();
 
-            var SenhaBase = Environment.GetEnvironmentVariable("SenhaBase") ?? "";
-            var userBase = Environment.GetEnvironmentVariable("UsuarioBase") ?? "";
-            var hostBase = Environment.GetEnvironmentVariable("HostBase") ?? "";
+            var SenhaBase = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "";
+            var userBase = Environment.GetEnvironmentVariable("DB_USER") ?? "";
+            var hostBase = Environment.GetEnvironmentVariable("DB_HOST") ?? "";
 
-            return GetConnection(new Conexao(SenhaBase, hostBase, userBase, ""));
+            return GetConnection(new Conexao(SenhaBase, hostBase, userBase));
         }
 
         /// <summary>
@@ -40,23 +40,21 @@ namespace Infra.DB
         /// <returns></returns>
         private static NpgsqlConnection GetConnection(Conexao connection)
         {
-            connection.StringConexao = "Host=" + connection.Instance + ";Username=" + connection.Usuario + ";Password=" + connection.Senha + ";";
-
-            var npgConnection = new NpgsqlConnection(connection.StringConexao);
+            var npgConnection = new NpgsqlConnection("Host=" + connection.Instance + ";Username=" + connection.Usuario + ";Password=" + connection.Senha + ";");
             npgConnection.Open();
             return npgConnection;
         }
 
         private static void CreateEnvironmentVariables()
         {
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SenhaBase")))
-                Environment.SetEnvironmentVariable("SenhaBase", "123456");
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DB_PASSWORD")))
+                Environment.SetEnvironmentVariable("DB_PASSWORD", "123456");
 
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UsuarioBase")))
-                Environment.SetEnvironmentVariable("UsuarioBase", "postgres");
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DB_USER")))
+                Environment.SetEnvironmentVariable("DB_USER", "postgres");
 
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HostBase")))
-                Environment.SetEnvironmentVariable("HostBase", "localhost:5432");
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DB_HOST")))
+                Environment.SetEnvironmentVariable("DB_HOST", "localhost:5432");
         }
     }
 }

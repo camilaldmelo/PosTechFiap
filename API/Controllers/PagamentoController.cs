@@ -13,12 +13,12 @@ namespace API.Controllers
     public class PagamentoController : Controller
     {
         private readonly ILogger<PagamentoController> _logger;
-        private readonly IPagamentoPresenters _pagamentoUseCase;
+        private readonly IPagamentoPresenter _pagamentoPresenter;
 
-        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoPresenters pagamentoUseCase)
+        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoPresenter pagamentoPresenter)
         {
             _logger = logger;
-            _pagamentoUseCase = pagamentoUseCase;
+            _pagamentoPresenter = pagamentoPresenter;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace API.Controllers
         {
             try
             {
-                var requisitado = await _pagamentoUseCase.PagarViaQRCodeMercadoPago(idPedido);
+                var requisitado = await _pagamentoPresenter.PagarViaQRCodeMercadoPago(idPedido);
 
                 if (requisitado)
                 {
@@ -62,7 +62,7 @@ namespace API.Controllers
         {
             try
             {
-                var pagamento = await _pagamentoUseCase.GetPagamentoByIdPedido(idPedido);
+                var pagamento = await _pagamentoPresenter.GetPagamentoByIdPedido(idPedido);
                 var successResponse = new { status = "Aprovado" };
                 return Ok(successResponse);
             }
@@ -91,7 +91,7 @@ namespace API.Controllers
         {
             try
             {
-                var idPagamento = await _pagamentoUseCase.Post(pagamento.IdPedido, pagamento.Aprovado, pagamento.Motivo);
+                var idPagamento = await _pagamentoPresenter.Post(pagamento.IdPedido, pagamento.Aprovado, pagamento.Motivo);
                 
                 if (idPagamento == 0)
                 {

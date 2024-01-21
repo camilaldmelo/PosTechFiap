@@ -17,32 +17,32 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Add services to the container.
 
 //Presenters
-builder.Services.AddScoped<IPedidoPresenters, PedidoPresenters>();
-builder.Services.AddScoped<IProdutoPresenters, ProdutoPresenters>();
-builder.Services.AddScoped<ICategoriaPresenters, CategoriaPresenters>();
-builder.Services.AddScoped<IAcompanhamentoPresenters, AcompanhamentoPresenters>();
-builder.Services.AddScoped<IClientePresenters, ClientePresenters>();
-builder.Services.AddScoped<IPagamentoPresenters, PagamentoPresenters>();
+builder.Services.AddScoped<IPedidoPresenter, PedidoPresenter>();
+builder.Services.AddScoped<IProdutoPresenter, ProdutoPresenter>();
+builder.Services.AddScoped<ICategoriaPresenter, CategoriaPresenter>();
+builder.Services.AddScoped<IAcompanhamentoPresenter, AcompanhamentoPresenter>();
+builder.Services.AddScoped<IClientePresenter, ClientePresenter>();
+builder.Services.AddScoped<IPagamentoPresenter, PagamentoPresenter>();
 
 //UseCases
-builder.Services.AddScoped<IPedidoUseCases, PedidoUseCases>();
-builder.Services.AddScoped<IProdutoUseCases, ProdutoUseCases>();
-builder.Services.AddScoped<ICategoriaUseCases, CategoriaUseCases>();
-builder.Services.AddScoped<IAcompanhamentoUseCases, AcompanhamentoUseCases>();
-builder.Services.AddScoped<IClienteUseCases, ClienteUseCases>();
-builder.Services.AddScoped<IPagamentoUseCases, PagamentoUseCases>();
+builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
+builder.Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
+builder.Services.AddScoped<ICategoriaUseCase, CategoriaUseCase>();
+builder.Services.AddScoped<IAcompanhamentoUseCase, AcompanhamentoUseCase>();
+builder.Services.AddScoped<IClienteUseCase, ClienteUseCase>();
+builder.Services.AddScoped<IPagamentoUseCase, PagamentoUseCase>();
 
 //Repositórios
 builder.Services.AddScoped<RepositoryDB>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IPedidoGateways, PedidoGateways>();
-builder.Services.AddScoped<IProdutosPedidoGateways, ProdutosPedidoGateways>();
-builder.Services.AddScoped<IProdutoGateways, ProdutoGateways>();
-builder.Services.AddScoped<ICategoriaGateways, CategoriaGateways>();
-builder.Services.AddScoped<IAcompanhamentoGateways, AcompanhamentoGateways>();
-builder.Services.AddScoped<IClienteGateways, ClienteGateways>();
-builder.Services.AddScoped<IPagamentoGateways, PagamentoGateways>();
+builder.Services.AddScoped<IPedidoGateway, PedidoGateway>();
+builder.Services.AddScoped<IProdutosPedidoGateway, ProdutosPedidoGateway>();
+builder.Services.AddScoped<IProdutoGateway, ProdutoGateway>();
+builder.Services.AddScoped<ICategoriaGateway, CategoriaGateway>();
+builder.Services.AddScoped<IAcompanhamentoGateway, AcompanhamentoGateway>();
+builder.Services.AddScoped<IClienteGateway, ClienteGateway>();
+builder.Services.AddScoped<iPagamentoGateway, PagamentoGateway>();
 
 
 //HealthCheck

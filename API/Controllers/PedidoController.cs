@@ -11,11 +11,11 @@ namespace API.Controllers
     [Route("[controller]")]
     public class PedidoController : Controller
     {
-        private readonly IPedidoPresenters _pedidoUseCase;
+        private readonly IPedidoPresenter _pedidoPresenter;
 
-        public PedidoController(IPedidoPresenters pedidoUseCase)
+        public PedidoController(IPedidoPresenter pedidoPresenter)
         {
-            _pedidoUseCase = pedidoUseCase;
+            _pedidoPresenter = pedidoPresenter;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoUseCase.GetById(idPedido);
+                var pedido = await _pedidoPresenter.GetById(idPedido);
 
                 if (pedido != null)
                 {
@@ -61,7 +61,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
+                var pedido = await _pedidoPresenter.GetByIdStatus(idAcompanhamento);
 
                 if (pedido != null)
                 {
@@ -91,7 +91,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoUseCase.GetInProgress();
+                var pedido = await _pedidoPresenter.GetInProgress();
 
                 if (pedido != null)
                 {
@@ -126,7 +126,7 @@ namespace API.Controllers
         {
             try
             {
-                int idPedido = await _pedidoUseCase.Create(pedido);
+                int idPedido = await _pedidoPresenter.Create(pedido);
                 return CreatedAtRoute("Pedidos", new { idPedido }, null);
             }
             catch (Exception ex)
@@ -156,7 +156,7 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _pedidoUseCase.UpdateStatus(idPedido, idStatus);
+                bool updated = await _pedidoPresenter.UpdateStatus(idPedido, idStatus);
 
                 if (updated)
                 {
@@ -192,7 +192,7 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _pedidoUseCase.Update(pedido);
+                bool updated = await _pedidoPresenter.Update(pedido);
 
                 if (updated)
                 {

@@ -11,12 +11,12 @@ namespace API.Controllers
     {
 
         private readonly ILogger<ProdutoController> _logger;
-        private readonly IProdutoPresenters _produtoUseCase;
+        private readonly IProdutoPresenter _produtoPresenter;
 
-        public ProdutoController(ILogger<ProdutoController> logger, IProdutoPresenters produtoUseCase)
+        public ProdutoController(ILogger<ProdutoController> logger, IProdutoPresenter produtoPresenter)
         {
             _logger = logger;
-            _produtoUseCase = produtoUseCase;
+            _produtoPresenter = produtoPresenter;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace API.Controllers
         {
             try
             {
-                var produtos = await _produtoUseCase.GetAll();
+                var produtos = await _produtoPresenter.GetAll();
 
                 if (produtos != null && produtos.Any())
                 {
@@ -68,7 +68,7 @@ namespace API.Controllers
         {
             try
             {
-                var produtos = await _produtoUseCase.GetByIdCategoria(idCategoria);
+                var produtos = await _produtoPresenter.GetByIdCategoria(idCategoria);
 
                 if (produtos != null && produtos.Any())
                 {
@@ -106,7 +106,7 @@ namespace API.Controllers
         {
             try
             {
-                int produtoId = await _produtoUseCase.Create(produto);
+                int produtoId = await _produtoPresenter.Create(produto);
                 return CreatedAtRoute("ProdutoPorId", new { id = produtoId }, null);
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _produtoUseCase.Delete(id);
+                bool result = await _produtoPresenter.Delete(id);
 
                 if (result)
                 {
@@ -168,7 +168,7 @@ namespace API.Controllers
         {
             try
             {
-                var produto = await _produtoUseCase.GetById(id);
+                var produto = await _produtoPresenter.GetById(id);
 
                 if (produto != null)
                 {
@@ -205,7 +205,7 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _produtoUseCase.Update(id, produto);
+                bool updated = await _produtoPresenter.Update(id, produto);
 
                 if (updated)
                 {
