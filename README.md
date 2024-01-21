@@ -24,7 +24,7 @@ A adoção desse modelo arquitetônico visa otimizar a manutenção e a escalabi
 
 #### a. Alterar/criar as APIs:
 
-##### i. Checkout Pedido que deverá recever os produtos solicitados e retornar a identificação do pedido.
+##### i. Checkout Pedido que deverá receber os produtos solicitados e retornar a identificação do pedido.
 
  ```bash
 POST http://localhost:8080/Pedido
@@ -42,6 +42,7 @@ POST http://localhost:8080/Pedido
   ]
 }
 ```
+Para informar os produtos deve ser consultado o GET de Produtos, para saber os produtos disponíveis.  
 
 ##### ii. Consultar status de pagamento do pedido, que informa se o pagamento foi aprovado ou não.
 
@@ -59,14 +60,20 @@ POST http://localhost:8080/Pagamento
   "motivo": "Pagamento aprovado."
 }
 ```
+Esse webhook deverá ser executado após a geração do QRCode e identificação do pagamento pelo Mercado Pago.
+
  ##### iv. Listagem de pedidos.
  ```bash
 GET http://localhost:8080/Pedido/InProgress
 ```
+Essa listagem retorna os Pedidos em "Andamento", ou seja, os que já estão com os status: Pronto, Em Preparação e Recebido.
+Também são ordenados do mais antigos para os mais novos, respeitando os status anteriores.
+Não são listados pedidos com os status: Criado (pagamento não confirmado/aprovado) e Finalizado
 ##### v. Atualizar o status do Pedido.
  ```bash
 PUT http://localhost:8080/Pedido/PedidoStatus?idPedido=6&idStatus=3
 ```
+Nesse exemplo, será atualizado o Pedido 6 para o status Recebido.
 ##### vi.Desafio extra - integração com o Mercado Pago.
 Não implementamos o desafio extra, referente a integração com o Mercado Pago.
 Porém criamos uma rota no nosso endpoint para simular o mock, que seria a chamada ao Mercado Pago para geração e pagamento via QRCode
@@ -145,7 +152,7 @@ kubectl delete pvc -l app=postgres
 kubectl delete -f "2 - init-sql-script-configmap.yml"
 kubectl delete -f "1 - postgres-secret.yml"
 ```
-Ou pode ser executado o comando abaix para deletar todas as infraestrutura que esta rodando no K8s:
+Ou pode ser executado o comando abaixo para deletar todas as infraestrutura que esta rodando no K8s:
 ```bash
 kubectl delete all --all
 ```
@@ -163,7 +170,8 @@ Para inicialização em ambiente local, como Docker Desktop, após a inicializa�
 
 - Acesse a API em http://localhost:8080/swagger ou http://localhost:8080/api-docs
 
-Utilizar a Collection do Postman, que possui todas as rotas possiveis com exemplos. Na Collection, também está separado as rotas separados por entregáveis.
+Utilizar a Collection do Postman, que possui todas as rotas possiveis com exemplos. Na Collection, também estão separadas as rotas por entregáveis, conforme imagem a seguir:
+
 ![](docs/Postman.PNG)
 
 #### d. Video demostrando a arquitetura 
