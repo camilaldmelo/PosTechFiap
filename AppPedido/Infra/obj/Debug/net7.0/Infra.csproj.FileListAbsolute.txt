@@ -1,0 +1,15 @@
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\bin\Debug\net7.0\Infra.deps.json
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\bin\Debug\net7.0\Infra.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\bin\Debug\net7.0\Infra.pdb
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.AssemblyInfoInputs.cache
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.AssemblyInfo.cs
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.csproj.CoreCompileInputs.cache
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\refint\Infra.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.pdb
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\ref\Infra.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\bin\Debug\net7.0\Domain.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\bin\Debug\net7.0\Domain.pdb
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.csproj.AssemblyReference.cache
+C:\PosTechFIAP\Repositorio\PosTechFiap\Infra\obj\Debug\net7.0\Infra.csproj.CopyComplete

@@ -1,0 +1,11 @@
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\bin\Debug\net7.0\Domain.deps.json
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\bin\Debug\net7.0\Domain.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\bin\Debug\net7.0\Domain.pdb
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.AssemblyInfoInputs.cache
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.AssemblyInfo.cs
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.csproj.CoreCompileInputs.cache
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\refint\Domain.dll
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.pdb
+C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\ref\Domain.dll
