@@ -1,7 +1,9 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters;
 using Application.Presenters.ViewModel;
 using Domain.Entities;
+using k8s;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -12,10 +14,12 @@ namespace API.Controllers
     public class PedidoController : Controller
     {
         private readonly IPedidoPresenter _pedidoPresenter;
+        private readonly IPedidoUseCase _pedidoUseCase;
 
-        public PedidoController(IPedidoPresenter pedidoPresenter)
+        public PedidoController(IPedidoPresenter pedidoPresenter, IPedidoUseCase pedidoUseCase)
         {
             _pedidoPresenter = pedidoPresenter;
+            _pedidoUseCase = pedidoUseCase;
         }
 
         /// <summary>
@@ -31,7 +35,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoPresenter.GetById(idPedido);
+                var pedido = await _pedidoUseCase.GetById(idPedido);
 
                 if (pedido != null)
                 {
@@ -61,7 +65,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoPresenter.GetByIdStatus(idAcompanhamento);
+                var pedido = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
 
                 if (pedido != null)
                 {
@@ -91,7 +95,7 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoPresenter.GetInProgress();
+                var pedido = await _pedidoUseCase.GetInProgress();
 
                 if (pedido != null)
                 {
@@ -126,7 +130,8 @@ namespace API.Controllers
         {
             try
             {
-                int idPedido = await _pedidoPresenter.Create(pedido);
+                var pedidoModel = await _pedidoPresenter.ConvertFromViewModelForCreate(pedido);
+                int idPedido = await _pedidoUseCase.Create(pedidoModel.Item1, pedidoModel.Item2);
                 return CreatedAtRoute("Pedidos", new { idPedido }, null);
             }
             catch (Exception ex)
@@ -156,7 +161,7 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _pedidoPresenter.UpdateStatus(idPedido, idStatus);
+                bool updated = await _pedidoUseCase.UpdateStatus(idPedido, idStatus);
 
                 if (updated)
                 {
@@ -192,7 +197,8 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _pedidoPresenter.Update(pedido);
+                var pedidoModel = await _pedidoPresenter.ConvertFromViewModelForUpdate(pedido);
+                bool updated = await _pedidoUseCase.Update(pedidoModel);
 
                 if (updated)
                 {

@@ -107,12 +107,28 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<bool> Update(Produto produto)
+        public async Task<bool> Update(Produto produto, int id)
         {
             try
             {
+                var existingProduct = await _produtoGateway.GetById(id);
+
+                if (existingProduct == null)
+                {
+                    return false; // Produto não encontrado, portanto, não foi atualizado.
+                }
+
+                // Realize as validações necessárias no objeto 'produto' e manipule exceções, se necessário.
+
+                // Atualize as propriedades do produto existente com base nos dados de 'produto'.
+                existingProduct.Nome = produto.Nome;
+                existingProduct.Preco = produto.Preco;
+                existingProduct.Descricao = produto.Descricao;
+                existingProduct.UrlImagem = produto.UrlImagem;
+                existingProduct.Categoria = produto.Categoria;
+
                 _unitOfWork.BeginTransaction();
-                bool updated = await _produtoGateway.Update(produto);
+                bool updated = await _produtoGateway.Update(existingProduct);
 
                 if (updated)
                 {

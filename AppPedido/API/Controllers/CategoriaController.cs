@@ -1,4 +1,5 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,11 +12,13 @@ namespace API.Controllers
     {
         private readonly ILogger<CategoriaController> _logger;
         private readonly ICategoriaPresenter _categoriaPresenter;
+        private readonly ICategoriaUseCase _categoriaUseCase;
 
-        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaPresenter categoriaPresenter)
+        public CategoriaController(ILogger<CategoriaController> logger, ICategoriaPresenter categoriaPresenter, ICategoriaUseCase categoriaUseCase)
         {
             _logger = logger;
             _categoriaPresenter = categoriaPresenter;
+            _categoriaUseCase = categoriaUseCase;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace API.Controllers
         {
             try
             {
-                var categorias = await _categoriaPresenter.GetAll();
+                var categorias = await _categoriaUseCase.GetAll();
 
                 if (categorias != null && categorias.Any())
                 {
@@ -70,7 +73,7 @@ namespace API.Controllers
         {
             try
             {
-                var categoria = await _categoriaPresenter.GetById(id);
+                var categoria = await _categoriaUseCase.GetById(id);
 
                 if (categoria != null)
                 {
@@ -103,7 +106,8 @@ namespace API.Controllers
         {
             try
             {
-                int categoriaId = await _categoriaPresenter.Create(categoria);
+                var categoriaModel = await _categoriaPresenter.ConvertFromViewModel(categoria);
+                int categoriaId = await _categoriaUseCase.Create(categoriaModel);
                 return CreatedAtRoute("CategoriaPorId", new { id = categoriaId }, null);
             }
             catch (Exception ex)
@@ -132,7 +136,8 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _categoriaPresenter.Update(id, categoria);
+                var categoriaModel = await _categoriaPresenter.ConvertFromViewModel(categoria);
+                bool updated = await _categoriaUseCase.Update(categoriaModel, id);
 
                 if (updated)
                 {
@@ -167,7 +172,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _categoriaPresenter.Delete(id);
+                bool result = await _categoriaUseCase.Delete(id);
 
                 if (result)
                 {

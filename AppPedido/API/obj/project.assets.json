@@ -5338,19 +5338,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\": {}
+    "C:\\Users\\User_PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\API\\API.csproj",
+      "projectUniqueName": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\Fabio Martins\\.nuget\\packages\\",
-      "outputPath": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\API\\obj\\",
+      "projectPath": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\User_PC\\.nuget\\packages\\",
+      "outputPath": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Fabio Martins\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User_PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5364,11 +5364,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\Application\\Application.csproj": {
-              "projectPath": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\Application\\Application.csproj"
+            "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\Application\\Application.csproj": {
+              "projectPath": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\Application\\Application.csproj"
             },
-            "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj": {
-              "projectPath": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj"
+            "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj": {
+              "projectPath": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj"
             }
           }
         }
@@ -5443,7 +5443,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -22,7 +22,6 @@ builder.Services.AddScoped<IProdutoPresenter, ProdutoPresenter>();
 builder.Services.AddScoped<ICategoriaPresenter, CategoriaPresenter>();
 builder.Services.AddScoped<IAcompanhamentoPresenter, AcompanhamentoPresenter>();
 builder.Services.AddScoped<IClientePresenter, ClientePresenter>();
-builder.Services.AddScoped<IPagamentoPresenter, PagamentoPresenter>();
 
 //UseCases
 builder.Services.AddScoped<IPedidoUseCase, PedidoUseCase>();

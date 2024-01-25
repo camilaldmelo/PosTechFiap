@@ -1,4 +1,5 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,11 +12,13 @@ namespace API.Controllers
     {
         private readonly ILogger<ClienteController> _logger;
         private readonly IClientePresenter _clientePresenter;
+        private readonly IClienteUseCase _clienteUseCase;
 
-        public ClienteController(ILogger<ClienteController> logger, IClientePresenter clientePresenter)
+        public ClienteController(ILogger<ClienteController> logger, IClientePresenter clientePresenter, IClienteUseCase clienteUseCase)
         {
             _logger = logger;
             _clientePresenter = clientePresenter;
+            _clienteUseCase = clienteUseCase;
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace API.Controllers
         {
             try
             {
-                var clientes = await _clientePresenter.GetAll();
+                var clientes = await _clienteUseCase.GetAll();
 
                 if (clientes != null && clientes.Any())
                 {
@@ -74,7 +77,7 @@ namespace API.Controllers
         {
             try
             {
-                var cliente = await _clientePresenter.GetById(id);
+                var cliente = await _clienteUseCase.GetById(id);
 
                 if (cliente != null)
                 {
@@ -109,7 +112,7 @@ namespace API.Controllers
         {
             try
             {
-                var cliente = await _clientePresenter.GetByCPF(cpf);
+                var cliente = await _clienteUseCase.GetByCPF(cpf);
 
                 if (cliente != null)
                 {
@@ -142,7 +145,8 @@ namespace API.Controllers
         {
             try
             {
-                int clienteId = await _clientePresenter.Create(cliente);
+                var clienteModel = await _clientePresenter.ConvertFromViewModel(cliente);
+                int clienteId = await _clienteUseCase.Create(clienteModel);
                 return CreatedAtRoute("ClientePorId", new { id = clienteId }, null);
             }
             catch (Exception ex)
@@ -171,7 +175,8 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _clientePresenter.Update(id, cliente);
+                var clienteModel = await _clientePresenter.ConvertFromViewModel(cliente);
+                bool updated = await _clienteUseCase.Update(clienteModel, id);
 
                 if (updated)
                 {
@@ -206,7 +211,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _clientePresenter.Delete(id);
+                bool result = await _clienteUseCase.Delete(id);
 
                 if (result)
                 {

@@ -1,13 +1,16 @@
 ﻿using Application.Presenters.ViewModel;
+using Domain.Entities;
 
 namespace Application.Interface.Presenters
 {
     public interface IAcompanhamentoPresenter
     {
-        public Task<IEnumerable<AcompanhamentoViewModel>> GetAll();
-        public Task<AcompanhamentoViewModel> GetById(int id);
-        public Task<int> Create(AcompanhamentoViewModel acompanhamento);
-        public Task<bool> Update(int id, AcompanhamentoViewModel acompanhamento);
-        public Task<bool> Delete(int id);
+        public Task<IEnumerable<AcompanhamentoViewModel>> ConvertToListViewModel(IEnumerable<Acompanhamento> acompanhamentos);
+
+        public Task<AcompanhamentoViewModel> ConvertToViewModel(Acompanhamento acompanhamento);
+
+        public Task<IEnumerable<Acompanhamento>> ConvertFromListViewModel(IEnumerable<AcompanhamentoViewModel> acompanhamentos);
+
+        public Task<Acompanhamento> ConvertFromViewModel(AcompanhamentoViewModel acompanhamento);
     }
 }

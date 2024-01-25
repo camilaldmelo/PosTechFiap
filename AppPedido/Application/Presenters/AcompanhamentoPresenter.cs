@@ -2,73 +2,36 @@
 using Application.Presenters.ViewModel;
 using AutoMapper;
 using Domain.Entities;
-using Application.Interface.UseCases;
 
 namespace Application.Presenters
 {
     public class AcompanhamentoPresenter : IAcompanhamentoPresenter
     {
-        private readonly IAcompanhamentoUseCase _acompanhamentoUseCase;
         private readonly IMapper _mapper;
 
-        public AcompanhamentoPresenter(IMapper mapper, IAcompanhamentoUseCase acompanhamentoUseCase)
+        public AcompanhamentoPresenter(IMapper mapper)
         {
-            _acompanhamentoUseCase = acompanhamentoUseCase;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<AcompanhamentoViewModel>> GetAll()
+        public async Task<IEnumerable<AcompanhamentoViewModel>> ConvertToListViewModel(IEnumerable<Acompanhamento> acompanhamentos)
         {
-            var acompanhamentos = await _acompanhamentoUseCase.GetAll();
-            return _mapper.Map<List<AcompanhamentoViewModel>>(acompanhamentos);
+            return await Task.Run(() => _mapper.Map<List<AcompanhamentoViewModel>>(acompanhamentos));
         }
 
-        public async Task<AcompanhamentoViewModel> GetById(int id)
+        public async Task<AcompanhamentoViewModel> ConvertToViewModel(Acompanhamento acompanhamento)
         {
-            var acompanhamento = await _acompanhamentoUseCase.GetById(id);
-            return _mapper.Map<AcompanhamentoViewModel>(acompanhamento);
+            return await Task.Run(() => _mapper.Map<AcompanhamentoViewModel>(acompanhamento));
         }
 
-        public async Task<int> Create(AcompanhamentoViewModel acompanhamento)
+        public async Task<IEnumerable<Acompanhamento>> ConvertFromListViewModel(IEnumerable<AcompanhamentoViewModel> acompanhamentos)
         {
-            var a = _mapper.Map<Acompanhamento>(acompanhamento);
-            try
-            {
-                return await _acompanhamentoUseCase.Create(a);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await Task.Run(() => _mapper.Map<List<Acompanhamento>>(acompanhamentos));
         }
 
-        public async Task<bool> Update(int id, AcompanhamentoViewModel acompanhamento)
+        public async Task<Acompanhamento> ConvertFromViewModel(AcompanhamentoViewModel acompanhamento)
         {
-            var existingAcompanhamento = await _acompanhamentoUseCase.GetById(id);
-
-            if (existingAcompanhamento == null)
-            {
-                return false; // Acompanhamento não encontrado, portanto, não foi atualizado.
-            }
-
-            // Realize as validações necessárias no objeto 'acompanhamento' e manipule exceções, se necessário.
-
-            // Atualize as propriedades do acompanhamento existente com base nos dados de 'acompanhamento'.
-            existingAcompanhamento.Nome = acompanhamento.Nome;
-
-            return await _acompanhamentoUseCase.Update(existingAcompanhamento); // Atualiza o acompanhamento no serviço.
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                return await _acompanhamentoUseCase.Delete(id);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return await Task.Run(() => _mapper.Map<Acompanhamento>(acompanhamento));
         }
     }
 }

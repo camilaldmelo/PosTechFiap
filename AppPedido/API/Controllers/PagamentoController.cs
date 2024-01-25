@@ -1,9 +1,6 @@
-﻿using Application.Interface.Presenters;
-using Application.Presenters;
+﻿using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers
@@ -13,12 +10,12 @@ namespace API.Controllers
     public class PagamentoController : Controller
     {
         private readonly ILogger<PagamentoController> _logger;
-        private readonly IPagamentoPresenter _pagamentoPresenter;
+        private readonly IPagamentoUseCase _pagamentoUseCase;
 
-        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoPresenter pagamentoPresenter)
+        public PagamentoController(ILogger<PagamentoController> logger, IPagamentoUseCase pagamentoUseCase)
         {
             _logger = logger;
-            _pagamentoPresenter = pagamentoPresenter;
+            _pagamentoUseCase = pagamentoUseCase;
         }
 
         /// <summary>
@@ -33,7 +30,7 @@ namespace API.Controllers
         {
             try
             {
-                var requisitado = await _pagamentoPresenter.PagarViaQRCodeMercadoPago(idPedido);
+                var requisitado = await _pagamentoUseCase.PagarViaQRCodeMercadoPago(idPedido);
 
                 if (requisitado)
                 {
@@ -62,7 +59,7 @@ namespace API.Controllers
         {
             try
             {
-                var pagamento = await _pagamentoPresenter.GetPagamentoByIdPedido(idPedido);
+                var pagamento = await _pagamentoUseCase.GetPagamentoByIdPedido(idPedido);
                 var successResponse = new { status = "Aprovado" };
                 return Ok(successResponse);
             }
@@ -91,7 +88,7 @@ namespace API.Controllers
         {
             try
             {
-                var idPagamento = await _pagamentoPresenter.Post(pagamento.IdPedido, pagamento.Aprovado, pagamento.Motivo);
+                var idPagamento = await _pagamentoUseCase.Post(pagamento.IdPedido, pagamento.Aprovado, pagamento.Motivo);
                 
                 if (idPagamento == 0)
                 {

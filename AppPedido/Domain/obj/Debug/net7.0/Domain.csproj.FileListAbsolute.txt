@@ -9,3 +9,14 @@ C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.dll
 C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\refint\Domain.dll
 C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\Domain.pdb
 C:\PosTechFIAP\Repositorio\PosTechFiap\Domain\obj\Debug\net7.0\ref\Domain.dll
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\bin\Debug\net7.0\Domain.deps.json
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\bin\Debug\net7.0\Domain.dll
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\bin\Debug\net7.0\Domain.pdb
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.AssemblyInfoInputs.cache
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.AssemblyInfo.cs
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.csproj.CoreCompileInputs.cache
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.dll
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\refint\Domain.dll
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\Domain.pdb
+D:\FIAP\Fase 2\PosTechFiap\AppPedido\Domain\obj\Debug\net7.0\ref\Domain.dll

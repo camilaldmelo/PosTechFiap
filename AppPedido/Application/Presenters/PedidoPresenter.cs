@@ -17,46 +17,42 @@ namespace Application.Presenters
             _mapper = mapper;
         }
 
-        public async Task<PedidoViewModel> GetById(int idPedido)
+        public async Task<IEnumerable<PedidoViewModel>> ConvertToListViewModel(IEnumerable<Cliente> pedidos)
         {
-            var pedido = await _pedidoUseCase.GetById(idPedido);
-
-            return _mapper.Map<PedidoViewModel>(pedido);
+            return await Task.Run(() => _mapper.Map<List<PedidoViewModel>>(pedidos));
         }
 
-        public async Task<IEnumerable<PedidoViewModel>> GetByIdStatus(int idAcompanhamento)
+        public async Task<PedidoViewModel> ConvertToViewModel(Pedido pedido)
         {
-            var pedido = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
-
-            return _mapper.Map<List<PedidoViewModel>>(pedido);
+            return await Task.Run(() => _mapper.Map<PedidoViewModel>(pedido));
         }
 
-        public async Task<IEnumerable<PedidoViewModel>> GetInProgress()
+        public async Task<IEnumerable<Pedido>> ConvertFromListViewModel(IEnumerable<PedidoViewModel> pedidos)
         {
-            var pedidos = await _pedidoUseCase.GetInProgress();
-
-            return _mapper.Map<List<PedidoViewModel>>(pedidos);
+            return await Task.Run(() => _mapper.Map<List<Pedido>>(pedidos));
         }
 
-        public async Task<int> Create(PedidoIncViewModel pedidoViewModel)
+        public async Task<Pedido> ConvertFromViewModel(PedidoViewModel pedido)
+        {
+            return await Task.Run(() => _mapper.Map<Pedido>(pedido));
+        }
+
+        public async Task<Tuple<Cliente, List<ProdutosPedido>>> ConvertFromViewModelForCreate(PedidoIncViewModel pedidoViewModel)
         {
             var cliente = _mapper.Map<Cliente>(pedidoViewModel);
             var produtosPedido = _mapper.Map<List<ProdutosPedido>>(pedidoViewModel.ProdutosPedido);
 
-            return await _pedidoUseCase.Create(cliente, produtosPedido);
+            return await Task.Run(() => new Tuple<Cliente, List<ProdutosPedido>>(cliente, produtosPedido));
         }
 
-        public async Task<bool> UpdateStatus(int idPedido, int idStatus)
+        public async Task<Pedido> ConvertFromViewModelForUpdate(PedidoIncViewModel pedidoViewModel)
         {
-            return await _pedidoUseCase.UpdateStatus(idPedido, idStatus);
-        }
-
-        public async Task<bool> Update(PedidoIncViewModel pedidoViewModel)
-        {
-            var pedido = _mapper.Map<Pedido>(pedidoViewModel);
-            pedido.ProdutosPedido = _mapper.Map<List<ProdutosPedido>>(pedidoViewModel.ProdutosPedido);
-
-            return await _pedidoUseCase.Update(pedido);
+            return await Task.Run(() =>
+            {
+                var pedido = _mapper.Map<Pedido>(pedidoViewModel);
+                pedido.ProdutosPedido = _mapper.Map<List<ProdutosPedido>>(pedidoViewModel.ProdutosPedido);
+                return pedido;
+            });
         }
     }
 }

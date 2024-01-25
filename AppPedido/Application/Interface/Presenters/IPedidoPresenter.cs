@@ -1,19 +1,21 @@
 ﻿using Application.Presenters.ViewModel;
+using Domain.Entities;
 
 namespace Application.Interface.Presenters
 {
     public interface IPedidoPresenter
     {
-        public Task<PedidoViewModel> GetById(int idPedido);
+        public Task<IEnumerable<PedidoViewModel>> ConvertToListViewModel(IEnumerable<Cliente> pedidos);
 
-        public Task<IEnumerable<PedidoViewModel>> GetByIdStatus(int idAcompanhamento);
+        public Task<PedidoViewModel> ConvertToViewModel(Pedido pedido);
 
-        public Task<IEnumerable<PedidoViewModel>> GetInProgress();
+        public Task<IEnumerable<Pedido>> ConvertFromListViewModel(IEnumerable<PedidoViewModel> pedidos);
 
-        public Task<bool> Update(PedidoIncViewModel pedido);
+        public Task<Pedido> ConvertFromViewModel(PedidoViewModel pedido);
 
-        public Task<bool> UpdateStatus(int idPedido, int idStatus);
+        public Task<Pedido> ConvertFromViewModelForUpdate(PedidoIncViewModel pedidoViewModel);
 
-        public Task<int> Create(PedidoIncViewModel pedido);
+        public Task<Tuple<Cliente, List<ProdutosPedido>>> ConvertFromViewModelForCreate(PedidoIncViewModel pedidoViewModel);
     }
 }
+

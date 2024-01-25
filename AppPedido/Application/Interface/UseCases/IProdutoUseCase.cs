@@ -9,6 +9,6 @@ namespace Application.Interface.UseCases
         public Task<int> Create(Produto produto);
         public Task<bool> Delete(int id);
         public Task<Produto> GetById(int id);
-        public Task<bool> Update(Produto produto);
+        public Task<bool> Update(Produto produto, int id);
     }
 }

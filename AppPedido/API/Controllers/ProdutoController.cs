@@ -1,4 +1,5 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -12,11 +13,13 @@ namespace API.Controllers
 
         private readonly ILogger<ProdutoController> _logger;
         private readonly IProdutoPresenter _produtoPresenter;
+        private readonly IProdutoUseCase _produtoUseCase;
 
-        public ProdutoController(ILogger<ProdutoController> logger, IProdutoPresenter produtoPresenter)
+        public ProdutoController(ILogger<ProdutoController> logger, IProdutoPresenter produtoPresenter, IProdutoUseCase produtoUseCase)
         {
             _logger = logger;
             _produtoPresenter = produtoPresenter;
+            _produtoUseCase = produtoUseCase;
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace API.Controllers
         {
             try
             {
-                var produtos = await _produtoPresenter.GetAll();
+                var produtos = await _produtoUseCase.GetAll();
 
                 if (produtos != null && produtos.Any())
                 {
@@ -68,7 +71,7 @@ namespace API.Controllers
         {
             try
             {
-                var produtos = await _produtoPresenter.GetByIdCategoria(idCategoria);
+                var produtos = await _produtoUseCase.GetByIdCategoria(idCategoria);
 
                 if (produtos != null && produtos.Any())
                 {
@@ -106,7 +109,8 @@ namespace API.Controllers
         {
             try
             {
-                int produtoId = await _produtoPresenter.Create(produto);
+                var produtoModel = await _produtoPresenter.ConvertFromViewModel(produto);
+                int produtoId = await _produtoUseCase.Create(produtoModel);
                 return CreatedAtRoute("ProdutoPorId", new { id = produtoId }, null);
             }
             catch (Exception ex)
@@ -133,7 +137,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _produtoPresenter.Delete(id);
+                bool result = await _produtoUseCase.Delete(id);
 
                 if (result)
                 {
@@ -168,7 +172,7 @@ namespace API.Controllers
         {
             try
             {
-                var produto = await _produtoPresenter.GetById(id);
+                var produto = await _produtoUseCase.GetById(id);
 
                 if (produto != null)
                 {
@@ -205,7 +209,8 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _produtoPresenter.Update(id, produto);
+                var produtoModel = await _produtoPresenter.ConvertFromViewModel(produto);
+                bool updated = await _produtoUseCase.Update(produtoModel, id);
 
                 if (updated)
                 {

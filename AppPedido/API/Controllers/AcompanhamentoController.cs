@@ -1,4 +1,5 @@
 ﻿using Application.Interface.Presenters;
+using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,11 +12,13 @@ namespace API.Controllers
     {
         private readonly ILogger<AcompanhamentoController> _logger;
         private readonly IAcompanhamentoPresenter _acompanhamentoPresenter;
+        private readonly IAcompanhamentoUseCase _acompanhamentoUseCase;
 
-        public AcompanhamentoController(ILogger<AcompanhamentoController> logger, IAcompanhamentoPresenter acompanhamentoPresenter)
+        public AcompanhamentoController(ILogger<AcompanhamentoController> logger, IAcompanhamentoPresenter acompanhamentoPresenter, IAcompanhamentoUseCase acompanhamentoUseCase)
         {
             _logger = logger;
             _acompanhamentoPresenter = acompanhamentoPresenter;
+            _acompanhamentoUseCase = acompanhamentoUseCase;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace API.Controllers
         {
             try
             {
-                var acompanhamentos = await _acompanhamentoPresenter.GetAll();
+                var acompanhamentos = await _acompanhamentoUseCase.GetAll();
 
                 if (acompanhamentos != null && acompanhamentos.Any())
                 {
@@ -70,7 +73,7 @@ namespace API.Controllers
         {
             try
             {
-                var acompanhamento = await _acompanhamentoPresenter.GetById(id);
+                var acompanhamento = await _acompanhamentoUseCase.GetById(id);
 
                 if (acompanhamento != null)
                 {
@@ -103,7 +106,8 @@ namespace API.Controllers
         {
             try
             {
-                int acompanhamentoId = await _acompanhamentoPresenter.Create(acompanhamento);
+                var acompanhamentoModel = await _acompanhamentoPresenter.ConvertFromViewModel(acompanhamento);
+                int acompanhamentoId = await _acompanhamentoUseCase.Create(acompanhamentoModel);
                 return CreatedAtRoute("AcompanhamentoPorId", new { id = acompanhamentoId }, null);
             }
             catch (Exception ex)
@@ -134,7 +138,8 @@ namespace API.Controllers
         {
             try
             {
-                bool updated = await _acompanhamentoPresenter.Update(id, acompanhamento);
+                var acompanhamentoModel = await _acompanhamentoPresenter.ConvertFromViewModel(acompanhamento);
+                bool updated = await _acompanhamentoUseCase.Update(acompanhamentoModel, id);
 
                 if (updated)
                 {
@@ -169,7 +174,7 @@ namespace API.Controllers
         {
             try
             {
-                bool result = await _acompanhamentoPresenter.Delete(id);
+                bool result = await _acompanhamentoUseCase.Delete(id);
 
                 if (result)
                 {

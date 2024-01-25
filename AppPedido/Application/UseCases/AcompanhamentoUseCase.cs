@@ -68,12 +68,24 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<bool> Update(Acompanhamento acompanhamento)
+        public async Task<bool> Update(Acompanhamento acompanhamento, int id)
         {
             try
             {
+                var existingAcompanhamento = await _acompanhamentoGateway.GetById(id);
+
+                if (existingAcompanhamento == null)
+                {
+                    return false; // Acompanhamento não encontrado, portanto, não foi atualizado.
+                }
+
+                // Realize as validações necessárias no objeto 'acompanhamento' e manipule exceções, se necessário.
+
+                // Atualize as propriedades do acompanhamento existente com base nos dados de 'acompanhamento'.
+                existingAcompanhamento.Nome = acompanhamento.Nome;
+
                 _unitOfWork.BeginTransaction();
-                bool updated = await _acompanhamentoGateway.Update(acompanhamento);
+                bool updated = await _acompanhamentoGateway.Update(existingAcompanhamento);
 
                 if (updated)
                 {

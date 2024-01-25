@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "FgXnFq63ftUZ9wUeJXf3xRMghrHWQ0YRrTMJh69+gIdGJBI4boQ2HXdwONKrJMfBeHzg7JqXFNvT7fOpw6Uy8g==",
+  "dgSpecHash": "qNZxJRtDcdjY3A6K8rim3HQn3YMbLuak/zJO9E0Lcpyq2F9z8Fng5j0HJ+YVa7mLxiQt+QidAVy+7b5tbsBILA==",
   "success": true,
-  "projectFilePath": "C:\\PosTechFIAP\\Repositorio\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj",
+  "projectFilePath": "D:\\FIAP\\Fase 2\\PosTechFiap\\AppPedido\\Infra\\Infra.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\dapper\\2.1.4\\dapper.2.1.4.nupkg.sha512",
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
-    "C:\\Users\\Fabio Martins\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\User_PC\\.nuget\\packages\\dapper\\2.1.4\\dapper.2.1.4.nupkg.sha512",
+    "C:\\Users\\User_PC\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\User_PC\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\User_PC\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\User_PC\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\User_PC\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

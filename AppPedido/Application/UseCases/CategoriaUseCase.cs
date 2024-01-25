@@ -66,12 +66,24 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<bool> Update(Categoria categoria)
+        public async Task<bool> Update(Categoria categoria, int id)
         {
             try
             {
+                var existingCategoria = await _categoriaGateway.GetById(id);
+
+                if (existingCategoria == null)
+                {
+                    return false; // Categoria não encontrada, portanto, não foi atualizada.
+                }
+
+                // Realize as validações necessárias no objeto 'categoria' e manipule exceções, se necessário.
+
+                // Atualize as propriedades da categoria existente com base nos dados de 'categoria'.
+                existingCategoria.Nome = categoria.Nome;
+
                 _unitOfWork.BeginTransaction();
-                bool updated = await _categoriaGateway.Update(categoria);
+                bool updated = await _categoriaGateway.Update(existingCategoria);
 
                 if (updated)
                 {

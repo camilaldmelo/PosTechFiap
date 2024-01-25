@@ -84,12 +84,27 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<bool> Update(Cliente cliente)
+        public async Task<bool> Update(Cliente cliente, int id)
         {
             try
             {
+                var existingCliente = await _clienteGateway.GetById(id);
+
+                if (existingCliente == null)
+                {
+                    return false; // Cliente não encontrado, portanto, não foi atualizado.
+                }
+
+                // Realize as validações necessárias no objeto 'cliente' e manipule exceções, se necessário.
+
+                // Atualize as propriedades do cliente existente com base nos dados de 'cliente'.
+                existingCliente.Nome = cliente.Nome;
+                existingCliente.CPF = cliente.CPF;
+                existingCliente.Email = cliente.Email;
+                existingCliente.Data = cliente.Data;
+
                 _unitOfWork.BeginTransaction();
-                bool updated = await _clienteGateway.Update(cliente);
+                bool updated = await _clienteGateway.Update(existingCliente);
 
                 if (updated)
                 {
