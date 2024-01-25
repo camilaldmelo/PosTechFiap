@@ -72,7 +72,8 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Finaliza o pagamento do pedido.
+        /// Webhook para realizar o pagamento do Pedido.
+        /// Será chamado pelo serviço de pagamento fake.
         /// </summary>
         /// <param name="pagamento">Dados do Pagamento.</param>
         /// <returns>

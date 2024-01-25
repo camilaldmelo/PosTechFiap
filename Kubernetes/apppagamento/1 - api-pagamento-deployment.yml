@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: api-pagamento
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: api-pagamento
   template:
     metadata:
       labels:
-        app: api
+        app: api-pagamento
     spec:
       containers:
-      - name: api
-        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v5
+      - name: api-pagamento
+        image: docker.io/fabiogmartins13/apipagamentotechchallengegrupo01:v6
         livenessProbe:
           httpGet:
             path: /health  
@@ -31,14 +31,7 @@ spec:
             cpu: "500m"
             memory: "512Mi"
         ports:
-        - containerPort: 80
+        - containerPort: 80        
         env:
-        - name: DB_HOST
-          value: "postgres.default.svc.cluster.local:5432"
-        - name: DB_USER
-          value: "postgres"          
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: password          
+        - name: WEBHOOK_URL
+          value: "http://api-service.default.svc.cluster.local:8080/Pagamento"        

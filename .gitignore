@@ -10,3 +10,12 @@ API/obj/
 API/bin/
 API/API.csproj.user
 .vs/
+AppPagamento/Infra/obj/
+AppPagamento/Infra/bin/
+AppPagamento/Domain/obj/
+AppPagamento/Domain/bin/
+AppPagamento/Application/obj/
+AppPagamento/Application/bin/
+AppPagamento/PaymentAPI/obj/
+AppPagamento/PaymentAPI/bin/
+AppPagamento/PaymentAPI/API.csproj.user
