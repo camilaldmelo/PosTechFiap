@@ -21,34 +21,6 @@ namespace API.Controllers
             _pagamentoPresenter = pagamentoPresenter;
         }
 
-        /// <summary>
-        /// Realiza o pagamento do Pedido via o QRCode do Mercado Pago (Fake).
-        /// </summary>
-        [HttpPut("{idPedido}", Name = "PagamentoViaQRCodePeloIdDoPedido")]
-        [SwaggerOperation(Summary = "Pagamento do Pedido via QRCode (Fake)", Description = "Realiza o pagamento do Pedido via QRCode (Fake).")]
-        [SwaggerResponse(StatusCodes.Status200OK, "Requisição do processamento do pagamento do pedido, realizada com sucesso.", typeof(IActionResult))]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "Não foi encontrado o Pedido.")]
-        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno do servidor.")]
-        public async Task<IActionResult> Put(int idPedido)
-        {
-            try
-            {
-                var requisitado = await _pagamentoPresenter.PagarViaQRCodeMercadoPago(idPedido);
-
-                if (requisitado)
-                {
-                    return Ok(); // Retorna 200 OK se a atualização for bem-sucedida.
-                }
-                else
-                {
-                    return NotFound(); // Retorna 404 Not Found se o acompanhamento não for encontrado.
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message); // Retorna 500 Internal Server Error em caso de erro interno do servidor.
-            }
-        }
 
         /// <summary>
         /// Consulta o status do pagamento do Pedido (Fake).
@@ -75,7 +47,8 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Finaliza o pagamento do pedido.
+        /// Webhook para realizar o pagamento do Pedido.
+        /// Será chamado pelo serviço de pagamento fake.
         /// </summary>
         /// <param name="pagamento">Dados do Pagamento.</param>
         /// <returns>

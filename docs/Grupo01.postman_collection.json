@@ -898,12 +898,21 @@
 					"response": []
 				},
 				{
-					"name": "III. Pagamento (Fake)",
+					"name": "III. Webhook - Confirmação de pagamento",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPedido\": 6,\r\n  \"aprovado\": true,\r\n  \"motivo\": \"Pagamento aprovado.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/Pagamento/6",
+							"raw": "http://localhost:8080/Pagamento/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -911,7 +920,7 @@
 							"port": "8080",
 							"path": [
 								"Pagamento",
-								"6"
+								""
 							]
 						}
 					},
@@ -968,13 +977,13 @@
 					"response": []
 				},
 				{
-					"name": "VI. Mock Mercado Pago",
+					"name": "VI. Mock Gerar QRCode (Fake)",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idPedido\": 6,\r\n  \"aprovado\": true,\r\n  \"motivo\": \"Pagamento aprovado.\"\r\n}",
+							"raw": "{\r\n  \"idPedido\": 6,\r\n  \"valor\": 21.95\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -982,14 +991,44 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/Pagamento",
+							"raw": "http://localhost:8081/Pagamento/GeraQRCodeParaPagamento",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
-								"Pagamento"
+								"Pagamento",
+								"GeraQRCodeParaPagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VI. Mock Pagamento do QRCode via Mercado Pago (Chamando o Webhook)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"eyJJZFBlZGlkbyI6MSwiVmFsb3IiOjIxLjB9\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/Pagamento/PagaQRCode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"Pagamento",
+								"PagaQRCode"
 							]
 						}
 					},
@@ -1001,9 +1040,9 @@
 			"name": "Pagamento",
 			"item": [
 				{
-					"name": "Webhook - Pedido (Inicia pagamento via QRCode)",
+					"name": "Get - Consultar status pagamento",
 					"request": {
-						"method": "PUT",
+						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/Pagamento/6",
@@ -1021,7 +1060,7 @@
 					"response": []
 				},
 				{
-					"name": "Webhook - Confirmação de pagamento",
+					"name": "Webhook - Confirmação de pagamento Copy",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1044,26 +1083,6 @@
 							"path": [
 								"Pagamento",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Webhook - Consultar status pagamento",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/Pagamento/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"Pagamento",
-								"6"
 							]
 						}
 					},
