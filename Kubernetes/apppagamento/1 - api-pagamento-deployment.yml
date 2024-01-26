@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-pagamento
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-pagamento
+  template:
+    metadata:
+      labels:
+        app: api-pagamento
+    spec:
+      containers:
+      - name: api-pagamento
+        image: docker.io/fabiogmartins13/apipagamentotechchallengegrupo01:v10
+        livenessProbe:
+          httpGet:
+            path: /health  
+            port: 80
+          initialDelaySeconds: 15  
+          periodSeconds: 10        
+          timeoutSeconds: 5        
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 80        
+        env:
+        - name: WEBHOOK_URL
+          value: "http://api-service.default.svc.cluster.local:8080/Pagamento"        

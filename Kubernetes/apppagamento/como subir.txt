@@ -1,0 +1,7 @@
+kubectl apply -f "1 - api-pagamento-deployment.yml"
+kubectl apply -f "2 - api-pagamento-service.yml"
+kubectl apply -f "3 - api-pagamento-hpa.yml"
+
+kubectl delete -f "3 - api-pagamento-hpa.yml"
+kubectl delete -f "2 - api-pagamento-service.yml"
+kubectl delete -f "1 - api-pagamento-deployment.yml"

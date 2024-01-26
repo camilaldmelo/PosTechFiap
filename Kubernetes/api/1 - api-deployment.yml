@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v10
+        livenessProbe:
+          httpGet:
+            path: /health  
+            port: 80
+          initialDelaySeconds: 15  
+          periodSeconds: 10        
+          timeoutSeconds: 5        
+          failureThreshold: 3
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          value: "postgres.default.svc.cluster.local:5432"
+        - name: DB_USER
+          value: "postgres"          
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password          

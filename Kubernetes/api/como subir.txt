@@ -1,0 +1,7 @@
+kubectl apply -f "1 - api-deployment.yml"
+kubectl apply -f "2 - api-service.yml"
+kubectl apply -f "3 - api-hpa.yml"
+
+kubectl delete -f "3 - api-hpa.yml"
+kubectl delete -f "2 - api-service.yml"
+kubectl delete -f "1 - api-deployment.yml"

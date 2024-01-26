@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\**" />
+    <Compile Remove="ValueObjects\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <EmbeddedResource Remove="ValueObjects\**" />
+    <None Remove="Repositories\**" />
+    <None Remove="ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Base\" />
+    <Folder Include="Entities\Enums\" />
+  </ItemGroup>
+
+</Project>
