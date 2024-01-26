@@ -76,12 +76,25 @@ PUT http://localhost:8080/Pedido/PedidoStatus?idPedido=6&idStatus=3
 Nesse exemplo, será atualizado o Pedido 6 para o status Recebido.
 ##### vi.Desafio extra - integração com o Mercado Pago.
 Não implementamos o desafio extra, referente a integração com o Mercado Pago.
-Porém criamos uma rota no nosso endpoint para simular o mock, que seria a chamada ao Mercado Pago para geração e pagamento via QRCode
+Porém criamos uma [API](/AppPagamento) secundária para simular o Mercado Pago, onde possui duas rotas:
+
+Geração de um QRCode Fake
+```bash
+POST http://localhost:8081/Pagamento/GeraQRCodeParaPagamento
+
+{
+  "idPedido": 6,
+  "valor": 21.95
+}
+```
+Pagamento do QRCode Fake, que irá enviar para API de Pedidos a notificação via Webhook, referente a aprovação ou não do pagamento.
  
  ```bash
-PUT http://localhost:8080/Pagamento/6
+POST http://localhost:8081/Pagamento/PagaQRCode
+
+"eyJJZFBlZGlkbyI6NiwiVmFsb3IiOjIxLjk1fQ=="
 ```
-Nessa etapa, apos a identificação do pagamento do QRCode, é chamado o WebHook disponibilizado no passo III, retornando o callback que o pagamento foi aprovado.
+
 
 
 ### Entregável 02 - Arquitetura em Kubernetes
