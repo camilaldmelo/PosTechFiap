@@ -1,9 +1,7 @@
 ﻿using Application.Interface.Presenters;
 using Application.Interface.UseCases;
-using Application.Presenters;
 using Application.Presenters.ViewModel;
 using Domain.Entities;
-using k8s;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -36,10 +34,11 @@ namespace API.Controllers
             try
             {
                 var pedido = await _pedidoUseCase.GetById(idPedido);
+                var pedidoView = await _pedidoPresenter.ConvertToViewModel(pedido);
 
-                if (pedido != null)
+                if (pedidoView != null)
                 {
-                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                    return Ok(pedidoView); // Retorna 200 OK com o cliente recuperado.
                 }
                 else
                 {
@@ -65,11 +64,12 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
+                var pedidos = await _pedidoUseCase.GetByIdStatus(idAcompanhamento);
+                var pedidosView = await _pedidoPresenter.ConvertToListViewModel(pedidos);
 
-                if (pedido != null)
-                {
-                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                if (pedidosView != null)
+                {                    
+                    return Ok(pedidosView); // Retorna 200 OK com o cliente recuperado.
                 }
                 else
                 {
@@ -95,11 +95,12 @@ namespace API.Controllers
         {
             try
             {
-                var pedido = await _pedidoUseCase.GetInProgress();
+                var pedidos = await _pedidoUseCase.GetInProgress();
+                var pedidosView = await _pedidoPresenter.ConvertToListViewModel(pedidos);
 
-                if (pedido != null)
+                if (pedidosView != null)
                 {
-                    return Ok(pedido); // Retorna 200 OK com o cliente recuperado.
+                    return Ok(pedidosView); // Retorna 200 OK com o cliente recuperado.
                 }
                 else
                 {

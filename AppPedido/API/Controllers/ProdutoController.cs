@@ -1,6 +1,8 @@
 ﻿using Application.Interface.Presenters;
 using Application.Interface.UseCases;
+using Application.Presenters;
 using Application.Presenters.ViewModel;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -36,12 +38,13 @@ namespace API.Controllers
             try
             {
                 var produtos = await _produtoUseCase.GetAll();
+                var produtosView = await _produtoPresenter.ConvertToListViewModel(produtos);
 
-                if (produtos != null && produtos.Any())
+                if (produtosView != null && produtosView.Any())
                 {
-                    return Ok(produtos); // Retorna 200 OK com os produtos recuperados.
+                    return Ok(produtosView); // Retorna 200 OK com os produtos recuperados.
                 }
-                else if (produtos != null)
+                else if (produtosView != null)
                 {
                     return NotFound(); // Retorna 404 Not Found se não houver produtos encontrados.
                 }
@@ -72,12 +75,13 @@ namespace API.Controllers
             try
             {
                 var produtos = await _produtoUseCase.GetByIdCategoria(idCategoria);
+                var produtosView = await _produtoPresenter.ConvertToListViewModel(produtos);
 
-                if (produtos != null && produtos.Any())
+                if (produtosView != null && produtosView.Any())
                 {
-                    return Ok(produtos); // Retorna 200 OK com os produtos recuperados.
+                    return Ok(produtosView); // Retorna 200 OK com os produtos recuperados.
                 }
-                else if (produtos != null)
+                else if (produtosView != null)
                 {
                     return NotFound(); // Retorna 404 Not Found se não houver produtos encontrados.
                 }
@@ -173,10 +177,11 @@ namespace API.Controllers
             try
             {
                 var produto = await _produtoUseCase.GetById(id);
+                var produtoView = await _produtoPresenter.ConvertToViewModel(produto);
 
-                if (produto != null)
+                if (produtoView != null)
                 {
-                    return Ok(produto); // Retorna 200 OK com o produto recuperado.
+                    return Ok(produtoView); // Retorna 200 OK com o produto recuperado.
                 }
                 else
                 {

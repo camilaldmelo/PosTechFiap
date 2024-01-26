@@ -39,12 +39,13 @@ namespace API.Controllers
             try
             {
                 var clientes = await _clienteUseCase.GetAll();
+                var clientesView = await _clientePresenter.ConvertToListViewModel(clientes);
 
-                if (clientes != null && clientes.Any())
+                if (clientesView != null && clientesView.Any())
                 {
-                    return Ok(clientes); // Retorna 200 OK com os clientes recuperados.
+                    return Ok(clientesView); // Retorna 200 OK com os clientes recuperados.
                 }
-                else if (clientes != null)
+                else if (clientesView != null)
                 {
                     return NotFound(); // Retorna 404 Not Found se não houver clientes encontrados.
                 }
@@ -78,10 +79,11 @@ namespace API.Controllers
             try
             {
                 var cliente = await _clienteUseCase.GetById(id);
+                var clienteView = await _clientePresenter.ConvertToViewModel(cliente);  
 
-                if (cliente != null)
+                if (clienteView != null)
                 {
-                    return Ok(cliente); // Retorna 200 OK com o cliente recuperado.
+                    return Ok(clienteView); // Retorna 200 OK com o cliente recuperado.
                 }
                 else
                 {
@@ -113,6 +115,7 @@ namespace API.Controllers
             try
             {
                 var cliente = await _clienteUseCase.GetByCPF(cpf);
+                var clienteView = await _clientePresenter.ConvertToViewModel(cliente);
 
                 if (cliente != null)
                 {

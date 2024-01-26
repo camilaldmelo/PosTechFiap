@@ -6,7 +6,7 @@ Este projeto implementa uma API em um ambiente Kubernetes, garantindo escalabili
 
 O `Deployment` chamado `api` é responsável por gerenciar os pods da API. Ele define as seguintes configurações:
 
-- **Imagem do Container**: Utilizamos a imagem `docker.io/fabiogmartins13/apitechchallengegrupo01:v5` para os pods.
+- **Imagem do Container**: Utilizamos a imagem `docker.io/fabiogmartins13/apitechchallengegrupo01:v10` para os pods.
 - **Probes de Liveness**: Implementamos um probe de liveness com uma chamada HTTP para o endpoint `/health` na porta 80. Isso garante que o serviço seja reiniciado automaticamente se parar de responder.
 - **Recursos**: Configuramos limites e solicitações de recursos (CPU e memória) para garantir um gerenciamento eficiente dos recursos do cluster.
 - **Portas e Variáveis de Ambiente**: O container expõe a porta 80 e utiliza variáveis de ambiente para configurações de banco de dados. A senha do banco de dados é injetada de forma segura usando o `Secret` `postgres-secret`.

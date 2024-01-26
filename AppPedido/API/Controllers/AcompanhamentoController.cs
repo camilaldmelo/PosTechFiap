@@ -1,6 +1,7 @@
 ﻿using Application.Interface.Presenters;
 using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -35,12 +36,13 @@ namespace API.Controllers
             try
             {
                 var acompanhamentos = await _acompanhamentoUseCase.GetAll();
+                var acompanhamentosView = await _acompanhamentoPresenter.ConvertToListViewModel(acompanhamentos);
 
-                if (acompanhamentos != null && acompanhamentos.Any())
+                if (acompanhamentosView != null && acompanhamentosView.Any())
                 {
-                    return Ok(acompanhamentos); // Retorna 200 OK com os acompanhamentos recuperados.
+                    return Ok(acompanhamentosView); // Retorna 200 OK com os acompanhamentos recuperados.
                 }
-                else if (acompanhamentos != null)
+                else if (acompanhamentosView != null)
                 {
                     return NotFound(); // Retorna 404 Not Found se não houver acompanhamentos encontrados.
                 }
@@ -74,10 +76,11 @@ namespace API.Controllers
             try
             {
                 var acompanhamento = await _acompanhamentoUseCase.GetById(id);
+                var acompanhamentosView = await _acompanhamentoPresenter.ConvertToViewModel(acompanhamento);
 
-                if (acompanhamento != null)
+                if (acompanhamentosView != null)
                 {
-                    return Ok(acompanhamento); // Retorna 200 OK com o acompanhamento recuperado.
+                    return Ok(acompanhamentosView); // Retorna 200 OK com o acompanhamento recuperado.
                 }
                 else
                 {

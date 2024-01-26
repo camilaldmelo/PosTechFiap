@@ -87,8 +87,9 @@ Nessa etapa, apos a identificação do pagamento do QRCode, é chamado o WebHook
 ### Entregável 02 - Arquitetura em Kubernetes
 Este guia fornecerá instruções passo a passo sobre como clonar e executar a aplicação .NET 7.0 com um banco de dados PostgreSQL usando a arquitetura em Kubernetes. Certifique-se de ter no seu ambiente o Kubernetes instalado e configurado, se for rodar localmente, ou siga as instruções da sua cloud.
 
-- [Estrutura e Funcionamento do Banco de Dados no Kubernetes](https://github.com/camilaldmelo/PosTechFiap/tree/fase-2/Kubernetes/db/README.md)
-- [Estrutura e Funcionamento da API no Kubernetes](https://github.com/camilaldmelo/PosTechFiap/tree/fase-2/Kubernetes/api/README.md)
+- [Estrutura e Funcionamento do Banco de Dados (PostgreSQL) no Kubernetes](Kubernetes/db/README.md)
+- [Estrutura e Funcionamento da API de Pedidos no Kubernetes](/Kubernetes/api/README.md)
+-  [Estrutura e Funcionamento da API de Pagamento (Mock) no Kubernetes](Kubernetes/apppagamento/README.md)
 
 #### Passo 1: Clone o Repositório 
 Para começar, você precisa clonar o repositório do GitHub, para ter acesso aos arguivos. Abra o terminal e execute o seguinte comando:
@@ -103,7 +104,7 @@ Após clonar o repositório, navegue até o diretório do projeto usando o segui
 cd PosTechFiap/Kubernetes
 ```
 
-#### Passo 3: Navegue até o Diretório do db
+#### Passo 3: Navegue até o Diretório do Banco de Dados
 Navegue até o diretório da api usando os seguintes comandos:
 ```bash
 cd ..
@@ -121,7 +122,7 @@ kubectl apply -f "5 - postgres-service.yml"
 kubectl apply -f "6 - postgres-init-job.yml"
 ```
 
-#### Passo 5: Navegue até o Diretório da api
+#### Passo 5: Navegue até o Diretório da API de Pedido
 Navegue até o diretório da api usando o seguinte comando:
 ```bash
 cd api
@@ -135,8 +136,29 @@ kubectl apply -f "2 - api-service.yml"
 kubectl apply -f "3 - api-hpa.yml"
 ```
 
-#### Passo 7: Exclusão da arquitetura em Kubernetes (Opcional)
+#### Passo 7: Navegue até o Diretório da Api de Pagamento (Mock)
+Navegue até o diretório da api usando o seguinte comando:
+```bash
+cd apppagamento
+```
+
+#### Passo 8: Execute os comandos na ordem:
+Execute usando os seguintes comandos:
+```bash
+kubectl apply -f "1 - api-pagamento-deployment.yml"
+kubectl apply -f "2 - api-pagamento-service.yml"
+kubectl apply -f "3 - api-pagamento-hpa.yml"
+```
+
+#### Passo 9: Exclusão da arquitetura em Kubernetes (Opcional)
 Execute os comando dentro de cada diretório.
+
+No diretório Kubernetes/apppagamento:
+```bash
+kubectl delete -f "3 - api-pagamento-hpa.yml"
+kubectl delete -f "2 - api-pagamento-service.yml"
+kubectl delete -f "1 - api-pagamento-deployment.yml"
+```
 No diretório Kubernetes/api:
 ```bash
 kubectl delete -f "3 - api-hpa.yml"
@@ -160,13 +182,13 @@ kubectl delete all --all
 ### Entregável 03
 
 #### a. Desenho da arquitetura
-![Desenho da arquitetura](https://cdn.discordapp.com/attachments/1144408943993573376/1198276440500732084/image.png?ex=65be50e6&is=65abdbe6&hm=2744212da50d87b7e29d16daa5d53ab958a2449c3fb3ba51473a807c889a1cbe&)
+![Desenho da arquitetura](https://cdn.discordapp.com/attachments/1144408943993573376/1199858576588550226/image.png?ex=65c41260&is=65b19d60&hm=640da24f695d4dc49dd83e798b1bb0f5d933c3672b6451d28f74728f98a9a48d&)
 
 #### b. Collection do Postman
 [Baixe o Postman Collection](docs/Grupo01.postman_collection.json)
 
 #### c. Instruções para execução do projeto
-Para inicialização em ambiente local, como Docker Desktop, após a inicialização bem-sucedida da infraestrutura do Kubernetes, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
+Para inicialização em ambiente local, como Docker Desktop, após a inicialização bem-sucedida da infraestrutura do Kubernetes, conforme descrito anteriormente nessa documentação, você pode acessar a aplicação em seu navegador ou usando ferramentas como o curl. A API estará disponível na porta 8080.
 
 - Acesse a API em http://localhost:8080/swagger ou http://localhost:8080/api-docs
 

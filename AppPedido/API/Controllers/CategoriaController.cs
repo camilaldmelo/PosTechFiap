@@ -1,6 +1,7 @@
 ﻿using Application.Interface.Presenters;
 using Application.Interface.UseCases;
 using Application.Presenters.ViewModel;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -36,11 +37,13 @@ namespace API.Controllers
             {
                 var categorias = await _categoriaUseCase.GetAll();
 
-                if (categorias != null && categorias.Any())
+                var categoriasView = await _categoriaPresenter.ConvertToListViewModel(categorias);
+
+                if (categoriasView != null && categoriasView.Any())
                 {
-                    return Ok(categorias); // Retorna 200 OK com as categorias recuperadas.
+                    return Ok(categoriasView); // Retorna 200 OK com as categorias recuperadas.
                 }
-                else if (categorias != null)
+                else if (categoriasView != null)
                 {
                     return NotFound(); // Retorna 404 Not Found se não houver categorias encontradas.
                 }
@@ -74,10 +77,11 @@ namespace API.Controllers
             try
             {
                 var categoria = await _categoriaUseCase.GetById(id);
+                var categoriaView = await _categoriaPresenter.ConvertToViewModel(categoria);
 
-                if (categoria != null)
+                if (categoriaView != null)
                 {
-                    return Ok(categoria); // Retorna 200 OK com a categoria recuperada.
+                    return Ok(categoriaView); // Retorna 200 OK com a categoria recuperada.
                 }
                 else
                 {

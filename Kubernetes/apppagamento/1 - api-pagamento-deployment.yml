@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-pagamento
-        image: docker.io/fabiogmartins13/apipagamentotechchallengegrupo01:v6
+        image: docker.io/fabiogmartins13/apipagamentotechchallengegrupo01:v10
         livenessProbe:
           httpGet:
             path: /health  

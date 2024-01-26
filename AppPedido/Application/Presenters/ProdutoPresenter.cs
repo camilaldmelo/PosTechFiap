@@ -17,7 +17,7 @@ namespace Application.Presenters
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProdutoViewModel>> ConvertToListViewModel(IEnumerable<Cliente> produtos)
+        public async Task<IEnumerable<ProdutoViewModel>> ConvertToListViewModel(IEnumerable<Produto> produtos)
         {
             return await Task.Run(() => _mapper.Map<List<ProdutoViewModel>>(produtos));
         }

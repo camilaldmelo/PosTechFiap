@@ -5,7 +5,7 @@ namespace Application.Interface.Presenters
 {
     public interface IPedidoPresenter
     {
-        public Task<IEnumerable<PedidoViewModel>> ConvertToListViewModel(IEnumerable<Cliente> pedidos);
+        public Task<IEnumerable<PedidoViewModel>> ConvertToListViewModel(IEnumerable<Pedido> pedidos);
 
         public Task<PedidoViewModel> ConvertToViewModel(Pedido pedido);
 

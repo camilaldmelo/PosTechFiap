@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v5
+        image: docker.io/fabiogmartins13/apitechchallengegrupo01:v10
         livenessProbe:
           httpGet:
             path: /health  
