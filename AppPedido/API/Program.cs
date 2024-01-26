@@ -1,7 +1,7 @@
-using Application.AutoMapper;
 using Application.Interface.Presenters;
 using Application.Interface.UseCases;
 using Application.Presenters;
+using Application.Presenters.AutoMapper;
 using Application.UseCases;
 using Domain.Interface.Gateways;
 using Infra.DB;
