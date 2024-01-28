@@ -210,3 +210,4 @@ Utilizar a Collection do Postman, que possui todas as rotas possiveis com exempl
 ![](docs/Postman.PNG)
 
 #### d. Video demostrando a arquitetura 
+https://youtu.be/_ni9YU4DK_U
